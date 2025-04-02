@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const illustrationMap = [
+   "/guided-process.png",
   "https://placehold.co/400x250?text=Step+By+Step+Profile",
   "https://placehold.co/400x250?text=Digital+Safety",
   "https://placehold.co/400x250?text=Life+Improvement",
