@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
-import { mergeUserData } from "../../services/UserDataService"; // ✅ Updated import
+import { mergeUserData } from "../../services/UserDataService";
 
 const ProfileCreation = ({ onComplete }) => {
   const [profileData, setProfileData] = useState({
@@ -85,57 +85,41 @@ const ProfileCreation = ({ onComplete }) => {
         </div>
 
         <h3 className="font-semibold mb-1">
-          💬 How comfortable are you with Dutch?
+          💬 How comfortable are you with the language you picked?
         </h3>
         <select
           name="dutchComfort"
           onChange={handleChange}
           className="mb-4 w-full p-2 border rounded"
         >
-          <option value="">Select Language Comfort Level</option>
-          <option value="Basic Survival Dutch">
-            Basic Survival Dutch (Beginner)
-          </option>
+          <option value="">Select Comfort Level</option>
+          <option value="Basic Survival Dutch">Basic Survival (Beginner)</option>
           <option value="Basic Social & Everyday Conversations">
-            Basic Social & Everyday Conversations (Moderate)
+            Social & Everyday Conversations (Moderate)
           </option>
           <option value="Understands and holds basic conversations">
-            Understands well and can hold basic conversations (Intermediate)
+            Hold Basic Conversations (Intermediate)
           </option>
           <option value="Comfortable with speaking and understanding">
-            Pretty comfortable with understanding and speaking (Advanced)
+            Comfortable with Speaking and Listening (Advanced)
           </option>
           <option value="Fluent">Feels like a native (Fluent)</option>
         </select>
 
         <h3 className="font-semibold mb-1">
-          🎯 Which real-life scenario are you dealing with next?
+          🎯 What kind of real-life situation are you facing next?
         </h3>
         <select
           name="realLifeScenario"
           onChange={handleChange}
           className="mb-6 w-full p-2 border rounded"
         >
-          <option value="">Select a Real-Life Situation</option>
-          <option value="Support my child’s success in school">
-            Help my preschool or school child(ren) to better succeed
+          <option value="">Select a Category</option>
+          <option value="Everyday Life Skills">
+            🟩 Everyday Life Skills (🛈 Skills for clarity, confidence, balance)
           </option>
-          <option value="Digital readiness at home or work">
-            Gearing Up for a Digital World (At Home and at Work)
-          </option>
-          <option value="Green practices and family learning">
-            Raising a Greener Generation (By Practicing What We Teach)
-          </option>
-          <option value="Staying relevant with tech change">
-            Staying Relevant in an Automated World and Guiding Your Kids to Do
-            the Same
-          </option>
-          <option value="Improve how I show up in life and work">
-            Strengthening the Skills That Shape How You Show Up — At Work, At
-            Home, In Life
-          </option>
-          <option value="Turning ideas into action">
-            Ideas into Action — and Action into Sustainable Value
+          <option value="New Paths & Opportunities">
+            🟦 New Paths & Opportunities (🛈 Expand options in work & society)
           </option>
         </select>
 
@@ -146,3 +130,4 @@ const ProfileCreation = ({ onComplete }) => {
 };
 
 export default ProfileCreation;
+
