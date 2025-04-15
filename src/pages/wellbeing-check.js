@@ -23,7 +23,7 @@ const mhcQuestions = [
   { id: 14, text: "During the past month, how often did you feel that your life has a sense of direction or meaning to it?" },
 ];
 
-const MHCForm = ({ onComplete }) => {
+const WellbeingCheck = ({ onComplete }) => {
   const [answers, setAnswers] = useState({});
 
   const handleChange = (e) => {
@@ -63,7 +63,7 @@ const MHCForm = ({ onComplete }) => {
       matrixLabel: matrixResult.matrixLabel,
       normalizedSWB: matrixResult.normalizedSWB,
       normalizedPWB: matrixResult.normalizedPWB,
-      mhcSkipped: false, // ✅ User completed it
+      mhcSkipped: false,
     };
 
     mergeUserData(mhcResults);
@@ -71,7 +71,7 @@ const MHCForm = ({ onComplete }) => {
   };
 
   const handleSkip = () => {
-    mergeUserData({ mhcSkipped: true }); // ✅ Just skip
+    mergeUserData({ mhcSkipped: true });
     if (onComplete) onComplete();
   };
 
@@ -104,14 +104,12 @@ const MHCForm = ({ onComplete }) => {
 
         <div className="flex gap-4 mt-6">
           <Button onClick={handleSubmit}>✅ Submit & Continue</Button>
-          <Button onClick={handleSkip} variant="outline">
-            ⏭️ Skip this step
-          </Button>
+          <Button onClick={handleSkip} variant="outline">⏭️ Skip this step</Button>
         </div>
       </CardContent>
     </Card>
   );
 };
 
-export default MHCForm;
+export default WellbeingCheck;
 
