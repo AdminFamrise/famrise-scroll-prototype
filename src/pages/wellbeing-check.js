@@ -1,4 +1,4 @@
-// src/components/forms/MHCForm.js
+// src/components/forms/wellbeing-check.js
 
 import React, { useState } from "react";
 import { Card, CardContent } from "../../components/ui/Card";
