@@ -5,7 +5,7 @@ import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { getUserData, mergeUserData } from "../../services/UserDataService";
 
-const ScenarioFollowUp = ({ onComplete }) => {
+const Scenario = ({ onComplete }) => {
   const [formData, setFormData] = useState({ specificGoal: "" });
   const [realLifeScenario, setRealLifeScenario] = useState("");
 
@@ -93,5 +93,6 @@ const ScenarioFollowUp = ({ onComplete }) => {
   );
 };
 
-export default ScenarioFollowUp;
+export default Scenario;
+
 
