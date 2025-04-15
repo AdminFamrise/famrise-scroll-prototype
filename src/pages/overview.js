@@ -1,14 +1,16 @@
-// src/components/forms/overview.js
+// src/pages/overview.js
 
 import React, { useState, useEffect } from "react";
-import { Card, CardContent } from "../ui/Card";
-import { Button } from "../ui/Button";
-import { getUserData } from "../../services/UserDataService";
-import LanguageLayer from "../language/LanguageLayer";
-import mockSpecialServices from "../../services/MockSpecialServices"; // ✅ New file with extra support options
+import { Card, CardContent } from "../components/ui/Card";
+import { Button } from "../components/ui/Button";
+import { getUserData } from "../services/UserDataService";
+import LanguageLayer from "../components/language/LanguageLayer";
+import mockSpecialServices from "../services/MockSpecialServices";
+import mockSolutions from "../services/MockSolutions";
 
-const OpportunityOverview = ({ solutions, onComplete }) => {
+const Overview = ({ onComplete }) => {
   const [userData, setUserData] = useState(null);
+  const [learningMatches, setLearningMatches] = useState([]);
   const [specialSupport, setSpecialSupport] = useState([]);
 
   useEffect(() => {
@@ -16,7 +18,16 @@ const OpportunityOverview = ({ solutions, onComplete }) => {
     if (data) {
       setUserData(data);
 
-      if (data.mhcSWB !== undefined && data.mhcPWB !== undefined) {
+      // 🎯 Match standard learning baskets
+      const matches = mockSolutions.filter(
+        (sol) =>
+          sol.Scenario === data.realLifeScenario &&
+          sol.SpecificGoal === data.specificGoal
+      );
+      setLearningMatches(matches);
+
+      // 🧠 If MHC-SF was filled, match extra services
+      if (!data.mhcSkipped) {
         const extras = mockSpecialServices.filter(
           (svc) =>
             svc.realLifeScenario === data.realLifeScenario &&
@@ -27,65 +38,62 @@ const OpportunityOverview = ({ solutions, onComplete }) => {
     }
   }, []);
 
-  const getFilteredSolutions = () => {
-    if (!userData || !solutions || solutions.length === 0) return [];
-
-    return solutions.filter(
-      (sol) =>
-        sol.Scenario === userData.realLifeScenario &&
-        sol.SpecificGoal === userData.specificGoal
-    );
-  };
-
   return (
-    <Card className="p-4">
-      <CardContent>
-        <h2 className="text-xl font-bold mb-2">🌱 Opportunity Overview</h2>
+    <div className="p-6 space-y-10">
+      <h1 className="text-2xl font-bold text-center">🎯 Your Results Overview</h1>
 
-        <h3 className="mt-4 font-semibold">🎒 Your Matching Learning Options</h3>
-        {getFilteredSolutions().length > 0 ? (
-          getFilteredSolutions().map((sol, index) => (
-            <div key={index} className="mb-4 border rounded p-3 bg-gray-50">
-              <h4 className="font-semibold">{sol.Title}</h4>
-              <p className="text-sm text-gray-700">{sol.Description}</p>
-              <p className="text-xs text-gray-500 mt-1">
-                Interaction: {sol.InteractionType} | Language:{" "}
-                {sol.LanguageAddOn}
-              </p>
-              <LanguageLayer
-                goal={userData.specificGoal}
-                level={userData.dutchComfort}
-              />
-            </div>
-          ))
-        ) : (
-          <p className="text-sm mt-2">No matched learning found.</p>
-        )}
-
-        {specialSupport.length > 0 && (
-          <>
-            <h3 className="mt-8 font-semibold">
-              🧠 Extra Suggestions Based on Your Mental Health Check
-            </h3>
-            {specialSupport.map((svc, idx) => (
-              <div key={idx} className="mb-4 border rounded p-3 bg-white">
-                <h4 className="font-semibold">{svc.title}</h4>
-                <p className="text-sm text-gray-700">{svc.description}</p>
-                <p className="text-xs text-gray-500 mt-1">
-                  Format: {svc.format} | Interaction: {svc.interactionType} |
-                  Language: {svc.languages.join(", ")}
-                </p>
-              </div>
+      <section>
+        <h2 className="text-lg font-semibold mb-3">🎒 Matched Learning Baskets</h2>
+        {learningMatches.length > 0 ? (
+          <div className="grid md:grid-cols-2 gap-4">
+            {learningMatches.map((sol, idx) => (
+              <Card key={idx}>
+                <CardContent>
+                  <h4 className="font-semibold mb-1">{sol.Title}</h4>
+                  <p className="text-sm mb-2">{sol.Description}</p>
+                  <p className="text-xs text-gray-600">
+                    Format: {sol.InteractionType} | Language: {sol.LanguageAddOn}
+                  </p>
+                  <LanguageLayer
+                    goal={userData?.specificGoal}
+                    level={userData?.dutchComfort}
+                  />
+                </CardContent>
+              </Card>
             ))}
-          </>
+          </div>
+        ) : (
+          <p>No learning suggestions found yet. Please review your selections.</p>
         )}
+      </section>
 
-        <Button className="mt-6" onClick={onComplete}>
-          See My Personalized Path
-        </Button>
-      </CardContent>
-    </Card>
+      {specialSupport.length > 0 && (
+        <section>
+          <h2 className="text-lg font-semibold mb-3">
+            🧠 Extra Services Based on Well-Being Check
+          </h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {specialSupport.map((svc, idx) => (
+              <Card key={idx}>
+                <CardContent>
+                  <h4 className="font-semibold mb-1">{svc.title}</h4>
+                  <p className="text-sm mb-2">{svc.description}</p>
+                  <p className="text-xs text-gray-600">
+                    Format: {svc.format} | Interaction: {svc.interactionType} |{" "}
+                    Language: {svc.languages.join(", ")}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <div className="text-center mt-10">
+        <Button onClick={onComplete}>🚀 Start My Journey</Button>
+      </div>
+    </div>
   );
 };
 
-export default OpportunityOverview;
+export default Overview;
