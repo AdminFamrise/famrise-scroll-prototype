@@ -1,4 +1,4 @@
-// src/components/forms/ProfileCreation.js
+// src/components/forms/profile.js
 
 import React, { useState } from "react";
 import { Card, CardContent } from "../../components/ui/Card";
