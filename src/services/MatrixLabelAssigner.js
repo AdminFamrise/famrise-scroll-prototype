@@ -2,6 +2,20 @@
 
 // Assigns a matrix label based on normalized scores
 export function assignMatrixLabel(normalizedPWB, normalizedSWB) {
+  // If MHC was skipped or not provided
+  if (
+    typeof normalizedPWB !== "number" ||
+    typeof normalizedSWB !== "number" ||
+    isNaN(normalizedPWB) ||
+    isNaN(normalizedSWB)
+  ) {
+    return {
+      matrixLabel: "No special service required",
+      normalizedSWB: null,
+      normalizedPWB: null,
+    };
+  }
+
   let label = "Unknown";
 
   if (normalizedPWB <= 0.3 && normalizedSWB <= 0.3) label = "Crisis Mode";
@@ -25,7 +39,7 @@ export function assignMatrixLabel(normalizedPWB, normalizedSWB) {
   };
 }
 
-// Match matrix label to interaction strategies
+// Match matrix label to interaction strategies (for internal use only if needed)
 export function getRecommendedInteractions(matrixLabel) {
   const interactionMap = {
     "Crisis Mode": ["Guided Only"],
@@ -47,3 +61,4 @@ export function getRecommendedInteractions(matrixLabel) {
 
   return interactionMap[matrixLabel] || ["Individual"];
 }
+
