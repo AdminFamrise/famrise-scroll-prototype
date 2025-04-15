@@ -1,4 +1,4 @@
-// src/components/forms/ScenarioFollowUp.js
+// src/components/forms/scenario.js
 
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "../../components/ui/Card";
