@@ -6,7 +6,7 @@ import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 import { mergeUserData } from "../../services/UserDataService";
 
-const ProfileCreation = ({ onComplete }) => {
+const Profile = ({ onComplete }) => {
   const [profileData, setProfileData] = useState({
     name: "",
     email: "",
@@ -37,9 +37,9 @@ const ProfileCreation = ({ onComplete }) => {
   };
 
   return (
-    <Card className="p-6">
+    <Card className="p-6 max-w-xl mx-auto">
       <CardContent>
-        <h2 className="text-xl font-bold mb-4">👤 Create Your Profile</h2>
+        <h2 className="text-2xl font-bold mb-6">👤 Create Your Profile</h2>
 
         <Input
           name="name"
@@ -68,10 +68,10 @@ const ProfileCreation = ({ onComplete }) => {
           className="mb-4"
         />
 
-        <h3 className="font-semibold mb-1">🌐 Pick a Language Add-On</h3>
+        <h3 className="font-semibold mb-2">🌐 Pick a Language Add-On</h3>
         <div className="flex gap-4 mb-4">
           {["Dutch", "English"].map((lang) => (
-            <label key={lang}>
+            <label key={lang} className="text-sm">
               <input
                 type="checkbox"
                 value={lang}
@@ -84,7 +84,7 @@ const ProfileCreation = ({ onComplete }) => {
           ))}
         </div>
 
-        <h3 className="font-semibold mb-1">
+        <h3 className="font-semibold mb-2">
           💬 How comfortable are you with the language you picked?
         </h3>
         <select
@@ -106,7 +106,7 @@ const ProfileCreation = ({ onComplete }) => {
           <option value="Fluent">Feels like a native (Fluent)</option>
         </select>
 
-        <h3 className="font-semibold mb-1">
+        <h3 className="font-semibold mb-2">
           🎯 What kind of real-life situation are you facing next?
         </h3>
         <select
@@ -116,10 +116,10 @@ const ProfileCreation = ({ onComplete }) => {
         >
           <option value="">Select a Category</option>
           <option value="Everyday Life Skills">
-            🟩 Everyday Life Skills (🛈 Skills for clarity, confidence, balance)
+            🟩 Everyday Life Skills – Skills for clarity, confidence, balance
           </option>
           <option value="New Paths & Opportunities">
-            🟦 New Paths & Opportunities (🛈 Expand options in work & society)
+            🟦 New Paths & Opportunities – Expand options in work & society
           </option>
         </select>
 
@@ -129,5 +129,6 @@ const ProfileCreation = ({ onComplete }) => {
   );
 };
 
-export default ProfileCreation;
+export default Profile;
+
 
