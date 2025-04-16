@@ -23,7 +23,7 @@ function App() {
     <Router>
       <Routes>
         {/* General Flow */}
-        <Route path="/" element={<indexpage />} />
+        <Route path="/" element={< indexpage />} />
         <Route path="/profile" element={<ProfileCreation />} />
         <Route path="/scenario" element={<ScenarioSelection />} />
         <Route path="/wellbeing-check" element={<WellbeingCheck />} />
