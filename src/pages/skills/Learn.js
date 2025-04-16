@@ -1,3 +1,5 @@
+// src/pages/skills/Learn.js
+
 import React from "react";
 import { Card, CardContent } from "../../../components/ui/Card";
 import { Button } from "../../../components/ui/Button";
@@ -6,28 +8,28 @@ import { useNavigate } from "react-router-dom";
 // Example: small theory modules + optional quiz placeholders
 const readingResources = [
   {
-    title: "Verbal vs Non-Verbal Cues",
+    title: "Topic A Overview",
     description:
-      "Explore how tone, gesture, and eye contact matter as much as words.",
+      "Explore how subtle details matter just as much as the main concepts.",
     link: "#"
   },
   {
-    title: "Logical Thinking 101",
+    title: "Deeper Insight on Topic B",
     description:
-      "A short guide on applying reasoning in everyday tasks (family budgeting, scheduling).",
+      "A short guide on applying principles in everyday tasks (budgeting, scheduling, or planning).",
     link: "#"
   }
 ];
 
 const videos = [
   {
-    title: "Active Listening in Practice",
-    description: "Watch a 2-minute demonstration of reflective listening.",
+    title: "Real-Life Application Demo",
+    description: "Watch a short demonstration of how these concepts play out.",
     url: "https://placeholder.video.example"
   },
   {
-    title: "Using Reasoning to Solve Small Conflicts",
-    description: "A short animation explaining logic in heated moments.",
+    title: "Handling Challenges",
+    description: "A short animation showing how to handle tricky scenarios.",
     url: "https://placeholder.video.example"
   }
 ];
@@ -38,10 +40,11 @@ const Learn = () => {
   return (
     <Card className="p-6 max-w-3xl mx-auto">
       <CardContent>
-        <h1 className="text-2xl font-bold mb-4">📘 Learn: Communication & Reasoning</h1>
+        {/* Title */}
+        <h1 className="text-2xl font-bold mb-4">📘 Learn: [Skill Title Here]</h1>
         <p className="text-gray-700 mb-6">
-          Dive into the core concepts that shape how you communicate and how you
-          think through everyday challenges.
+          Dive into the core concepts that shape how you approach this skill and 
+          how it impacts your daily challenges.
         </p>
 
         {/* Reading Section */}
@@ -78,14 +81,24 @@ const Learn = () => {
         <section className="mb-6">
           <h2 className="text-xl font-semibold mb-2">🧩 Quick Self-Check</h2>
           <p className="text-gray-700 mb-2">
-            After skimming the articles or videos, do you feel you notice:
+            After reviewing the articles or videos, do you notice any of the following?
           </p>
           <ul className="list-disc ml-5 text-gray-700">
-            <li>How tone changes meaning?</li>
-            <li>Where reasoning steps are missing in daily decisions?</li>
+            <li>Areas where subtle changes in approach matter?</li>
+            <li>Where additional steps could enhance the outcome?</li>
           </ul>
           <p className="text-gray-700 mt-2 text-sm">
-            (This can be replaced with a short quiz or reflection prompt.)
+            (You can replace this with a short quiz or reflection prompt if desired.)
+          </p>
+        </section>
+
+        {/* 'Next Up' Progress Component (Placeholder) */}
+        <section className="mb-6 border p-4 bg-gray-50 rounded">
+          <h2 className="text-xl font-semibold mb-2">🌐 Next Up</h2>
+          <p className="text-sm text-gray-700">
+            You’ve completed the <strong>Learn</strong> phase. 
+            Up next, you’ll head over to <strong>Practice</strong>, 
+            where you can try scenario-based tasks and peer challenges.
           </p>
         </section>
 
@@ -101,4 +114,5 @@ const Learn = () => {
 };
 
 export default Learn;
+
 
