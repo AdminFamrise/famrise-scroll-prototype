@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function IndexPage() {
   return (
@@ -10,9 +9,11 @@ export default function IndexPage() {
         <div className="text-2xl font-bold">
           <span className="bg-gray-200 px-3 py-1 rounded">LOGO</span>
         </div>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-          Get Started
-        </button>
+        <Link to="/profile">
+          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            Get Started
+          </button>
+        </Link>
       </header>
 
       {/* 2️⃣ About Famrise */}
@@ -38,9 +39,11 @@ export default function IndexPage() {
           <li>4️⃣ Apply: Real-life task or coach check-in</li>
           <li>5️⃣ Reflect: Peer or coach session with personalized feedback</li>
         </ul>
-        <button className="mt-6 bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700">
-          Start My Journey
-        </button>
+        <Link to="/profile">
+          <button className="mt-6 bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700">
+            Start My Journey
+          </button>
+        </Link>
       </section>
 
       {/* 4️⃣ FAQ Section */}
@@ -67,3 +70,4 @@ export default function IndexPage() {
     </div>
   );
 }
+
