@@ -1,3 +1,5 @@
+// src/pages/skills/Practice.js
+
 import React from "react";
 import { Card, CardContent } from "../../../components/ui/Card";
 import { Button } from "../../../components/ui/Button";
@@ -6,43 +8,44 @@ import { useNavigate } from "react-router-dom";
 const Practice = () => {
   const navigate = useNavigate();
 
-  // Sample scenario tasks for variety
+  // Placeholder scenario tasks
   const scenarioTasks = [
     {
-      title: "Scenario: Heated Family Discussion",
+      title: "Scenario: Everyday Challenge",
       description:
-        "Your partner disagrees on vacation plans. Practice using calm tone, reflection of their viewpoint, and logical compromise to defuse tension."
+        "Imagine a common situation where this skill is needed. Walk through how you would respond or adapt using what you've learned."
     },
     {
-      title: "Scenario: Workplace Constraint",
+      title: "Scenario: Pressure Moment",
       description:
-        "Your boss wants a quick decision on a project. Outline 2–3 reasoning steps before you respond, balancing personal limits and company goals."
+        "You must react quickly under pressure. What thought process or behavior can you try differently this time?"
     }
   ];
 
-  // Example of journaling prompts for reflection
+  // Placeholder journaling prompts
   const journalingPrompts = [
-    "Identify one recent conflict. How did communication shape the outcome?",
-    "Write down a moment you paused to think logically before reacting. Did it help?",
-    "Note a time you used different tone or language choice — what changed?"
+    "Reflect on a recent situation. How would using this skill change the outcome?",
+    "Describe a moment you felt stuck — what skill-based strategy could help next time?",
+    "When have you used this skill naturally without noticing?"
   ];
 
-  // Peer Challenge examples
+  // Peer challenge ideas
   const peerChallenges = [
-    "Find a friend or colleague and discuss a 10-minute scenario. Try 'active listening' — reflect their words back to them.",
-    "Organize a quick role-play with a partner, focusing on calm communication under fake stress (like a missed deadline)."
+    "Explain this skill to a friend in your own words. Let them ask questions.",
+    "Try a 5-minute role-play with a peer, applying the skill in a made-up challenge.",
+    "Observe someone else and note how they use this skill (or not). Share your reflections."
   ];
 
   return (
     <Card className="p-6 max-w-3xl mx-auto">
       <CardContent>
-        <h1 className="text-2xl font-bold mb-4">🧪 Practice: Communication & Reasoning</h1>
+        <h1 className="text-2xl font-bold mb-4">🧪 Practice</h1>
         <p className="text-gray-700 mb-6">
-          In this step, you’ll deepen your skills by trying out scenario-based tasks,
-          journaling prompts, and peer challenges. Variety helps you solidify what you learned.
+          In this phase, you'll try hands-on activities to strengthen your new skill. 
+          Practice helps make knowledge stick through real scenarios, journaling, and peer interaction.
         </p>
 
-        {/* Scenario Tasks */}
+        {/* Scenario-Based Tasks */}
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-3">⚗️ Scenario-Based Tasks</h2>
           <div className="space-y-4">
@@ -64,7 +67,7 @@ const Practice = () => {
             ))}
           </ul>
           <p className="text-sm text-gray-500 mt-2">
-            (Feel free to record responses in a physical journal or a notes app.)
+            (You can write these in your personal journal or digital notes.)
           </p>
         </section>
 
