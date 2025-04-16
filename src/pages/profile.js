@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Input } from "../../components/ui/Input";
-import { Button } from "../../components/ui/Button";
+import { Button } from "../components/ui/Button";
 import { mergeUserData } from "../services/UserDataService";
 
 const Profile = ({ onComplete }) => {
