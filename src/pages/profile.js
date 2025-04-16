@@ -1,8 +1,8 @@
 // src/components/forms/profile.js
 
 import React, { useState } from "react";
-import { Card, CardContent } from "../../components/ui/Card";
-import { Input } from "../../components/ui/Input";
+import { Card, CardContent } from "../components/ui/Card";
+import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
 import { mergeUserData } from "../services/UserDataService";
 
