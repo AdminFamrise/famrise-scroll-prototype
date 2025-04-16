@@ -1,8 +1,8 @@
 // src/pages/skills/Reflect.js
 
 import React, { useEffect, useState } from "react";
-import { Card, CardContent } from "../../../components/ui/Card";
-import { Button } from "../../../components/ui/Button";
+import { Card, CardContent } from "../../components/ui/Card";
+import { Button } from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 import mockCoaches from "../../../services/MockCoachDirectory"; // Ensure this file exists
 
