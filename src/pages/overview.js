@@ -1,6 +1,5 @@
-// src/pages/overview.js
-
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { getUserData } from "../services/UserDataService";
@@ -8,7 +7,8 @@ import LanguageLayer from "../components/language/LanguageLayer";
 import mockSpecialServices from "../services/MockSpecialServices";
 import mockSolutions from "../services/MockSolutions";
 
-const Overview = ({ onComplete }) => {
+const Overview = () => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [learningMatches, setLearningMatches] = useState([]);
   const [specialSupport, setSpecialSupport] = useState([]);
@@ -37,6 +37,10 @@ const Overview = ({ onComplete }) => {
       }
     }
   }, []);
+
+  const handleStartJourney = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <div className="p-6 space-y-10">
@@ -90,10 +94,11 @@ const Overview = ({ onComplete }) => {
       )}
 
       <div className="text-center mt-10">
-        <Button onClick={onComplete}>🚀 Start My Journey</Button>
+        <Button onClick={handleStartJourney}>🚀 Start My Journey</Button>
       </div>
     </div>
   );
 };
 
 export default Overview;
+
