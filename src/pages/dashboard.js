@@ -1,13 +1,20 @@
+// src/pages/dashboard.js
+
 import React from "react";
 import { Card, CardContent } from "../components/ui/Card";
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
 
 const CustomerDashboard = () => {
-  return (
-    <div className="p-6 space-y-8">
+  // Placeholder flags (replace later with dynamic content)
+  const hasCurrentLearnings = false;
+  const hasSpecializations = false;
 
-      {/* Language Selection */}
+  return (
+    <div className="p-6 space-y-10">
+      <h1 className="text-2xl font-bold text-center">🎓 Welcome to Your Dashboard</h1>
+
+      {/* Language Settings */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardContent>
@@ -30,46 +37,80 @@ const CustomerDashboard = () => {
         </Card>
       </section>
 
-      {/* Search and Recently Viewed */}
+      {/* Search */}
       <section>
         <Input placeholder="🔍 Search for a skill or topic..." className="mb-3" />
-        <h2 className="text-xl font-semibold mb-1">🕒 Recently Viewed</h2>
-        <p className="text-gray-600">You haven’t viewed anything yet.</p>
       </section>
 
-      {/* Special Services */}
+      {/* Learnings Overview */}
       <section>
-        <h2 className="text-xl font-semibold mb-1">💡 My Special Services</h2>
-        <Card className="mt-2">
+        <h2 className="text-xl font-semibold mb-4">📘 My Current Learnings</h2>
+        {hasCurrentLearnings ? (
+          <div className="grid md:grid-cols-2 gap-4">
+            {/* Replace with mapped cards */}
+          </div>
+        ) : (
+          <Card>
+            <CardContent>
+              <p className="text-gray-600">You haven’t started learning yet.</p>
+              <Button className="mt-3">📚 Choose what to learn</Button>
+            </CardContent>
+          </Card>
+        )}
+      </section>
+
+      {/* Specializations */}
+      <section>
+        <h2 className="text-xl font-semibold mb-4">🎯 My Specializations</h2>
+        {hasSpecializations ? (
+          <div className="grid md:grid-cols-2 gap-4">
+            {/* Replace with mapped specializations */}
+          </div>
+        ) : (
+          <Card>
+            <CardContent>
+              <p className="text-gray-600">No specializations selected yet.</p>
+              <Button className="mt-3">✨ Explore Specializations</Button>
+            </CardContent>
+          </Card>
+        )}
+      </section>
+
+      {/* Mental Health Add-On */}
+      <section>
+        <h2 className="text-xl font-semibold mb-4">🧠 My Special Services</h2>
+        <Card>
           <CardContent>
-            <p>No special services assigned yet.</p>
-            <Button className="mt-2">🧠 Take Mental Health Check</Button>
+            <p className="text-gray-600">No services assigned yet.</p>
+            <Button className="mt-3">🌈 Take Mental Health Check</Button>
           </CardContent>
         </Card>
       </section>
 
-      {/* Quick Access */}
+      {/* Mentor Sessions */}
       <section>
-        <h2 className="text-xl font-semibold mb-1">🎒 Quick Access</h2>
-        <ul className="list-disc ml-6 space-y-1 text-blue-700 underline">
-          <li><a href="#">📘 My Current Learnings</a></li>
-          <li><a href="#">📗 My Specializations</a></li>
-          <li><a href="#">🧑‍🏫 My Mentor Sessions</a></li>
-        </ul>
+        <h2 className="text-xl font-semibold mb-4">👥 My Mentor Sessions</h2>
+        <Card>
+          <CardContent>
+            <p className="text-gray-600">No mentor sessions scheduled.</p>
+            <Button className="mt-3">💬 Book a Session</Button>
+          </CardContent>
+        </Card>
       </section>
 
-      {/* Profile Dropdown (simulated for now) */}
+      {/* Profile Settings */}
       <section>
-        <h2 className="text-xl font-semibold mb-1">👤 Profile Menu</h2>
-        <ul className="list-disc ml-6 space-y-1">
-          <li>📄 Subscription</li>
-          <li>⚙️ Settings</li>
-          <li>🏅 Accomplishments</li>
-          <li>🆘 Help Center</li>
-        </ul>
+        <h2 className="text-xl font-semibold mb-4">👤 My Profile</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Card><CardContent>📄 Subscription</CardContent></Card>
+          <Card><CardContent>⚙️ Settings</CardContent></Card>
+          <Card><CardContent>🏅 Accomplishments</CardContent></Card>
+          <Card><CardContent>🆘 Help Center</CardContent></Card>
+        </div>
       </section>
     </div>
   );
 };
 
 export default CustomerDashboard;
+
