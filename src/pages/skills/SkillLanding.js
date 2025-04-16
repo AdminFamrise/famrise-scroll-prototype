@@ -1,8 +1,8 @@
 // src/pages/skills/[skillName]/SkillLanding.js
 
 import React from "react";
-import { Card, CardContent } from "../../../components/ui/Card";
-import { Button } from "../../../components/ui/Button";
+import { Card, CardContent } from "../../components/ui/Card";
+import { Button } from "../../components/ui/Button";
 // If you’re using React Router for navigation:
 import { useNavigate } from "react-router-dom";
 
