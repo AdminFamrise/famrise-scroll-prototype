@@ -1,17 +1,17 @@
 // src/services/UserDataService.js
 
-// Save data to localStorage
+// Save user data to localStorage
 export function saveUserData(data) {
   localStorage.setItem("userData", JSON.stringify(data));
 }
 
-// Get data from localStorage
+// Retrieve user data from localStorage
 export function getUserData() {
   const stored = localStorage.getItem("userData");
   return stored ? JSON.parse(stored) : {};
 }
 
-// Merge partial updates into stored data
+// Merge new user data into existing stored data
 export function mergeUserData(partialData) {
   const existing = getUserData();
   const merged = {
@@ -22,8 +22,23 @@ export function mergeUserData(partialData) {
   return merged;
 }
 
-// ✅ Optional: check if user skipped MHC
-export function didSkipMHC() {
+// Check if user skipped the Well-being Check (previously MHC)
+export function didSkipWellBeingCheck() {
   const user = getUserData();
-  return user.mhcSkipped === true;
+  return user.wellBeingSkipped === true; // ✅ updated key
+}
+
+// Optional: check if user has submitted well-being data
+export function hasWellBeingData() {
+  const user = getUserData();
+  return (
+    user.mhcSWB !== undefined &&
+    user.mhcPWB !== undefined &&
+    user.matrixLabel !== undefined
+  );
+}
+
+// Optional: clear user data (e.g. on logout)
+export function clearUserData() {
+  localStorage.removeItem("userData");
 }
