@@ -1,12 +1,15 @@
 // src/components/forms/profile.js
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/Card";
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
 import { mergeUserData } from "../services/UserDataService";
 
-const Profile = ({ onComplete }) => {
+const Profile = () => {
+  const navigate = useNavigate();
+
   const [profileData, setProfileData] = useState({
     name: "",
     email: "",
@@ -32,8 +35,18 @@ const Profile = ({ onComplete }) => {
   };
 
   const handleSubmit = () => {
+    // 1️⃣ Save user data
     mergeUserData(profileData);
-    if (onComplete) onComplete();
+
+    // 2️⃣ Redirect based on realLifeScenario value
+    if (profileData.realLifeScenario === "Everyday Life Skills") {
+      navigate("/scenario/everyday");
+    } else if (profileData.realLifeScenario === "New Paths & Opportunities") {
+      navigate("/scenario/opportunities");
+    } else {
+      // Fallback
+      navigate("/scenario");
+    }
   };
 
   return (
@@ -130,5 +143,4 @@ const Profile = ({ onComplete }) => {
 };
 
 export default Profile;
-
 
