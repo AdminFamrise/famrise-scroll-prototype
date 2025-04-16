@@ -1,8 +1,8 @@
 // src/pages/skills/Learn.js
 
 import React from "react";
-import { Card, CardContent } from "../../../components/ui/Card";
-import { Button } from "../../../components/ui/Button";
+import { Card, CardContent } from "../../components/ui/Card";
+import { Button } from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 
 // Example: small theory modules + optional quiz placeholders
