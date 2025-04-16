@@ -1,7 +1,15 @@
-// src/components/dashboard/ExploreBar.js
+// src/components/dashboard/CustomerDashboard/ExploreBar.js
 
 import React from "react";
 
+/**
+ * ExploreBar
+ *
+ * Props:
+ * - value (string): The current search input value.
+ * - onChange (function): Handler for updating input state.
+ * - onSearch (function): Called when user hits Enter or triggers a search action.
+ */
 const ExploreBar = ({ value, onChange, onSearch }) => {
   return (
     <section className="mb-6">
