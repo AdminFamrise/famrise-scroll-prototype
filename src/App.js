@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // General Pages
 import LandingPage from "./pages/index";
 import ProfileCreation from "./pages/profile";
-import ScenarioSelection from "./pages/scenario";
+import EverydayScenarioPage from "./pages/scenario/everyday";
+import OpportunitiesScenarioPage from "./pages/scenario/opportunities";
 import WellbeingCheck from "./pages/wellbeing-check";
 import OpportunityOverview from "./pages/overview";
 import Dashboard from "./pages/dashboard";
@@ -25,7 +26,8 @@ function App() {
         {/* General Flow */}
         <Route path="/" element={<LandingPage/>} />
         <Route path="/profile" element={<ProfileCreation />} />
-        <Route path="/scenario" element={<ScenarioSelection />} />
+        <Route path="/scenario/everyday" element={<EverydayScenarioPage />} />
+        <Route path="/scenario/opportunities" element={<OpportunitiesScenarioPage />} />
         <Route path="/wellbeing-check" element={<WellbeingCheck />} />
         <Route path="/overview" element={<OpportunityOverview />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -44,4 +46,8 @@ function App() {
 }
 
 export default App;
+
+
+
+
 
