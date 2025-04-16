@@ -3,64 +3,94 @@
 import React from "react";
 import { Card, CardContent } from "../ui/Card";
 
-// Language Integration Tags
-const tags = [
-  {
-    emoji: "🔤",
-    label: "Use it in Dutch",
-    description: "Say or write 1 phrase related to the task in Dutch (e.g., greeting, idiom).",
-  },
-  {
-    emoji: "💡",
-    label: "Hear it in Dutch",
-    description: "Listen to a short audio clip or word used in context.",
-  },
-  {
-    emoji: "✍️",
-    label: "Reflect in Dutch",
-    description: "Write one sentence or keyword in Dutch during the reflection step.",
-  },
-  {
-    emoji: "📂",
-    label: "Dutch in Action Words",
-    description: "Learn 2–3 task-specific words in Dutch with their real-life use (e.g., school, recycling).",
-  },
-  {
-    emoji: "💬",
-    label: "Try it in Conversation",
-    description: "Insert one Dutch phrase into a real-world interaction.",
-  },
-  {
-    emoji: "📱",
-    label: "Digital Dutch Moment",
-    description: "Switch your app/system into Dutch during a task (e.g., Google Maps, phone settings).",
-  },
-  {
-    emoji: "🔁",
-    label: "Repeat It This Week",
-    description: "Try using the new Dutch word or phrase 3 more times in your life this week.",
-  },
-];
+// Example language integration ideas per language
+const languageIdeas = {
+  Dutch: [
+    {
+      emoji: "🔤",
+      label: "Use it in Dutch",
+      description:
+        "Say or write one phrase related to your task in Dutch (e.g., greeting, idiom).",
+    },
+    {
+      emoji: "💡",
+      label: "Hear it in Dutch",
+      description: "Listen to a short audio clip or word used in context.",
+    },
+    {
+      emoji: "✍️",
+      label: "Reflect in Dutch",
+      description:
+        "Write one sentence or keyword in Dutch during the reflection step.",
+    },
+    {
+      emoji: "📂",
+      label: "Dutch in Action Words",
+      description:
+        "Learn 2–3 task-specific words in Dutch with their real-life use (school, recycling, etc.).",
+    },
+    {
+      emoji: "💬",
+      label: "Try it in Conversation",
+      description:
+        "Insert one Dutch phrase into a real-world interaction this week.",
+    },
+    {
+      emoji: "📱",
+      label: "Digital Dutch Moment",
+      description:
+        "Switch one of your apps or phone settings into Dutch temporarily.",
+    },
+    {
+      emoji: "🔁",
+      label: "Repeat It This Week",
+      description:
+        "Try using the new Dutch word or phrase 3 times in daily life.",
+    },
+  ],
+  English: [
+    {
+      emoji: "🔤",
+      label: "Use it in English",
+      description:
+        "Say or write one phrase related to your task in English (e.g., greeting, idiom).",
+    },
+    {
+      emoji: "💡",
+      label: "Hear it in English",
+      description: "Listen to a short audio clip or word used in context.",
+    },
+    {
+      emoji: "✍️",
+      label: "Reflect in English",
+      description:
+        "Write one sentence or keyword in English during the reflection step.",
+    },
+    // Add more English-specific tips here, or replicate the same ones as Dutch
+  ],
+};
 
-const LanguageLayer = ({ goal, level }) => {
-  // Show this layer only if Dutch was selected
-  if (!level || !level.toLowerCase().includes("dutch")) return null;
+const LanguageLayer = ({ languageAddOn }) => {
+  if (!languageAddOn) return null;
+
+  const tips = languageIdeas[languageAddOn];
+  if (!tips) return null; // no tips defined for that language
 
   return (
     <Card className="mt-4 bg-yellow-50 border-yellow-300 border">
       <CardContent>
         <h3 className="text-md font-semibold mb-2">
-          🇳🇱 Practice Dutch While You Learn
+          🌐 Practice {languageAddOn} While You Learn
         </h3>
         <p className="text-sm mb-3">
-          Based on your selected language add-on, here are Dutch integration ideas for this module:
+          Here are some {languageAddOn} integration ideas for this module:
         </p>
         <ul className="space-y-2 text-sm">
-          {tags.map((tag, index) => (
-            <li key={index} className="flex items-start gap-2">
-              <span className="text-lg">{tag.emoji}</span>
+          {tips.map((tip, idx) => (
+            <li key={idx} className="flex items-start gap-2">
+              <span className="text-lg">{tip.emoji}</span>
               <div>
-                <strong>{tag.label}:</strong> {tag.description}
+                <strong>{tip.label}:</strong> {tip.description}
               </div>
             </li>
           ))}
