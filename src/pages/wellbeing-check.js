@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
-import { assignMatrixLabel } from "../../services/MatrixLabelAssigner";
-import { mergeUserData } from "../../services/UserDataService";
+import { assignMatrixLabel } from "../services/MatrixLabelAssigner";
+import { mergeUserData } from "../services/UserDataService";
 
 const mhcQuestions = [
   { id: 1, text: "During the past month, how often did you feel happy?" },
