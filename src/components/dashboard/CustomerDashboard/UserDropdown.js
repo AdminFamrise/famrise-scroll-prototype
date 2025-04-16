@@ -1,4 +1,4 @@
-// src/components/dashboard/UserDropdown.js
+// src/components/dashboard/CustomerDashboard/UserDropdown.js
 
 import React, { useState } from "react";
 import { Button } from "../ui/Button";
