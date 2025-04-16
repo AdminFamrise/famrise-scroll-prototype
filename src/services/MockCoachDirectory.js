@@ -1,4 +1,4 @@
-// src/services/CoachDirectory.js
+// src/services/MockCoachDirectory.js
 
 const mockServices = [
   {
