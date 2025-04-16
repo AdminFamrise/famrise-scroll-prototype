@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
-import mockCoaches from "../../../services/MockCoachDirectory"; // Ensure this file exists
+import mockCoaches from "../services/MockCoachDirectory"; // Ensure this file exists
 
 const Reflect = () => {
   const navigate = useNavigate();
