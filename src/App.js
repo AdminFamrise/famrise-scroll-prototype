@@ -1,49 +1,47 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Main Pages
+// General Pages
 import LandingPage from "./pages/index";
 import ProfileCreation from "./pages/profile";
-import ScenarioFollowUp from "./pages/scenario";
-import WellBeingCheck from "./pages/wellbeing-check";
+import ScenarioSelection from "./pages/scenario";
+import WellbeingCheck from "./pages/wellbeing-check";
 import OpportunityOverview from "./pages/overview";
-import CustomerDashboard from "./pages/dashboard";
+import Dashboard from "./pages/dashboard";
 
-// Skill Journey Pages (generic structure — uses communication-reasoning as current placeholder)
-import SkillLanding from "./pages/skills/communication-reasoning/index";
-import Discover from "./pages/skills/communication-reasoning/Discover";
-import Learn from "./pages/skills/communication-reasoning/Learn";
-import Practice from "./pages/skills/communication-reasoning/Practice";
-import Apply from "./pages/skills/communication-reasoning/Apply";
-import Reflect from "./pages/skills/communication-reasoning/Reflect";
-import BridgeModule from "./pages/skills/communication-reasoning/BridgeModule";
+// Skill Journey Pages (dynamic)
+import SkillLanding from "./pages/skills/SkillLanding";
+import Discover from "./pages/skills/Discover";
+import Learn from "./pages/skills/Learn";
+import Practice from "./pages/skills/Practice";
+import Apply from "./pages/skills/Apply";
+import Reflect from "./pages/skills/Reflect";
+import BridgeModule from "./pages/skills/BridgeModule";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* 💡 General Pages */}
+        {/* General Flow */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/profile" element={<ProfileCreation />} />
-        <Route path="/scenario" element={<ScenarioFollowUp />} />
-        <Route path="/wellbeing-check" element={<WellBeingCheck />} />
+        <Route path="/scenario" element={<ScenarioSelection />} />
+        <Route path="/wellbeing-check" element={<WellbeingCheck />} />
         <Route path="/overview" element={<OpportunityOverview />} />
-        <Route path="/dashboard" element={<CustomerDashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
-        {/* 🧩 Skill Journey (placeholder: Communication & Reasoning) */}
-        <Route path="/skills/communication-reasoning" element={<SkillLanding />} />
-        <Route path="/skills/communication-reasoning/discover" element={<Discover />} />
-        <Route path="/skills/communication-reasoning/learn" element={<Learn />} />
-        <Route path="/skills/communication-reasoning/practice" element={<Practice />} />
-        <Route path="/skills/communication-reasoning/apply" element={<Apply />} />
-        <Route path="/skills/communication-reasoning/reflect" element={<Reflect />} />
-        <Route path="/skills/communication-reasoning/bridge" element={<BridgeModule />} />
-
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* Skill Journey (Dynamic slug) */}
+        <Route path="/skills/:skillSlug" element={<SkillLanding />} />
+        <Route path="/skills/:skillSlug/discover" element={<Discover />} />
+        <Route path="/skills/:skillSlug/learn" element={<Learn />} />
+        <Route path="/skills/:skillSlug/practice" element={<Practice />} />
+        <Route path="/skills/:skillSlug/apply" element={<Apply />} />
+        <Route path="/skills/:skillSlug/reflect" element={<Reflect />} />
+        <Route path="/skills/:skillSlug/bridge" element={<BridgeModule />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
