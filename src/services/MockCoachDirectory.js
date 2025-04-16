@@ -1,42 +1,46 @@
 // src/services/MockCoachDirectory.js
 
-const mockServices = [
+const MockCoachDirectory = [
   {
-    title: "Sanne de Vries",
+    name: "Sanne de Vries",
     avatar: "https://i.pravatar.cc/150?img=12",
     bio: "Experienced learning coach specialized in guiding parents through Dutch curriculum thinking strategies.",
-    interactionType: "Guided",
+    theorySession: "Thinking Strategies for Parents",
+    scenario: "Support my child’s success in school",
     format: "1-on-1 Coaching",
-    realLifeScenario: "Support my child’s success in school",
-    specificGoal: "Teach kids how to think",
+    included: false,
+    price: 40,
     languages: ["Dutch", "English"],
     calendarLink: "https://calendly.com/sanne-devries/intro-call",
     groupInvite: "https://t.me/mockthinkinggroup",
   },
   {
-    title: "Mohammed El-Khatib",
+    name: "Mohammed El-Khatib",
     avatar: "https://i.pravatar.cc/150?img=23",
     bio: "Community facilitator helping international families connect, learn, and grow together in a fun peer-led format.",
-    interactionType: "Group Free",
+    theorySession: "Peer-Led Learning & Family Support",
+    scenario: "Support my child’s success in school",
     format: "Peer Meetup",
-    realLifeScenario: "Support my child’s success in school",
-    specificGoal: "Teach kids how to think",
+    included: true,
+    price: 0,
     languages: ["Dutch", "Arabic", "English"],
     calendarLink: "https://forms.gle/book-call-mohammed",
     groupInvite: "https://chat.whatsapp.com/peer-group-example",
   },
   {
-    title: "Eva Janssen",
+    name: "Eva Janssen",
     avatar: "https://i.pravatar.cc/150?img=37",
     bio: "Educator and coach blending critical thinking with playful learning — perfect for parents and kids.",
-    interactionType: "Group Learning",
+    theorySession: "Creative Reasoning and Play",
+    scenario: "Support my child’s success in school",
     format: "Webinar + Q&A",
-    realLifeScenario: "Support my child’s success in school",
-    specificGoal: "Teach kids how to think",
+    included: true,
+    price: 0,
     languages: ["Dutch", "English"],
     calendarLink: "https://calendly.com/eva-webinar/intro",
     groupInvite: "",
   },
 ];
 
-export default mockServices;
+export default MockCoachDirectory;
+
