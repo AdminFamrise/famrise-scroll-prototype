@@ -1,3 +1,5 @@
+// src/pages/skills/Apply.js
+
 import React from "react";
 import { Card, CardContent } from "../../../components/ui/Card";
 import { Button } from "../../../components/ui/Button";
@@ -6,32 +8,30 @@ import { useNavigate } from "react-router-dom";
 const Apply = () => {
   const navigate = useNavigate();
 
-  // Example real-world tasks
   const realWorldTasks = [
     {
-      title: "Conduct a Family Meeting",
+      title: "Run a Micro-Project",
       description:
-        "Schedule a 20-minute family discussion to plan an upcoming event or resolve a small conflict. Apply calm tone, active listening, and reasoning steps to reach a decision."
+        "Choose a small, achievable action related to this skill — such as leading a conversation, organizing something, or applying it to a task at home or work.",
     },
     {
-      title: "Negotiate a Small Agreement",
+      title: "Facilitate a Real-Life Decision",
       description:
-        "Find a situation (like a shared purchase or weekend plan) where you can apply logical arguments and open communication to reach an agreement with a friend or partner."
-    }
+        "Identify a low-stakes challenge and intentionally apply the skill in how you evaluate, communicate, or collaborate with others.",
+    },
   ];
 
   return (
     <Card className="p-6 max-w-3xl mx-auto">
       <CardContent>
-        <h1 className="text-2xl font-bold mb-4">🌍 Apply: Communication & Reasoning</h1>
+        <h1 className="text-2xl font-bold mb-4">🌍 Apply: Real-World Tasks</h1>
         <p className="text-gray-700 mb-6">
-          Now it’s time to take everything you’ve practiced and apply it
-          to real-world tasks. Choose at least one mini-project below
-          to solidify your new skills in an authentic setting.
+          Now it’s time to move beyond theory. Choose a real-world micro-project where
+          you can test and apply this skill in a meaningful way.
         </p>
 
         <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">🚀 Real-World Mini-Projects</h2>
+          <h2 className="text-xl font-semibold mb-3">🚀 Suggested Mini-Projects</h2>
           <div className="space-y-4">
             {realWorldTasks.map((task, i) => (
               <div key={i} className="bg-gray-50 p-4 rounded shadow-sm">
@@ -43,20 +43,19 @@ const Apply = () => {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">📝 Documentation</h2>
+          <h2 className="text-xl font-semibold mb-3">📝 Document Your Experience</h2>
           <p className="text-sm text-gray-700 mb-2">
-            Jot down observations or outcomes from your real-world experiment.
-            What worked well? What felt challenging or awkward? Any emotional triggers?
+            Write down your experience — what went well, what you’d do differently,
+            and what surprised you about yourself or others.
           </p>
           <p className="text-xs text-gray-500">
-            (You can keep notes here, in a physical journal, or an online doc.)
+            (Use a notebook, notes app, or share in your peer group later.)
           </p>
         </section>
 
-        {/* Next Step Button */}
         <div className="text-center mt-6">
           <Button onClick={() => navigate("../reflect")}>
-            Next: Reflect with Coaches or Peers
+            Next: Reflect with a Coach or Peer
           </Button>
         </div>
       </CardContent>
@@ -65,4 +64,3 @@ const Apply = () => {
 };
 
 export default Apply;
-
