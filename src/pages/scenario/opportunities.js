@@ -28,7 +28,7 @@ const OpportunitiesScenarioPage = () => {
 
   const handleSubmit = () => {
     mergeUserData(formData);
-    navigate("/overview");
+    navigate("/wellbeing-check");
   };
 
   return (
