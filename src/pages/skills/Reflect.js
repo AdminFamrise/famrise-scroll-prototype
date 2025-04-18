@@ -33,9 +33,9 @@ const Reflect = () => {
             Choose a support option to deepen your understanding or celebrate your progress.
           </p>
           <div className="space-y-3">
-            <Button variant="outline">💬 Book a Coaching Session</Button>
-            <Button variant="outline">👥 Join a Peer Group</Button>
-            <Button variant="outline">🎓 Ask a Mentor</Button>
+            <Button variant="outline">💬 Book 1-on-1 Mentorship</Button>
+            <Button variant="outline">👥 Join Peer Group Meetup</Button>
+            <Button variant="outline">🎓 Guided Coaching Session</Button>
           </div>
         </section>
 
@@ -53,3 +53,4 @@ const Reflect = () => {
 };
 
 export default Reflect;
+
