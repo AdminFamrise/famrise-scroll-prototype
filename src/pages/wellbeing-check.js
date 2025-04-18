@@ -1,6 +1,5 @@
-// src/components/forms/wellbeing-check.js
-
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { assignMatrixLabel } from "../services/MatrixLabelAssigner";
@@ -23,7 +22,8 @@ const mhcQuestions = [
   { id: 14, text: "During the past month, how often did you feel that your life has a sense of direction or meaning to it?" },
 ];
 
-const WellbeingCheck = ({ onComplete }) => {
+const WellbeingCheck = () => {
+  const navigate = useNavigate();
   const [answers, setAnswers] = useState({});
 
   const handleChange = (e) => {
@@ -67,12 +67,12 @@ const WellbeingCheck = ({ onComplete }) => {
     };
 
     mergeUserData(mhcResults);
-    if (onComplete) onComplete();
+    navigate("/overview");
   };
 
   const handleSkip = () => {
     mergeUserData({ mhcSkipped: true });
-    if (onComplete) onComplete();
+    navigate("/overview");
   };
 
   return (
