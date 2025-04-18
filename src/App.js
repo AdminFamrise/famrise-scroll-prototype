@@ -9,6 +9,7 @@ import OpportunitiesScenarioPage from "./pages/scenario/opportunities";
 import WellbeingCheck from "./pages/wellbeing-check";
 import OpportunityOverview from "./pages/overview";
 import Dashboard from "./pages/dashboard";
+import AddSkill from "./pages/admin/AddSkill";
 
 // Skill Journey Pages (dynamic)
 import SkillLanding from "./pages/skills/SkillLanding";
@@ -31,6 +32,7 @@ function App() {
         <Route path="/wellbeing-check" element={<WellbeingCheck />} />
         <Route path="/overview" element={<OpportunityOverview />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin/add-skill" element={<AddSkill />} />
 
         {/* Skill Journey (Dynamic slug) */}
         <Route path="/skills/:skillSlug" element={<SkillLanding />} />
