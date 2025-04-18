@@ -1,61 +1,73 @@
 // src/pages/skills/Apply.js
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 
 const Apply = () => {
   const navigate = useNavigate();
+  const [projectChoice, setProjectChoice] = useState("");
 
-  const realWorldTasks = [
+  const miniProjects = [
     {
-      title: "Run a Micro-Project",
-      description:
-        "Choose a small, achievable action related to this skill — such as leading a conversation, organizing something, or applying it to a task at home or work.",
+      title: "📝 Micro-Project: Observe & Adjust",
+      description: "Choose a recurring situation (e.g., team meeting or morning routine). Apply one technique from this skill and record the outcome."
     },
     {
-      title: "Facilitate a Real-Life Decision",
-      description:
-        "Identify a low-stakes challenge and intentionally apply the skill in how you evaluate, communicate, or collaborate with others.",
-    },
+      title: "🎯 Peer Prompt Exchange",
+      description: "Exchange scenarios with a peer and give each other feedback or encouragement. Reflect on the alternative approaches."
+    }
   ];
 
   return (
-    <Card className="p-6 max-w-3xl mx-auto">
+    <Card className="p-6 max-w-4xl mx-auto">
       <CardContent>
-        <h1 className="text-2xl font-bold mb-4">🌍 Apply: Real-World Tasks</h1>
+        <h1 className="text-2xl font-bold mb-4">🏗️ Apply Your Skill</h1>
+
         <p className="text-gray-700 mb-6">
-          Now it’s time to move beyond theory. Choose a real-world micro-project where
-          you can test and apply this skill in a meaningful way.
+          Now that you’ve explored the theory and practiced key actions, it’s time to use your skill in a real-world mini project.
         </p>
 
+        {/* Mini Projects */}
         <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">🚀 Suggested Mini-Projects</h2>
+          <h2 className="text-xl font-semibold mb-3">🧪 Mini Projects</h2>
           <div className="space-y-4">
-            {realWorldTasks.map((task, i) => (
-              <div key={i} className="bg-gray-50 p-4 rounded shadow-sm">
-                <h3 className="font-medium mb-1">{task.title}</h3>
-                <p className="text-sm text-gray-700">{task.description}</p>
-              </div>
+            {miniProjects.map((proj, idx) => (
+              <label
+                key={idx}
+                className={`block border rounded p-4 cursor-pointer transition ${
+                  projectChoice === proj.title ? "bg-green-100 border-green-500" : "hover:bg-gray-50"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="project"
+                  className="mr-2"
+                  value={proj.title}
+                  checked={projectChoice === proj.title}
+                  onChange={() => setProjectChoice(proj.title)}
+                />
+                <strong>{proj.title}</strong>
+                <p className="text-sm text-gray-600 mt-1">{proj.description}</p>
+              </label>
             ))}
           </div>
         </section>
 
+        {/* Optional Peer Connection */}
         <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">📝 Document Your Experience</h2>
+          <h2 className="text-xl font-semibold mb-3">🤝 Want Peer Support?</h2>
           <p className="text-sm text-gray-700 mb-2">
-            Write down your experience — what went well, what you’d do differently,
-            and what surprised you about yourself or others.
+            You can share your chosen project in a peer group and invite feedback or ideas.
           </p>
-          <p className="text-xs text-gray-500">
-            (Use a notebook, notes app, or share in your peer group later.)
-          </p>
+          <Button variant="outline">🔗 Open Peer Room</Button>
         </section>
 
-        <div className="text-center mt-6">
-          <Button onClick={() => navigate("../reflect")}>
-            Next: Reflect with a Coach or Peer
+        {/* CTA */}
+        <div className="text-center mt-8">
+          <Button onClick={() => navigate("../reflect")} disabled={!projectChoice}>
+            Next: Reflect & Connect
           </Button>
         </div>
       </CardContent>
