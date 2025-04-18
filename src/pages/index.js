@@ -20,12 +20,12 @@ export default function IndexPage() {
       <section className="py-16 px-6 text-center max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold mb-4">About Famrise</h2>
         <p className="mb-4">
-          <strong>Our Vision:</strong> A society where every family has the tools to thrive emotionally,
-          socially, and professionally — no matter the challenges they face.
+          <strong>Our Vision:</strong> Your 1st Lifelong Learning Skills platform. 
+        A Smarter path to families growth and well-being
         </p>
         <p>
-          <strong>Our Mission:</strong> To empower families through personalized digital guidance, community
-          support, and life-relevant skill-building.
+          <strong>Our Mission:</strong> Give customers the skills they need to be more productive and competitive
+          in a fast changing world.
         </p>
       </section>
 
@@ -33,11 +33,11 @@ export default function IndexPage() {
       <section className="py-16 px-6 text-center bg-gray-50">
         <h2 className="text-3xl font-bold mb-4">How It Works</h2>
         <ul className="space-y-3 max-w-xl mx-auto text-left text-lg">
-          <li>1️⃣ Discover: Self-guided story to build awareness</li>
-          <li>2️⃣ Learn: Self-guided content with real-life tools</li>
-          <li>3️⃣ Practice: Scenario-based journaling or simulation</li>
-          <li>4️⃣ Apply: Real-life task or coach check-in</li>
-          <li>5️⃣ Reflect: Peer or coach session with personalized feedback</li>
+          <li>1️⃣ Discover: Understand how a particular skill relates to your current life challenges</li>
+          <li>2️⃣ Learn: Gain high level skills using our Self-guided tools content at your own pace</li>
+          <li>3️⃣ Practice: Our tools guide you towards mastering concepts </li>
+          <li>4️⃣ Apply: Different formats are designed so you may start applying skills in real life</li>
+          <li>5️⃣ Reflect: Human mentorship and coaching is what makes the difference</li>
         </ul>
         <Link to="/profile">
           <button className="mt-6 bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700">
