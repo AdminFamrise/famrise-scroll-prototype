@@ -18,7 +18,7 @@ const Discover = () => {
         <section className="mb-6">
           <h2 className="text-xl font-semibold mb-2">👀 A Real-World Situation</h2>
           <p className="text-gray-700">
-            Imagine a moment of tension in daily life — a child spills milk, a colleague interrupts your point, a bus runs late. How you respond becomes a learning opportunity. 
+            Imagine a moment of tension in daily life — a child spills milk, a colleague interrupts your point, a bus runs late. How you respond becomes a learning opportunity.
             This module shows how simple moments are chances to practice your skill with awareness and clarity.
           </p>
         </section>
@@ -37,10 +37,10 @@ const Discover = () => {
         <section className="mb-6">
           <h2 className="text-xl font-semibold mb-2">📚 Starter Concepts</h2>
           <p className="text-gray-700 mb-2">
-            <strong>Term 1:</strong> Short explanation of a foundational idea tied to this skill.
+            <strong>Clarity in Action:</strong> Recognizing your patterns and triggers before reacting.
           </p>
           <p className="text-gray-700">
-            <strong>Term 2:</strong> A second principle or tool that the learner will use throughout their journey.
+            <strong>Situational Awareness:</strong> The ability to pause, observe, and respond instead of react.
           </p>
         </section>
 
@@ -54,9 +54,7 @@ const Discover = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-8">
-          <Button onClick={() => navigate("../learn")}>
-            Ready to Start Learning
-          </Button>
+          <Button onClick={() => navigate("../learn")}>Ready to Start Learning</Button>
         </div>
       </CardContent>
     </Card>
