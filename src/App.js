@@ -24,8 +24,11 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* TEMP: Default to Admin AddSkill page */}
+        <Route path="/" element={<AddSkill />} />
+
         {/* General Flow */}
-        <Route path="/" element={<LandingPage/>} />
+        <Route path="/landing" element={<LandingPage />} />
         <Route path="/profile" element={<ProfileCreation />} />
         <Route path="/scenario/everyday" element={<EverydayScenarioPage />} />
         <Route path="/scenario/opportunities" element={<OpportunitiesScenarioPage />} />
@@ -48,8 +51,4 @@ function App() {
 }
 
 export default App;
-
-
-
-
 
