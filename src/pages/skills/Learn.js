@@ -5,32 +5,27 @@ import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 
-// Example: small theory modules + optional quiz placeholders
-const readingResources = [
+const readingModules = [
   {
-    title: "Topic A Overview",
-    description:
-      "Explore how subtle details matter just as much as the main concepts.",
-    link: "#"
+    title: "🌱 Foundation: Awareness in Action",
+    content: "Understanding how everyday choices shape outcomes."
   },
   {
-    title: "Deeper Insight on Topic B",
-    description:
-      "A short guide on applying principles in everyday tasks (budgeting, scheduling, or planning).",
-    link: "#"
+    title: "🔍 Micro-Decisions",
+    content: "The role of attention and decision-making in skill-building."
   }
 ];
 
 const videos = [
   {
-    title: "Real-Life Application Demo",
-    description: "Watch a short demonstration of how these concepts play out.",
-    url: "https://placeholder.video.example"
+    title: "🎥 Scenario Simulation",
+    url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    description: "Observe real-world use of the skill in action."
   },
   {
-    title: "Handling Challenges",
-    description: "A short animation showing how to handle tricky scenarios.",
-    url: "https://placeholder.video.example"
+    title: "🎥 Common Mistakes & Fixes",
+    url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    description: "Learn how to spot and fix typical mistakes."
   }
 ];
 
@@ -38,75 +33,64 @@ const Learn = () => {
   const navigate = useNavigate();
 
   return (
-    <Card className="p-6 max-w-3xl mx-auto">
+    <Card className="p-6 max-w-4xl mx-auto">
       <CardContent>
         {/* Title */}
-        <h1 className="text-2xl font-bold mb-4">📘 Learn: [Skill Title Here]</h1>
+        <h1 className="text-2xl font-bold mb-4">📘 Learn</h1>
         <p className="text-gray-700 mb-6">
-          Dive into the core concepts that shape how you approach this skill and 
-          how it impacts your daily challenges.
+          This step includes short lessons, real-life video demos, and reflection questions.
         </p>
 
-        {/* Reading Section */}
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">📚 Reading & Articles</h2>
-          <ul className="list-disc ml-5">
-            {readingResources.map((item, idx) => (
-              <li key={idx} className="mb-2">
-                <strong>{item.title}:</strong> {item.description}{" "}
-                <a href={item.link} className="text-blue-600 underline">
-                  (Read More)
-                </a>
-              </li>
+        {/* Reading Blocks */}
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-3">📚 Theory Modules</h2>
+          <div className="space-y-4">
+            {readingModules.map((mod, idx) => (
+              <div key={idx} className="border rounded p-4 bg-gray-50">
+                <h3 className="font-semibold mb-1">{mod.title}</h3>
+                <p className="text-sm text-gray-700">{mod.content}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
 
-        {/* Video Section */}
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">🎬 Short Videos</h2>
-          <ul className="list-disc ml-5">
-            {videos.map((vid, idx) => (
-              <li key={idx} className="mb-2">
-                <strong>{vid.title}:</strong> {vid.description}{" "}
-                <a href={vid.url} className="text-blue-600 underline">
-                  (Watch)
-                </a>
-              </li>
+        {/* Video Embeds */}
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-3">🎬 Video Demos</h2>
+          <div className="space-y-6">
+            {videos.map((video, idx) => (
+              <div key={idx} className="space-y-2">
+                <h3 className="font-semibold">{video.title}</h3>
+                <p className="text-sm text-gray-600">{video.description}</p>
+                <div className="aspect-w-16 aspect-h-9">
+                  <iframe
+                    className="w-full h-64"
+                    src={video.url}
+                    title={video.title}
+                    allowFullScreen
+                  />
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
 
-        {/* Optional Self-Check or Quiz */}
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">🧩 Quick Self-Check</h2>
-          <p className="text-gray-700 mb-2">
-            After reviewing the articles or videos, do you notice any of the following?
+        {/* Reflection Prompt */}
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-2">🧩 Self-Reflection</h2>
+          <p className="text-sm text-gray-700 mb-2">
+            Which concept challenged you the most? Can you recall a moment when this would’ve helped?
           </p>
-          <ul className="list-disc ml-5 text-gray-700">
-            <li>Areas where subtle changes in approach matter?</li>
-            <li>Where additional steps could enhance the outcome?</li>
-          </ul>
-          <p className="text-gray-700 mt-2 text-sm">
-            (You can replace this with a short quiz or reflection prompt if desired.)
-          </p>
+          <textarea
+            placeholder="Write a few thoughts..."
+            className="w-full p-3 border rounded shadow-sm text-sm"
+            rows={4}
+          ></textarea>
         </section>
 
-        {/* 'Next Up' Progress Component (Placeholder) */}
-        <section className="mb-6 border p-4 bg-gray-50 rounded">
-          <h2 className="text-xl font-semibold mb-2">🌐 Next Up</h2>
-          <p className="text-sm text-gray-700">
-            You’ve completed the <strong>Learn</strong> phase. 
-            Up next, you’ll head over to <strong>Practice</strong>, 
-            where you can try scenario-based tasks and peer challenges.
-          </p>
-        </section>
-
-        {/* CTA to Next Step */}
-        <div className="text-center mt-6">
-          <Button onClick={() => navigate("../practice")}>
-            Next: Practice Your Skills
-          </Button>
+        {/* CTA to Practice */}
+        <div className="text-center">
+          <Button onClick={() => navigate("../practice")}>Next: Practice Your Skills</Button>
         </div>
       </CardContent>
     </Card>
@@ -114,5 +98,6 @@ const Learn = () => {
 };
 
 export default Learn;
+
 
 
