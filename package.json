@@ -3,12 +3,19 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^2.2.2",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^10.12.16",
+    "fuse.js": "^7.1.0",
+    "lucide-react": "^0.492.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-player": "^2.16.0",
     "react-router-dom": "^6.30.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "swiper": "^11.2.6",
+    "tailwind-variants": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
