@@ -110,9 +110,6 @@ const AddSkill = () => {
           onChange={(e) => handleChange("overview", e.target.value)}
           className="w-full p-2 border rounded mb-4"
         />
-
-        {/* Continue with other sections: discover, learn, practice, apply, reflect, bridge... */}
-
         <Button onClick={handleSave}>Save Skill</Button>
       </CardContent>
     </Card>
@@ -120,3 +117,4 @@ const AddSkill = () => {
 };
 
 export default AddSkill;
+
