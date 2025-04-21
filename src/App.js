@@ -15,7 +15,10 @@ import AddSkill from "./pages/admin/AddSkill";
 import agentHub from './agents/framework/agentHub';
 import agentStore from './agents/framework/agentStore';
 import agentRegistry from './agents/framework/agentRegistry';
+
+// Agent UI Components
 import ContentStructuringTool from './components/admin/ContentStructuringTool';
+import ScenarioGenerationTool from './components/admin/ScenarioGenerationTool';
 
 // Skill Journey Pages (dynamic)
 import SkillLanding from "./pages/skills/SkillLanding";
@@ -41,8 +44,11 @@ function App() {
         <Route path="/wellbeing-check" element={<WellbeingCheck />} />
         <Route path="/overview" element={<OpportunityOverview />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        
+        {/* Admin Tools */}
         <Route path="/admin/add-skill" element={<AddSkill />} />
         <Route path="/admin/content-tool" element={<ContentStructuringTool />} />
+        <Route path="/admin/scenario-tool" element={<ScenarioGenerationTool />} />
         
         {/* Skill Journey (Dynamic slug) */}
         <Route path="/skills/:skillSlug" element={<SkillLanding />} />
@@ -58,4 +64,3 @@ function App() {
 }
 
 export default App;
-
