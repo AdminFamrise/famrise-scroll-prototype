@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useAgentCommand } from '../../agents/hooks/useAgent';
+import React from 'react';
 
 const ScenarioGenerationTool = () => {
-  const [skillData, setSkillData] = useState({
+  // Simplified version without hooks or agent integration
+  const [skillData, setSkillData] = React.useState({
     slug: '',
     title: '',
     category: '',
@@ -10,12 +10,10 @@ const ScenarioGenerationTool = () => {
     overview: ''
   });
   
-  const [selectedCluster, setSelectedCluster] = useState('expat-parents-young-children');
-  const [scenarios, setScenarios] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState('');
-  
-  const { execute, isLoading: isGenerating, error } = useAgentCommand('generateScenarios');
+  const [selectedCluster, setSelectedCluster] = React.useState('expat-parents-young-children');
+  const [scenarios, setScenarios] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [message, setMessage] = React.useState('');
   
   const customerClusters = [
     { id: 'expat-parents-young-children', name: 'Working Expat Parents with Young Children (0-5) in Maastricht' },
@@ -32,7 +30,7 @@ const ScenarioGenerationTool = () => {
     setSelectedCluster(e.target.value);
   };
   
-  const handleGenerateScenarios = async () => {
+  const handleGenerateScenarios = () => {
     if (!skillData.slug || !skillData.title || !skillData.category) {
       setMessage('Please fill in at least the Slug, Title, and Category fields');
       return;
@@ -41,23 +39,73 @@ const ScenarioGenerationTool = () => {
     setIsLoading(true);
     setMessage('Generating scenarios...');
     
-    try {
-      const result = await execute({
-        skillData,
-        clusterId: selectedCluster
+    // Simulate API call with timeout
+    setTimeout(() => {
+      // Generate mock scenarios based on the selected cluster and skill data
+      const mockScenarios = generateMockScenarios(skillData, selectedCluster);
+      setScenarios(mockScenarios);
+      setMessage(`Generated ${mockScenarios.length} scenarios for this customer cluster`);
+      setIsLoading(false);
+    }, 1500);
+  };
+  
+  // Function to generate mock scenarios
+  const generateMockScenarios = (skill, clusterId) => {
+    const scenarios = [];
+    
+    if (clusterId === 'expat-parents-young-children') {
+      scenarios.push({
+        label: `Applying ${skill.title} in a Multilingual Family Environment`,
+        use: `Help your children develop ${skill.title} skills while navigating language differences.`,
+        relevance: 0.9,
+        context: `As working expat parents in Maastricht with young children, you face unique challenges in supporting your children's development.`,
+        problem: `Your children are learning multiple languages simultaneously, which can sometimes create confusion when trying to apply ${skill.title}.`,
+        solution: `Using structured approaches from ${skill.title}, you can create consistent learning patterns that work across languages.`
       });
       
-      if (result.success) {
-        setScenarios(result.data.scenarios);
-        setMessage(`Generated ${result.data.scenarios.length} scenarios for this customer cluster`);
-      } else {
-        setMessage(`Error: ${result.error || 'Failed to generate scenarios'}`);
-      }
-    } catch (err) {
-      setMessage(`Error: ${err.message}`);
-    } finally {
-      setIsLoading(false);
+      scenarios.push({
+        label: `${skill.title} for School Readiness`,
+        use: `Prepare your child for the Dutch school system using ${skill.title} techniques.`,
+        relevance: 0.85,
+        context: `Expat families often need to help their children adapt to new educational systems.`,
+        problem: `The Dutch school approach may differ from educational systems in your home country.`,
+        solution: `${skill.title} provides frameworks that help children adapt to different learning environments.`
+      });
     }
+    
+    else if (clusterId === 'mid-career-professionals') {
+      scenarios.push({
+        label: `Leveraging ${skill.title} to Break Career Plateaus`,
+        use: `Apply ${skill.title} to identify new growth opportunities in your current role.`,
+        relevance: 0.9,
+        context: `Mid-career professionals often reach points where growth seems limited.`,
+        problem: `You've mastered your current responsibilities but aren't seeing paths for advancement.`,
+        solution: `${skill.title} techniques can help you identify overlooked opportunities and reframe challenges.`
+      });
+    }
+    
+    else if (clusterId === 'recent-graduates') {
+      scenarios.push({
+        label: `Using ${skill.title} to Stand Out in Entry-Level Positions`,
+        use: `Apply ${skill.title} to demonstrate value beyond your job description.`,
+        relevance: 0.9,
+        context: `Recent graduates often struggle to differentiate themselves in competitive job markets.`,
+        problem: `Entry-level positions may not fully utilize your capabilities or provide clear advancement paths.`,
+        solution: `${skill.title} approaches can help you identify and address organizational needs beyond your assigned tasks.`
+      });
+    }
+    
+    // Add a generic scenario for all clusters
+    scenarios.push({
+      label: `${skill.title} in Everyday Situations`,
+      use: `Practical application of ${skill.title} in common scenarios.`,
+      relevance: 0.7,
+      context: `Everyone encounters situations where ${skill.title} can be valuable.`,
+      problem: skill.realLifeScenario || `Facing challenges that require structured thinking and problem-solving.`,
+      solution: `${skill.title} provides frameworks to approach problems methodically and develop effective solutions.`
+    });
+    
+    return scenarios;
   };
   
   return (
@@ -149,10 +197,10 @@ const ScenarioGenerationTool = () => {
         
         <button
           onClick={handleGenerateScenarios}
-          disabled={isLoading || isGenerating}
+          disabled={isLoading}
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-blue-300"
         >
-          {isLoading || isGenerating ? 'Generating...' : 'Generate Scenarios'}
+          {isLoading ? 'Generating...' : 'Generate Scenarios'}
         </button>
         
         {message && (
