@@ -10,6 +10,13 @@ import WellbeingCheck from "./pages/wellbeing-check";
 import OpportunityOverview from "./pages/overview";
 import Dashboard from "./pages/dashboard";
 import AddSkill from "./pages/admin/AddSkill";
+// src/agents/agents/contentStructuringAgent.js
+
+import agentHub from '../framework/agentHub';
+import agentStore from '../framework/agentStore';
+import agentRegistry from '../framework/agentRegistry';
+import ContentStructuringTool from './components/admin/ContentStructuringTool';
+
 
 // Skill Journey Pages (dynamic)
 import SkillLanding from "./pages/skills/SkillLanding";
@@ -36,6 +43,7 @@ function App() {
         <Route path="/overview" element={<OpportunityOverview />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin/add-skill" element={<AddSkill />} />
+        <Route path="/admin/content-tool" element={<ContentStructuringTool />} />
 
         {/* Skill Journey (Dynamic slug) */}
         <Route path="/skills/:skillSlug" element={<SkillLanding />} />
