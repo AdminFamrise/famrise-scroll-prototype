@@ -4,383 +4,385 @@ import agentHub from '../framework/agentHub';
 import agentStore from '../framework/agentStore';
 import agentRegistry from '../framework/agentRegistry';
 
+/**
+ * Scenario Generation Agent
+ * 
+ * This agent generates tailored scenarios for specific customer clusters
+ * based on skill content and demographic information.
+ */
 const scenarioGenerationAgent = {
-  // Agent metadata
-  id: 'scenarioGenerationAgent',
-  name: 'Scenario Generation Agent',
-  description: 'Adapts content to create relevant scenarios for specific customer clusters',
+  name: 'scenarioGenerationAgent',
   
-  // Initialize the agent
+  /**
+   * Initialize the agent and register its commands
+   */
   init: function() {
-    // Register with the registry
-    agentRegistry.register(this.id, {
-      name: this.name,
-      description: this.description,
-      capabilities: ['generateScenarios', 'getScenariosByCluster']
+    console.log('Initializing Scenario Generation Agent');
+    
+    // Register the agent
+    agentRegistry.register(this.name, {
+      description: 'Generates tailored scenarios for specific customer clusters',
+      commands: ['generateScenarios'],
+      requests: ['getScenariosByCluster'],
+      events: ['scenariosGenerated']
     });
     
-    // Set up command handlers
-    this._setupCommandHandlers();
-    
-    // Set up request handlers
-    this._setupRequestHandlers();
-    
-    // Mark as initialized
-    agentRegistry.updateStatus(this.id, 'active');
-    
-    console.log(`Agent ${this.name} initialized`);
-  },
-  
-  // Set up command handlers
-  _setupCommandHandlers: function() {
-    agentHub.onCommand('generateScenarios', this._executeGenerateScenarios.bind(this));
-  },
-  
-  // Command handlers
-  _executeGenerateScenarios: function(data) {
-    console.log(`Agent ${this.name} executing generateScenarios:`, data);
-    
-    if (!data.skillId || !data.clusterInfo) {
-      return { 
-        success: false, 
-        error: 'Missing skillId or clusterInfo' 
-      };
+    // Initialize state in the store if it doesn't exist
+    if (!agentStore.hasState(this.name)) {
+      agentStore.setState(this.name, {
+        scenarios: {},
+        customerClusters: [
+          {
+            id: 'expat-parents-young-children',
+            name: 'Working Expat Parents with Young Children (0-5)',
+            location: 'Maastricht',
+            demographics: {
+              familyStatus: 'Parents with young children',
+              ageRange: '30-45',
+              employment: 'Full-time professionals',
+              language: 'Non-native Dutch speakers'
+            },
+            challenges: [
+              'Language barrier in school communication',
+              'Limited social network for childcare support',
+              'Balancing work and family responsibilities',
+              'Navigating unfamiliar educational system'
+            ]
+          },
+          {
+            id: 'mid-career-professionals',
+            name: 'Mid-Career Professionals Seeking Growth',
+            location: 'Urban centers',
+            demographics: {
+              familyStatus: 'Mixed (single and with family)',
+              ageRange: '35-50',
+              employment: 'Mid to senior level positions',
+              language: 'Proficient in business English'
+            },
+            challenges: [
+              'Career plateau or stagnation',
+              'Work-life balance struggles',
+              'Keeping skills relevant in changing market',
+              'Managing teams with diverse backgrounds'
+            ]
+          },
+          {
+            id: 'recent-graduates',
+            name: 'Recent Graduates Entering Workforce',
+            location: 'Various',
+            demographics: {
+              familyStatus: 'Mostly single',
+              ageRange: '22-28',
+              employment: 'Entry-level or seeking employment',
+              language: 'Digital natives'
+            },
+            challenges: [
+              'Limited practical experience',
+              'Building professional network',
+              'Adapting to workplace culture',
+              'Financial management with new income'
+            ]
+          }
+        ]
+      });
     }
     
-    // Get the skill content
-    const skillContent = agentStore.get(`content.structured.${data.skillId}`);
+    // Register command handlers
+    agentHub.registerCommandHandler('generateScenarios', this.handleGenerateScenarios.bind(this));
     
-    if (!skillContent) {
-      return { 
-        success: false, 
-        error: 'Skill content not found' 
-      };
+    // Register request handlers
+    agentHub.registerRequestHandler('getScenariosByCluster', this.handleGetScenariosByCluster.bind(this));
+  },
+  
+  /**
+   * Handle the generateScenarios command
+   * @param {Object} data - Command data
+   * @param {Function} callback - Callback function
+   */
+  handleGenerateScenarios: function(data, callback) {
+    console.log('Generating scenarios for cluster:', data.clusterId);
+    
+    const state = agentStore.getState(this.name);
+    const cluster = state.customerClusters.find(c => c.id === data.clusterId);
+    
+    if (!cluster) {
+      callback({
+        success: false,
+        error: `Customer cluster with ID "${data.clusterId}" not found`
+      });
+      return;
     }
     
-    // Generate scenarios based on cluster info
-    const scenarios = this._generateScenariosForCluster(skillContent, data.clusterInfo);
+    // Generate scenarios for the specified skill and cluster
+    const scenarios = this.generateScenariosForCluster(data.skillData, cluster);
     
-    // Store the generated scenarios
-    const scenarioId = `scenario-${data.skillId}-${Date.now()}`;
-    agentStore.update(`scenarios.${scenarioId}`, {
-      skillId: data.skillId,
-      clusterInfo: data.clusterInfo,
-      scenarios: scenarios,
-      timestamp: Date.now()
-    });
-    
-    // Publish event
-    agentHub.publish('scenariosGenerated', {
-      scenarioId: scenarioId,
-      skillId: data.skillId,
-      timestamp: Date.now()
-    });
-    
-    return { 
-      success: true, 
-      scenarioId: scenarioId,
-      scenarios: scenarios
+    // Update state with new scenarios
+    const updatedScenarios = {
+      ...state.scenarios,
+      [data.skillData.slug]: {
+        ...(state.scenarios[data.skillData.slug] || {}),
+        [data.clusterId]: scenarios
+      }
     };
-  },
-  
-  // Set up request handlers
-  _setupRequestHandlers: function() {
-    agentHub.onRequest('getScenariosByCluster', this._handleGetScenariosByCluster.bind(this));
-  },
-  
-  // Request handlers
-  _handleGetScenariosByCluster: function(data, respond) {
-    console.log(`Agent ${this.name} handling getScenariosByCluster:`, data);
     
-    if (!data.clusterInfo) {
-      respond({ 
-        success: false, 
-        error: 'Missing clusterInfo' 
-      });
-      return;
-    }
+    agentStore.setState(this.name, {
+      ...state,
+      scenarios: updatedScenarios
+    });
     
-    // Get all scenarios
-    const allScenarios = agentStore.get('scenarios');
+    // Emit event
+    agentHub.emit('scenariosGenerated', {
+      skillSlug: data.skillData.slug,
+      clusterId: data.clusterId,
+      scenarios: scenarios
+    });
     
-    if (!allScenarios) {
-      respond({ 
-        success: false, 
-        error: 'No scenarios found' 
-      });
-      return;
-    }
-    
-    // Filter scenarios by cluster match
-    const matchingScenarios = this._filterScenariosByCluster(allScenarios, data.clusterInfo);
-    
-    respond({ 
-      success: true, 
-      data: matchingScenarios 
+    // Return success
+    callback({
+      success: true,
+      data: {
+        scenarios: scenarios
+      }
     });
   },
   
-  // Helper: Generate scenarios for a specific cluster
-  _generateScenariosForCluster: function(skillContent, clusterInfo) {
-    // Extract relevant information from cluster info
-    const { 
-      location, 
-      professionalBackground, 
-      psychologicalNeeds, 
-      socialNeeds, 
-      culturalContext, 
-      currentChallenges, 
-      profileData 
-    } = clusterInfo;
+  /**
+   * Handle the getScenariosByCluster request
+   * @param {Object} data - Request data
+   * @param {Function} callback - Callback function
+   */
+  handleGetScenariosByCluster: function(data, callback) {
+    const state = agentStore.getState(this.name);
+    const scenarios = state.scenarios[data.skillSlug]?.[data.clusterId] || [];
     
-    // Generate scenarios based on skill content and cluster info
+    callback({
+      success: true,
+      data: {
+        scenarios: scenarios,
+        cluster: state.customerClusters.find(c => c.id === data.clusterId)
+      }
+    });
+  },
+  
+  /**
+   * Generate scenarios for a specific cluster and skill
+   * @param {Object} skillData - Skill data
+   * @param {Object} cluster - Customer cluster data
+   * @returns {Array} - Generated scenarios
+   */
+  generateScenariosForCluster: function(skillData, cluster) {
+    // Extract relevant information from skill data
+    const { title, category, realLifeScenario } = skillData;
+    
+    // Generate scenarios based on cluster demographics and challenges
     const scenarios = [];
     
-    // Process each section of the skill content
-    Object.entries(skillContent).forEach(([section, data]) => {
-      // Basic cognitive skills scenario
-      if (section === 'discover' || section === 'learn') {
-        // For parents with young children
-        if (profileData && profileData.hasChildren && profileData.childrenAgeRange === '0-12') {
-          const scenario = {
-            skillSection: section,
-            realLifeScenario: "Help my preschool or school child(ren) to better succeed",
-            scenarioLabel: this._generateScenarioLabel(section, data.title, clusterInfo),
-            use: this._generateScenarioUse(section, data.content, clusterInfo),
-            relevance: this._calculateRelevance(clusterInfo)
-          };
-          scenarios.push(scenario);
-        }
+    // Basic Cognitive Skills scenarios
+    if (category.toLowerCase().includes('basic') || 
+        category.toLowerCase().includes('cognitive') || 
+        category.toLowerCase().includes('communication')) {
+      
+      if (cluster.id === 'expat-parents-young-children') {
+        scenarios.push({
+          label: "Making Sense of School Tasks (And Explaining Them Simply)",
+          use: "Improve your ability to break down school instructions, so you can support your child without frustration.",
+          relevance: 0.9,
+          context: `As ${cluster.name} in ${cluster.location}, you often face ${cluster.challenges[0]} and ${cluster.challenges[3]}.`,
+          problem: "Your child brings home instructions for a school project, but they're written in Dutch and use educational terms you're unfamiliar with.",
+          solution: `Using ${title} skills, you can systematically translate and simplify these instructions, making them accessible for both you and your child.`
+        });
         
-        // For working professionals
-        if (professionalBackground && professionalBackground.isEmployed) {
-          const scenario = {
-            skillSection: section,
-            realLifeScenario: "Improve my effectiveness at work",
-            scenarioLabel: this._generateScenarioLabel(section, data.title, clusterInfo),
-            use: this._generateScenarioUse(section, data.content, clusterInfo),
-            relevance: this._calculateRelevance(clusterInfo)
-          };
-          scenarios.push(scenario);
-        }
+        scenarios.push({
+          label: "Talking About School Without Power Struggles",
+          use: "Learn how to guide and coach your child through conversations, while picking up Dutch/English school-related terms yourself.",
+          relevance: 0.85,
+          context: `Living in ${cluster.location} as expat parents, you need to navigate ${cluster.challenges[0]}.`,
+          problem: "Your child is reluctant to share details about their school day, and when they do, you struggle to understand the context of what they're describing.",
+          solution: `${title} provides techniques to create engaging conversations that help both of you build vocabulary and understanding together.`
+        });
       }
       
-      // Communication skills scenario
-      if (section === 'practice' || section === 'apply') {
-        // For expats
-        if (culturalContext && culturalContext.isExpat) {
-          const scenario = {
-            skillSection: section,
-            realLifeScenario: "Navigate cultural differences in my new environment",
-            scenarioLabel: this._generateScenarioLabel(section, data.title, clusterInfo),
-            use: this._generateScenarioUse(section, data.content, clusterInfo),
-            relevance: this._calculateRelevance(clusterInfo)
-          };
-          scenarios.push(scenario);
-        }
-        
-        // For those with social needs
-        if (socialNeeds && socialNeeds.improveCommunication) {
-          const scenario = {
-            skillSection: section,
-            realLifeScenario: "Build better relationships with others",
-            scenarioLabel: this._generateScenarioLabel(section, data.title, clusterInfo),
-            use: this._generateScenarioUse(section, data.content, clusterInfo),
-            relevance: this._calculateRelevance(clusterInfo)
-          };
-          scenarios.push(scenario);
-        }
+      else if (cluster.id === 'mid-career-professionals') {
+        scenarios.push({
+          label: "Translating Complex Ideas for Diverse Teams",
+          use: "Enhance your ability to communicate technical concepts to team members with varying backgrounds and expertise levels.",
+          relevance: 0.8,
+          context: `As a ${cluster.demographics.employment} professional dealing with ${cluster.challenges[3]}, clear communication is essential.`,
+          problem: "Your team includes members from different departments and cultural backgrounds, making it difficult to ensure everyone understands project requirements and technical concepts.",
+          solution: `${title} equips you with frameworks to adapt your communication style and break down complex ideas into accessible components for diverse audiences.`
+        });
       }
       
-      // Reflection and bridge scenarios
-      if (section === 'reflect' || section === 'bridge') {
-        // For those with psychological needs
-        if (psychologicalNeeds && psychologicalNeeds.personalGrowth) {
-          const scenario = {
-            skillSection: section,
-            realLifeScenario: "Develop a growth mindset and overcome challenges",
-            scenarioLabel: this._generateScenarioLabel(section, data.title, clusterInfo),
-            use: this._generateScenarioUse(section, data.content, clusterInfo),
-            relevance: this._calculateRelevance(clusterInfo)
-          };
-          scenarios.push(scenario);
-        }
+      else if (cluster.id === 'recent-graduates') {
+        scenarios.push({
+          label: "Decoding Workplace Expectations",
+          use: "Develop skills to understand unwritten workplace rules and expectations in your new professional environment.",
+          relevance: 0.9,
+          context: `As ${cluster.name} with ${cluster.challenges[2]}, understanding workplace culture can be challenging.`,
+          problem: "You're receiving feedback that your communication style isn't 'professional enough,' but you're unsure what specific changes are expected.",
+          solution: `${title} helps you analyze communication patterns in your workplace and adapt your approach to meet expectations while maintaining authenticity.`
+        });
       }
-    });
+    }
+    
+    // Transversal skills scenarios
+    if (category.toLowerCase().includes('transversal') || 
+        category.toLowerCase().includes('soft') || 
+        category.toLowerCase().includes('teamwork') ||
+        category.toLowerCase().includes('leadership')) {
+      
+      if (cluster.id === 'expat-parents-young-children') {
+        scenarios.push({
+          label: "Building a Support Network in a New Country",
+          use: "Develop strategies to create meaningful connections with other parents and local resources.",
+          relevance: 0.85,
+          context: `Living in ${cluster.location} with ${cluster.challenges[1]}, building a support network is crucial.`,
+          problem: "You need to establish a reliable support system for childcare and emergencies, but cultural differences and language barriers make this challenging.",
+          solution: `${title} provides frameworks for identifying potential connections, initiating meaningful relationships, and maintaining a diverse support network.`
+        });
+      }
+      
+      else if (cluster.id === 'mid-career-professionals') {
+        scenarios.push({
+          label: "Leading Cross-Functional Projects",
+          use: "Enhance your ability to lead teams with diverse expertise and priorities toward common goals.",
+          relevance: 0.9,
+          context: `As ${cluster.demographics.employment} dealing with ${cluster.challenges[3]}, effective leadership across departments is essential.`,
+          problem: "You're leading a project that requires collaboration between technical, marketing, and operations teams, each with different priorities and communication styles.",
+          solution: `${title} equips you with strategies to align diverse perspectives, facilitate productive discussions, and build consensus around shared objectives.`
+        });
+      }
+      
+      else if (cluster.id === 'recent-graduates') {
+        scenarios.push({
+          label: "Contributing Effectively in Team Settings",
+          use: "Learn how to add value to team projects while establishing your professional reputation.",
+          relevance: 0.85,
+          context: `As ${cluster.name} with ${cluster.challenges[0]}, finding your place in team dynamics can be challenging.`,
+          problem: "You want to contribute meaningfully to team projects, but you're unsure how to balance assertiveness with respect for more experienced colleagues.",
+          solution: `${title} provides frameworks for understanding team dynamics, identifying opportunities to contribute, and communicating your ideas effectively.`
+        });
+      }
+    }
+    
+    // Advanced Digital skills scenarios
+    if (category.toLowerCase().includes('digital') || 
+        category.toLowerCase().includes('technical') || 
+        category.toLowerCase().includes('technology')) {
+      
+      if (cluster.id === 'expat-parents-young-children') {
+        scenarios.push({
+          label: "Navigating Digital School Platforms",
+          use: "Master the digital tools used by your child's school to stay informed and engaged.",
+          relevance: 0.8,
+          context: `As ${cluster.name} dealing with ${cluster.challenges[3]}, understanding school communication systems is important.`,
+          problem: "Your child's school uses multiple digital platforms for assignments, communication, and progress tracking, all in Dutch.",
+          solution: `${title} helps you develop strategies to efficiently navigate these systems, set up translations, and organize information to stay on top of your child's education.`
+        });
+      }
+      
+      else if (cluster.id === 'mid-career-professionals') {
+        scenarios.push({
+          label: "Leveraging Digital Tools for Team Productivity",
+          use: "Implement digital solutions that enhance your team's efficiency and collaboration.",
+          relevance: 0.9,
+          context: `As ${cluster.demographics.employment} facing ${cluster.challenges[2]}, staying current with digital tools is essential.`,
+          problem: "Your team's productivity is hampered by inefficient processes and communication gaps that could be addressed with better digital tools.",
+          solution: `${title} provides a framework for evaluating, implementing, and optimizing digital solutions that address your team's specific challenges.`
+        });
+      }
+      
+      else if (cluster.id === 'recent-graduates') {
+        scenarios.push({
+          label: "Applying Digital Skills to Entry-Level Challenges",
+          use: "Leverage your digital fluency to add immediate value in your new role.",
+          relevance: 0.95,
+          context: `As ${cluster.demographics.language} with ${cluster.challenges[0]}, your digital skills can be a significant advantage.`,
+          problem: "You notice inefficient manual processes in your new workplace that could be automated or improved with digital tools.",
+          solution: `${title} helps you identify opportunities for digital enhancement, develop proposals that demonstrate value, and implement solutions that showcase your skills.`
+        });
+      }
+    }
+    
+    // Managerial skills scenarios
+    if (category.toLowerCase().includes('managerial') || 
+        category.toLowerCase().includes('leadership') || 
+        category.toLowerCase().includes('management')) {
+      
+      if (cluster.id === 'expat-parents-young-children') {
+        scenarios.push({
+          label: "Managing Family-Work Integration in a New Country",
+          use: "Develop strategies to balance professional responsibilities with family needs in an unfamiliar environment.",
+          relevance: 0.85,
+          context: `As ${cluster.name} dealing with ${cluster.challenges[2]}, effective time and resource management is crucial.`,
+          problem: "Without extended family nearby and with limited understanding of local resources, balancing work deadlines with childcare responsibilities is particularly challenging.",
+          solution: `${title} provides frameworks for prioritization, delegation, and resource allocation that help you create sustainable routines for your family.`
+        });
+      }
+      
+      else if (cluster.id === 'mid-career-professionals') {
+        scenarios.push({
+          label: "Revitalizing Team Performance",
+          use: "Implement management approaches that energize your team and drive innovation.",
+          relevance: 0.9,
+          context: `As ${cluster.demographics.employment} facing ${cluster.challenges[0]}, finding new ways to inspire performance is essential.`,
+          problem: "Your team has become comfortable with established processes, resulting in declining innovation and engagement.",
+          solution: `${title} equips you with strategies to assess team dynamics, introduce productive challenges, and create an environment that fosters creativity and growth.`
+        });
+      }
+      
+      else if (cluster.id === 'recent-graduates') {
+        scenarios.push({
+          label: "Managing Projects Without Formal Authority",
+          use: "Learn to coordinate work and influence outcomes without managerial title or experience.",
+          relevance: 0.8,
+          context: `As ${cluster.name} with ${cluster.challenges[1]}, you need to demonstrate leadership potential.`,
+          problem: "You've been asked to coordinate a project involving peers and some senior colleagues, but you have no formal authority over the team members.",
+          solution: `${title} provides approaches for building credibility, facilitating effective collaboration, and ensuring accountability through influence rather than authority.`
+        });
+      }
+    }
+    
+    // If no specific category matches, create generic scenarios based on the real-life scenario
+    if (scenarios.length === 0 && realLifeScenario) {
+      if (cluster.id === 'expat-parents-young-children') {
+        scenarios.push({
+          label: `Applying ${title} to Parenting Challenges`,
+          use: `Use ${title} to navigate common challenges faced by expat parents.`,
+          relevance: 0.75,
+          context: `As ${cluster.name} in ${cluster.location}, you face unique challenges in supporting your children's development.`,
+          problem: realLifeScenario,
+          solution: `${title} provides tools and approaches to address this scenario effectively, helping both you and your children thrive.`
+        });
+      }
+      
+      else if (cluster.id === 'mid-career-professionals') {
+        scenarios.push({
+          label: `Leveraging ${title} for Career Advancement`,
+          use: `Apply ${title} to overcome professional plateaus and drive your career forward.`,
+          relevance: 0.75,
+          context: `As ${cluster.demographics.employment} dealing with ${cluster.challenges[0]}, finding new growth opportunities is essential.`,
+          problem: realLifeScenario,
+          solution: `${title} equips you with approaches to address this challenge and create new pathways for professional development.`
+        });
+      }
+      
+      else if (cluster.id === 'recent-graduates') {
+        scenarios.push({
+          label: `Using ${title} to Stand Out as a New Professional`,
+          use: `Apply ${title} to distinguish yourself in your early career.`,
+          relevance: 0.75,
+          context: `As ${cluster.name} with ${cluster.challenges[0]} and ${cluster.challenges[1]}, establishing your professional identity is crucial.`,
+          problem: realLifeScenario,
+          solution: `${title} provides strategies to address this challenge effectively and build a strong foundation for your career.`
+        });
+      }
+    }
     
     // Sort scenarios by relevance
     return scenarios.sort((a, b) => b.relevance - a.relevance);
-  },
-  
-  // Helper: Generate scenario label based on skill section and cluster info
-  _generateScenarioLabel: function(section, title, clusterInfo) {
-    // Example for parents of young children in Maastricht
-    if (clusterInfo.location === 'Maastricht' && 
-        clusterInfo.profileData && 
-        clusterInfo.profileData.hasChildren && 
-        clusterInfo.profileData.childrenAgeRange === '0-5') {
-      
-      switch(section) {
-        case 'discover':
-          return "Making Sense of School Tasks (And Explaining Them Simply)";
-        case 'learn':
-          return "Understanding Dutch School Expectations";
-        case 'practice':
-          return "Talking About School Without Power Struggles";
-        case 'apply':
-          return "Supporting Homework in a Multilingual Home";
-        case 'reflect':
-          return "Balancing Work and School Support";
-        case 'bridge':
-          return "Connecting with Other Expat Parents";
-        default:
-          return `${title} for Expat Parents in Maastricht`;
-      }
-    }
-    
-    // Default scenario label generation based on section and title
-    return `${title} in Real-Life Situations`;
-  },
-  
-  // Helper: Generate scenario use description
-  _generateScenarioUse: function(section, content, clusterInfo) {
-    // Example for parents of young children in Maastricht
-    if (clusterInfo.location === 'Maastricht' && 
-        clusterInfo.profileData && 
-        clusterInfo.profileData.hasChildren && 
-        clusterInfo.profileData.childrenAgeRange === '0-5') {
-      
-      switch(section) {
-        case 'discover':
-          return "Improve your ability to break down school instructions, so you can support your child without frustration.";
-        case 'learn':
-          return "Understand the Dutch education approach and expectations to better support your child's learning journey.";
-        case 'practice':
-          return "Learn how to guide and coach your child through conversations, while picking up Dutch/English school-related terms yourself.";
-        case 'apply':
-          return "Develop strategies for helping with homework when you're still learning the language yourself.";
-        case 'reflect':
-          return "Find balance between your work responsibilities and supporting your child's education in a new country.";
-        case 'bridge':
-          return "Connect with other expat parents facing similar challenges and share solutions.";
-        default:
-          return `Apply ${section} skills to support your child's education in an international context.`;
-      }
-    }
-    
-    // Default use description
-    return `Apply what you've learned about ${content.substring(0, 30)}... to solve real-world problems.`;
-  },
-  
-  // Helper: Calculate relevance score for a scenario based on cluster match
-  _calculateRelevance: function(clusterInfo) {
-    // Simple relevance calculation - can be enhanced with more sophisticated algorithms
-    let relevance = 50; // Base relevance
-    
-    // Increase relevance based on specific cluster attributes
-    if (clusterInfo.location) relevance += 10;
-    if (clusterInfo.professionalBackground) relevance += 10;
-    if (clusterInfo.psychologicalNeeds) relevance += 10;
-    if (clusterInfo.socialNeeds) relevance += 10;
-    if (clusterInfo.culturalContext) relevance += 10;
-    if (clusterInfo.currentChallenges) relevance += 10;
-    if (clusterInfo.profileData) relevance += 10;
-    
-    return Math.min(relevance, 100); // Cap at 100
-  },
-  
-  // Helper: Filter scenarios by cluster match
-  _filterScenariosByCluster: function(allScenarios, clusterInfo) {
-    const matchingScenarios = [];
-    
-    Object.values(allScenarios).forEach(scenarioSet => {
-      // Calculate match score between scenario cluster and target cluster
-      const matchScore = this._calculateClusterMatchScore(scenarioSet.clusterInfo, clusterInfo);
-      
-      // If match score is above threshold, include in results
-      if (matchScore > 60) {
-        matchingScenarios.push({
-          ...scenarioSet,
-          matchScore: matchScore
-        });
-      }
-    });
-    
-    // Sort by match score
-    return matchingScenarios.sort((a, b) => b.matchScore - a.matchScore);
-  },
-  
-  // Helper: Calculate match score between two cluster profiles
-  _calculateClusterMatchScore: function(clusterA, clusterB) {
-    let matchPoints = 0;
-    let totalPoints = 0;
-    
-    // Compare location
-    if (clusterA.location && clusterB.location) {
-      totalPoints += 10;
-      if (clusterA.location === clusterB.location) {
-        matchPoints += 10;
-      }
-    }
-    
-    // Compare professional background
-    if (clusterA.professionalBackground && clusterB.professionalBackground) {
-      totalPoints += 10;
-      if (clusterA.professionalBackground.isEmployed === clusterB.professionalBackground.isEmployed) {
-        matchPoints += 5;
-      }
-      if (clusterA.professionalBackground.sector === clusterB.professionalBackground.sector) {
-        matchPoints += 5;
-      }
-    }
-    
-    // Compare psychological needs
-    if (clusterA.psychologicalNeeds && clusterB.psychologicalNeeds) {
-      totalPoints += 10;
-      if (clusterA.psychologicalNeeds.personalGrowth === clusterB.psychologicalNeeds.personalGrowth) {
-        matchPoints += 5;
-      }
-      if (clusterA.psychologicalNeeds.stressManagement === clusterB.psychologicalNeeds.stressManagement) {
-        matchPoints += 5;
-      }
-    }
-    
-    // Compare social needs
-    if (clusterA.socialNeeds && clusterB.socialNeeds) {
-      totalPoints += 10;
-      if (clusterA.socialNeeds.improveCommunication === clusterB.socialNeeds.improveCommunication) {
-        matchPoints += 5;
-      }
-      if (clusterA.socialNeeds.buildNetwork === clusterB.socialNeeds.buildNetwork) {
-        matchPoints += 5;
-      }
-    }
-    
-    // Compare cultural context
-    if (clusterA.culturalContext && clusterB.culturalContext) {
-      totalPoints += 10;
-      if (clusterA.culturalContext.isExpat === clusterB.culturalContext.isExpat) {
-        matchPoints += 5;
-      }
-      if (clusterA.culturalContext.originCountry === clusterB.culturalContext.originCountry) {
-        matchPoints += 5;
-      }
-    }
-    
-    // Compare profile data (children)
-    if (clusterA.profileData && clusterB.profileData) {
-      totalPoints += 10;
-      if (clusterA.profileData.hasChildren === clusterB.profileData.hasChildren) {
-        matchPoints += 5;
-      }
-      if (clusterA.profileData.childrenAgeRange === clusterB.profileData.childrenAgeRange) {
-        matchPoints += 5;
-      }
-    }
-    
-    // Calculate percentage match
-    return totalPoints > 0 ? (matchPoints / totalPoints) * 100 : 0;
   }
 };
 
 export default scenarioGenerationAgent;
+
