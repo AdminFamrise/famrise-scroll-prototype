@@ -12,9 +12,9 @@ import Dashboard from "./pages/dashboard";
 import AddSkill from "./pages/admin/AddSkill";
 // src/agents/agents/contentStructuringAgent.js
 
-import agentHub from '../framework/agentHub';
-import agentStore from '../framework/agentStore';
-import agentRegistry from '../framework/agentRegistry';
+import agentHub from './agents/framework/agentHub';
+import agentStore from './agents/framework/agentStore';
+import agentRegistry from './agents/framework/agentRegistry
 import ContentStructuringTool from './components/admin/ContentStructuringTool';
 
 
