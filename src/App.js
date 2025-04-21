@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 // General Pages
 import LandingPage from "./pages/index";
@@ -29,12 +29,47 @@ import Apply from "./pages/skills/Apply";
 import Reflect from "./pages/skills/Reflect";
 import BridgeModule from "./pages/skills/BridgeModule";
 
+// Admin Navigation Component
+const AdminNav = () => (
+  <div className="bg-gray-100 p-4 mb-6">
+    <h2 className="text-xl font-bold mb-4">Admin Tools</h2>
+    <div className="flex space-x-4">
+      <Link to="/admin/add-skill" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+        Add Skill
+      </Link>
+      <Link to="/admin/content-tool" className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+        Content Structuring Tool
+      </Link>
+      <Link to="/admin/scenario-tool" className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">
+        Scenario Generation Tool
+      </Link>
+    </div>
+  </div>
+);
+
+// Wrap admin pages with navigation
+const AdminPageWrapper = ({ children }) => (
+  <div className="container mx-auto px-4 py-8">
+    <AdminNav />
+    {children}
+  </div>
+);
+
 function App() {
   return (
     <Router>
       <Routes>
-        {/* TEMP: Default to Admin AddSkill page */}
-        <Route path="/" element={<AddSkill />} />
+        {/* TEMP: Default to Admin navigation page */}
+        <Route path="/" element={
+          <div className="container mx-auto px-4 py-8">
+            <h1 className="text-3xl font-bold mb-6">Famrise Admin Dashboard</h1>
+            <AdminNav />
+            <div className="mt-8 p-6 bg-gray-50 rounded-lg">
+              <h2 className="text-xl font-bold mb-4">Welcome to Famrise Admin</h2>
+              <p className="mb-4">Select a tool from the navigation above to get started.</p>
+            </div>
+          </div>
+        } />
         
         {/* General Flow */}
         <Route path="/landing" element={<LandingPage />} />
@@ -46,9 +81,21 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         
         {/* Admin Tools */}
-        <Route path="/admin/add-skill" element={<AddSkill />} />
-        <Route path="/admin/content-tool" element={<ContentStructuringTool />} />
-        <Route path="/admin/scenario-tool" element={<ScenarioGenerationTool />} />
+        <Route path="/admin/add-skill" element={
+          <AdminPageWrapper>
+            <AddSkill />
+          </AdminPageWrapper>
+        } />
+        <Route path="/admin/content-tool" element={
+          <AdminPageWrapper>
+            <ContentStructuringTool />
+          </AdminPageWrapper>
+        } />
+        <Route path="/admin/scenario-tool" element={
+          <AdminPageWrapper>
+            <ScenarioGenerationTool />
+          </AdminPageWrapper>
+        } />
         
         {/* Skill Journey (Dynamic slug) */}
         <Route path="/skills/:skillSlug" element={<SkillLanding />} />
@@ -64,3 +111,4 @@ function App() {
 }
 
 export default App;
+
