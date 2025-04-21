@@ -91,7 +91,8 @@ function App() {
             <ContentStructuringTool />
           </AdminPageWrapper>
         } />
-<Route path="/admin/scenario-tool" element={<StandaloneScenarioTool />} />
+        <Route path="/admin/scenario-tool" element={
+          <StandaloneScenarioTool />} />
           </AdminPageWrapper>
         } />
         
