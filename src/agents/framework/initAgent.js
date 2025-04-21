@@ -2,6 +2,9 @@
 
 import agentStore from './agentStore';
 import agentRegistry from './agentRegistry';
+import ContentStructuringTool from './components/admin/ContentStructuringTool';
+
+
 
 // Default state structure
 const defaultState = {
@@ -31,6 +34,10 @@ function initAgents() {
   
   // Initialize agents
   // Note: Agent initializations will be added here as we implement each agent
+
+contentStructuringAgent.init();
+
+
   
   console.log('Agent framework initialized successfully');
 }
