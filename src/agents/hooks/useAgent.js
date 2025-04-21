@@ -1,73 +1,107 @@
 // src/agents/hooks/useAgent.js
 
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import agentHub from '../framework/agentHub';
 
-// Hook for making agent requests
-export function useAgentRequest(requestType, params) {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
-  useEffect(() => {
-    let isMounted = true;
-    
-    setIsLoading(true);
-    
-    agentHub.sendRequest(requestType, params)
-      .then(response => {
-        if (isMounted) {
-          setData(response.data);
-          setIsLoading(false);
-        }
-      })
-      .catch(err => {
-        if (isMounted) {
-          setError(err);
-          setIsLoading(false);
-        }
-      });
-      
-    return () => { isMounted = false; };
-  }, [requestType, JSON.stringify(params)]);
-  
-  return [data, isLoading, error];
-}
-
-// Hook for executing agent commands
-export function useAgentCommand(commandType) {
+/**
+ * Hook for executing agent commands
+ * @param {string} commandName - The name of the command to execute
+ * @returns {Object} - Object containing execute function, loading state, and error
+ */
+export function useAgentCommand(commandName) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  
-  const execute = async (params) => {
+
+  const execute = useCallback(async (data) => {
     setIsLoading(true);
     setError(null);
     
     try {
-      const result = await agentHub.executeCommand(commandType, params);
+      const result = await new Promise((resolve) => {
+        agentHub.executeCommand(commandName, data, (response) => {
+          resolve(response);
+        });
+      });
+      
       setIsLoading(false);
+      
+      if (!result.success) {
+        setError(new Error(result.error || 'Command execution failed'));
+        return result;
+      }
+      
       return result;
     } catch (err) {
-      setError(err);
       setIsLoading(false);
+      setError(err);
       throw err;
     }
-  };
-  
+  }, [commandName]);
+
   return { execute, isLoading, error };
 }
 
-// Hook for subscribing to agent events
-export function useAgentSubscription(eventType, initialData = null) {
-  const [data, setData] = useState(initialData);
+/**
+ * Hook for subscribing to agent events
+ * @param {string} eventName - The name of the event to subscribe to
+ * @param {Function} callback - The callback function to execute when the event is triggered
+ */
+export function useAgentEvent(eventName, callback) {
+  const [isSubscribed, setIsSubscribed] = useState(false);
   
-  useEffect(() => {
-    const unsubscribe = agentHub.subscribe(eventType, (eventData) => {
-      setData(eventData);
-    });
-    
-    return unsubscribe;
-  }, [eventType]);
-  
-  return data;
+  useCallback(() => {
+    if (!isSubscribed) {
+      agentHub.subscribe(eventName, callback);
+      setIsSubscribed(true);
+      
+      return () => {
+        agentHub.unsubscribe(eventName, callback);
+        setIsSubscribed(false);
+      };
+    }
+  }, [eventName, callback, isSubscribed]);
 }
+
+/**
+ * Hook for making requests to agents
+ * @param {string} requestName - The name of the request to make
+ * @returns {Object} - Object containing request function, loading state, and error
+ */
+export function useAgentRequest(requestName) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const request = useCallback(async (data) => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const result = await new Promise((resolve) => {
+        agentHub.makeRequest(requestName, data, (response) => {
+          resolve(response);
+        });
+      });
+      
+      setIsLoading(false);
+      
+      if (!result.success) {
+        setError(new Error(result.error || 'Request failed'));
+        return result;
+      }
+      
+      return result;
+    } catch (err) {
+      setIsLoading(false);
+      setError(err);
+      throw err;
+    }
+  }, [requestName]);
+
+  return { request, isLoading, error };
+}
+
+export default {
+  useAgentCommand,
+  useAgentEvent,
+  useAgentRequest
+};
