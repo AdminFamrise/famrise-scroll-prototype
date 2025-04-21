@@ -23,6 +23,7 @@ import BridgeModule from "./pages/skills/BridgeModule";
 // Admin Components
 import AdminLayout from "./features/admin/layout/AdminLayout";
 import ScenarioGenerator from "./features/scenarios/ScenarioGenerator";
+import EnhancedScenarioGenerationTool from "./components/admin/EnhancedScenarioGenerationTool";
 
 // Simple Admin Navigation component
 const AdminNav = () => {
@@ -46,6 +47,7 @@ const AdminNav = () => {
       <a href="/" style={linkStyle}>Home</a>
       <a href="/admin/add-skill" style={linkStyle}>Add Skill</a>
       <a href="/admin/scenarios" style={linkStyle}>Scenario Tool</a>
+      <a href="/admin/enhanced-scenarios" style={linkStyle}>Enhanced Scenarios</a>
     </div>
   );
 };
@@ -115,6 +117,19 @@ function App() {
                     <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Scenario Tool</h2>
                     <p>Generate scenarios for different customer clusters</p>
                   </a>
+                  <a href="/admin/enhanced-scenarios" style={{ 
+                    textDecoration: 'none', 
+                    color: 'inherit',
+                    display: 'block',
+                    padding: '20px',
+                    backgroundColor: '#fff',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    border: '1px solid #e2e8f0'
+                  }}>
+                    <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Enhanced Scenarios</h2>
+                    <p>Generate comprehensive 5-step learning scenarios</p>
+                  </a>
                 </div>
               </div>
             </AdminPage>
@@ -130,6 +145,12 @@ function App() {
           <Route path="/admin/scenarios" element={
             <AdminPage>
               <ScenarioGenerator />
+            </AdminPage>
+          } />
+          
+          <Route path="/admin/enhanced-scenarios" element={
+            <AdminPage>
+              <EnhancedScenarioGenerationTool />
             </AdminPage>
           } />
 
