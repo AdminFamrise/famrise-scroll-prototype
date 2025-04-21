@@ -1,183 +1,200 @@
-// src/components/admin/ScenarioGenerationTool.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAgentCommand } from '../../agents/hooks/useAgent';
 
-function ScenarioGenerationTool() {
-  const [skillId, setSkillId] = useState('');
-  const [location, setLocation] = useState('');
-  const [hasChildren, setHasChildren] = useState(false);
-  const [childrenAgeRange, setChildrenAgeRange] = useState('');
-  const [isExpat, setIsExpat] = useState(false);
-  const [isEmployed, setIsEmployed] = useState(false);
-  const [scenarios, setScenarios] = useState(null);
+const ScenarioGenerationTool = () => {
+  const [skillData, setSkillData] = useState({
+    slug: '',
+    title: '',
+    category: '',
+    realLifeScenario: '',
+    overview: ''
+  });
   
-  const { execute, isLoading, error } = useAgentCommand('generateScenarios');
+  const [selectedCluster, setSelectedCluster] = useState('expat-parents-young-children');
+  const [scenarios, setScenarios] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  
+  const { execute, isLoading: isGenerating, error } = useAgentCommand('generateScenarios');
+  
+  const customerClusters = [
+    { id: 'expat-parents-young-children', name: 'Working Expat Parents with Young Children (0-5) in Maastricht' },
+    { id: 'mid-career-professionals', name: 'Mid-Career Professionals Seeking Growth' },
+    { id: 'recent-graduates', name: 'Recent Graduates Entering Workforce' }
+  ];
+  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSkillData(prev => ({ ...prev, [name]: value }));
+  };
+  
+  const handleClusterChange = (e) => {
+    setSelectedCluster(e.target.value);
+  };
   
   const handleGenerateScenarios = async () => {
+    if (!skillData.slug || !skillData.title || !skillData.category) {
+      setMessage('Please fill in at least the Slug, Title, and Category fields');
+      return;
+    }
+    
+    setIsLoading(true);
+    setMessage('Generating scenarios...');
+    
     try {
-      // Construct cluster info from form fields
-      const clusterInfo = {
-        location,
-        profileData: {
-          hasChildren,
-          childrenAgeRange: hasChildren ? childrenAgeRange : null
-        },
-        culturalContext: {
-          isExpat
-        },
-        professionalBackground: {
-          isEmployed
-        },
-        psychologicalNeeds: {
-          personalGrowth: true
-        },
-        socialNeeds: {
-          improveCommunication: true
-        }
-      };
-      
       const result = await execute({
-        skillId,
-        clusterInfo
+        skillData,
+        clusterId: selectedCluster
       });
       
       if (result.success) {
-        setScenarios(result.scenarios);
+        setScenarios(result.data.scenarios);
+        setMessage(`Generated ${result.data.scenarios.length} scenarios for this customer cluster`);
+      } else {
+        setMessage(`Error: ${result.error || 'Failed to generate scenarios'}`);
       }
     } catch (err) {
-      console.error('Error generating scenarios:', err);
+      setMessage(`Error: ${err.message}`);
+    } finally {
+      setIsLoading(false);
     }
   };
   
   return (
-    <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Scenario Generation Tool</h1>
+    <div className="max-w-4xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">Scenario Generation Tool</h1>
       
-      <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium mb-2">
-            Skill ID
-          </label>
-          <input
-            type="text"
-            className="w-full p-2 border rounded"
-            value={skillId}
-            onChange={(e) => setSkillId(e.target.value)}
-            placeholder="Enter skill ID"
-          />
-        </div>
+      <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+        <h2 className="text-xl font-semibold mb-4">Skill Information</h2>
         
-        <div>
-          <label className="block text-sm font-medium mb-2">
-            Location
-          </label>
-          <input
-            type="text"
-            className="w-full p-2 border rounded"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="e.g., Maastricht"
-          />
-        </div>
-        
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="hasChildren"
-            checked={hasChildren}
-            onChange={(e) => setHasChildren(e.target.checked)}
-            className="mr-2"
-          />
-          <label htmlFor="hasChildren" className="text-sm font-medium">
-            Has Children
-          </label>
-        </div>
-        
-        {hasChildren && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Children Age Range
-            </label>
-            <select
-              className="w-full p-2 border rounded"
-              value={childrenAgeRange}
-              onChange={(e) => setChildrenAgeRange(e.target.value)}
-            >
-              <option value="">Select age range</option>
-              <option value="0-5">0-5 years</option>
-              <option value="6-12">6-12 years</option>
-              <option value="13-18">13-18 years</option>
-            </select>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Skill Slug</label>
+            <input
+              type="text"
+              name="slug"
+              value={skillData.slug}
+              onChange={handleInputChange}
+              placeholder="e.g., critical-thinking"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            />
           </div>
-        )}
-        
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="isExpat"
-            checked={isExpat}
-            onChange={(e) => setIsExpat(e.target.checked)}
-            className="mr-2"
-          />
-          <label htmlFor="isExpat" className="text-sm font-medium">
-            Is Expat
-          </label>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Skill Title</label>
+            <input
+              type="text"
+              name="title"
+              value={skillData.title}
+              onChange={handleInputChange}
+              placeholder="e.g., Critical Thinking"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+            <input
+              type="text"
+              name="category"
+              value={skillData.category}
+              onChange={handleInputChange}
+              placeholder="e.g., Basic Cognitive Skills"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Real-Life Scenario</label>
+            <input
+              type="text"
+              name="realLifeScenario"
+              value={skillData.realLifeScenario}
+              onChange={handleInputChange}
+              placeholder="e.g., Evaluating information in a complex work situation"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
         </div>
         
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="isEmployed"
-            checked={isEmployed}
-            onChange={(e) => setIsEmployed(e.target.checked)}
-            className="mr-2"
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Overview</label>
+          <textarea
+            name="overview"
+            value={skillData.overview}
+            onChange={handleInputChange}
+            placeholder="Brief description of the skill..."
+            className="w-full px-3 py-2 border border-gray-300 rounded-md h-24"
           />
-          <label htmlFor="isEmployed" className="text-sm font-medium">
-            Is Employed
-          </label>
         </div>
       </div>
       
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-blue-300"
-        onClick={handleGenerateScenarios}
-        disabled={isLoading || !skillId.trim()}
-      >
-        {isLoading ? 'Generating...' : 'Generate Scenarios'}
-      </button>
-      
-      {error && (
-        <div className="mt-4 p-3 bg-red-100 text-red-700 rounded">
-          Error: {error.message}
-        </div>
-      )}
-      
-      {scenarios && (
-        <div className="mt-6">
-          <h2 className="text-xl font-bold mb-4">Generated Scenarios</h2>
-          
-          <div className="space-y-4">
-            {scenarios.map((scenario, index) => (
-              <div key={index} className="border rounded p-4">
-                <div className="flex justify-between">
-                  <span className="font-bold capitalize">{scenario.skillSection}</span>
-                  <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                    Relevance: {scenario.relevance}%
-                  </span>
-                </div>
-                <h3 className="font-bold text-lg mt-2">{scenario.realLifeScenario}</h3>
-                <div className="mt-2">
-                  <p className="font-medium">{scenario.scenarioLabel}</p>
-                  <p className="text-sm mt-1">{scenario.use}</p>
-                </div>
-              </div>
+      <div className="bg-white shadow-md rounded-lg p-6 mb-8">
+        <h2 className="text-xl font-semibold mb-4">Customer Cluster</h2>
+        
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Select Customer Cluster</label>
+          <select
+            value={selectedCluster}
+            onChange={handleClusterChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+          >
+            {customerClusters.map(cluster => (
+              <option key={cluster.id} value={cluster.id}>
+                {cluster.name}
+              </option>
             ))}
+          </select>
+        </div>
+        
+        <button
+          onClick={handleGenerateScenarios}
+          disabled={isLoading || isGenerating}
+          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-blue-300"
+        >
+          {isLoading || isGenerating ? 'Generating...' : 'Generate Scenarios'}
+        </button>
+        
+        {message && (
+          <div className={`mt-4 p-3 rounded-md ${message.startsWith('Error') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+            {message}
           </div>
+        )}
+      </div>
+      
+      {scenarios.length > 0 && (
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">Generated Scenarios</h2>
+          
+          {scenarios.map((scenario, index) => (
+            <div key={index} className="mb-6 p-4 border border-gray-200 rounded-md">
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-lg font-medium">{scenario.label}</h3>
+                <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                  Relevance: {Math.round(scenario.relevance * 100)}%
+                </span>
+              </div>
+              
+              <p className="text-sm text-gray-600 mb-3">{scenario.use}</p>
+              
+              <div className="bg-gray-50 p-3 rounded-md mb-3">
+                <p className="text-sm text-gray-700"><strong>Context:</strong> {scenario.context}</p>
+              </div>
+              
+              <div className="bg-red-50 p-3 rounded-md mb-3">
+                <p className="text-sm text-gray-700"><strong>Problem:</strong> {scenario.problem}</p>
+              </div>
+              
+              <div className="bg-green-50 p-3 rounded-md">
+                <p className="text-sm text-gray-700"><strong>Solution:</strong> {scenario.solution}</p>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
   );
-}
+};
 
 export default ScenarioGenerationTool;
+
