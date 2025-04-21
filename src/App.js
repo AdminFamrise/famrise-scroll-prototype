@@ -1,113 +1,122 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-// General Pages
-import LandingPage from "./pages/index";
-import ProfileCreation from "./pages/profile";
-import EverydayScenarioPage from "./pages/scenario/everyday";
-import OpportunitiesScenarioPage from "./pages/scenario/opportunities";
-import WellbeingCheck from "./pages/wellbeing-check";
-import OpportunityOverview from "./pages/overview";
-import Dashboard from "./pages/dashboard";
-import AddSkill from "./pages/admin/AddSkill";
+// Core components
+import AddSkill from './components/AddSkill';
+import SkillLanding from './pages/skills/SkillLanding';
+import SkillJourneyMap from './pages/skills/SkillJourneyMap';
+import Dashboard from './pages/dashboard';
+import Overview from './pages/overview';
+import Apply from './components/Apply';
+import Reflect from './components/Reflect';
+import BridgeModule from './components/BridgeModule';
+import WellbeingCheck from './components/wellbeing-check';
 
-// Agent imports
-import agentHub from './agents/framework/agentHub';
-import agentStore from './agents/framework/agentStore';
-import agentRegistry from './agents/framework/agentRegistry';
-
-// Agent UI Components
-import ContentStructuringTool from './components/admin/ContentStructuringTool';
+// Admin components
 import StandaloneScenarioTool from './components/admin/StandaloneScenarioTool';
-
-// Skill Journey Pages (dynamic)
-import SkillLanding from "./pages/skills/SkillLanding";
-import Discover from "./pages/skills/Discover";
-import Learn from "./pages/skills/Learn";
-import Practice from "./pages/skills/Practice";
-import Apply from "./pages/skills/Apply";
-import Reflect from "./pages/skills/Reflect";
-import BridgeModule from "./pages/skills/BridgeModule";
+import TestComponent from './components/admin/TestComponent';
 
 // Admin Navigation Component
 const AdminNav = () => (
-  <div className="bg-gray-100 p-4 mb-6">
-    <h2 className="text-xl font-bold mb-4">Admin Tools</h2>
-    <div className="flex space-x-4">
-      <Link to="/admin/add-skill" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-        Add Skill
-      </Link>
-      <Link to="/admin/content-tool" className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
-        Content Structuring Tool
-      </Link>
-      <Link to="/admin/scenario-tool" className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">
-        Scenario Generation Tool
-      </Link>
+  <div className="bg-gray-800 text-white p-4 mb-6">
+    <div className="container mx-auto">
+      <div className="flex flex-wrap items-center justify-between">
+        <h1 className="text-xl font-bold">Admin Dashboard</h1>
+        <nav className="flex space-x-4">
+          <Link to="/" className="px-3 py-2 rounded hover:bg-gray-700">Home</Link>
+          <Link to="/admin/add-skill" className="px-3 py-2 rounded hover:bg-gray-700">Add Skill</Link>
+          <Link to="/admin/scenario-tool" className="px-3 py-2 rounded hover:bg-gray-700">Scenario Tool</Link>
+          <Link to="/admin/test" className="px-3 py-2 rounded hover:bg-gray-700">Test Page</Link>
+        </nav>
+      </div>
     </div>
   </div>
 );
 
-// Wrap admin pages with navigation
-const AdminPageWrapper = ({ children }) => (
-  <div className="container mx-auto px-4 py-8">
+// Admin Page Wrapper
+const AdminPage = ({ children }) => (
+  <div className="min-h-screen bg-gray-100">
     <AdminNav />
-    {children}
+    <div className="container mx-auto px-4 py-6">
+      {children}
+    </div>
   </div>
+);
+
+// Home Page Component
+const HomePage = () => (
+  <AdminPage>
+    <div className="bg-white shadow-md rounded-lg p-6">
+      <h1 className="text-2xl font-bold mb-6">Lifelong Learning Platform Admin</h1>
+      <p className="mb-6">Welcome to the admin dashboard. Select a tool from the navigation bar above.</p>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="bg-blue-50 p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-3">Add Skill</h2>
+          <p className="mb-4">Add new skills to the platform and organize them into categories.</p>
+          <Link to="/admin/add-skill" className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Go to Add Skill
+          </Link>
+        </div>
+        
+        <div className="bg-green-50 p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-3">Scenario Generation</h2>
+          <p className="mb-4">Create tailored scenarios for specific customer clusters.</p>
+          <Link to="/admin/scenario-tool" className="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+            Go to Scenario Tool
+          </Link>
+        </div>
+        
+        <div className="bg-purple-50 p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-3">Test Page</h2>
+          <p className="mb-4">Simple test page to verify routing functionality.</p>
+          <Link to="/admin/test" className="inline-block px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
+            Go to Test Page
+          </Link>
+        </div>
+      </div>
+    </div>
+  </AdminPage>
 );
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* TEMP: Default to Admin navigation page */}
-        <Route path="/" element={
-          <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-6">Famrise Admin Dashboard</h1>
-            <AdminNav />
-            <div className="mt-8 p-6 bg-gray-50 rounded-lg">
-              <h2 className="text-xl font-bold mb-4">Welcome to Famrise Admin</h2>
-              <p className="mb-4">Select a tool from the navigation above to get started.</p>
-            </div>
-          </div>
-        } />
-        
         {/* General Flow */}
-        <Route path="/landing" element={<LandingPage />} />
-        <Route path="/profile" element={<ProfileCreation />} />
-        <Route path="/scenario/everyday" element={<EverydayScenarioPage />} />
-        <Route path="/scenario/opportunities" element={<OpportunitiesScenarioPage />} />
-        <Route path="/wellbeing-check" element={<WellbeingCheck />} />
-        <Route path="/overview" element={<OpportunityOverview />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/overview" element={<Overview />} />
+        <Route path="/wellbeing-check" element={<WellbeingCheck />} />
         
         {/* Admin Tools */}
         <Route path="/admin/add-skill" element={
-          <AdminPageWrapper>
+          <AdminPage>
             <AddSkill />
-          </AdminPageWrapper>
-        } />
-        <Route path="/admin/content-tool" element={
-          <AdminPageWrapper>
-            <ContentStructuringTool />
-          </AdminPageWrapper>
+          </AdminPage>
         } />
         <Route path="/admin/scenario-tool" element={
-          <StandaloneScenarioTool />} />
-          </AdminPageWrapper>
+          <AdminPage>
+            <StandaloneScenarioTool />
+          </AdminPage>
+        } />
+        <Route path="/admin/test" element={
+          <AdminPage>
+            <TestComponent />
+          </AdminPage>
         } />
         
-        {/* Skill Journey (Dynamic slug) */}
-        <Route path="/skills/:skillSlug" element={<SkillLanding />} />
-        <Route path="/skills/:skillSlug/discover" element={<Discover />} />
-        <Route path="/skills/:skillSlug/learn" element={<Learn />} />
-        <Route path="/skills/:skillSlug/practice" element={<Practice />} />
-        <Route path="/skills/:skillSlug/apply" element={<Apply />} />
-        <Route path="/skills/:skillSlug/reflect" element={<Reflect />} />
-        <Route path="/skills/:skillSlug/bridge" element={<BridgeModule />} />
+        {/* Skill Journey */}
+        <Route path="/skill-landing" element={<SkillLanding />} />
+        <Route path="/skill-journey-map" element={<SkillJourneyMap />} />
+        <Route path="/apply" element={<Apply />} />
+        <Route path="/reflect" element={<Reflect />} />
+        <Route path="/bridge" element={<BridgeModule />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
 
