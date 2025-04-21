@@ -1,122 +1,161 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Core components
-import AddSkill from './components/AddSkill';
-import SkillLanding from './pages/skills/SkillLanding';
-import SkillJourneyMap from './pages/skills/SkillJourneyMap';
-import Dashboard from './pages/dashboard';
-import Overview from './pages/overview';
-import Apply from './components/Apply';
-import Reflect from './components/Reflect';
-import BridgeModule from './components/BridgeModule';
-import WellbeingCheck from './components/wellbeing-check';
+// General Pages
+import LandingPage from "./pages/index";
+import ProfileCreation from "./pages/profile";
+import EverydayScenarioPage from "./pages/scenario/everyday";
+import OpportunitiesScenarioPage from "./pages/scenario/opportunities";
+import WellbeingCheck from "./pages/wellbeing-check";
+import OpportunityOverview from "./pages/overview";
+import Dashboard from "./pages/dashboard";
+import AddSkill from "./pages/admin/AddSkill";
 
-// Admin components
-import StandaloneScenarioTool from './components/admin/StandaloneScenarioTool';
-import TestComponent from './components/admin/TestComponent';
+// Skill Journey Pages (dynamic)
+import SkillLanding from "./pages/skills/SkillLanding";
+import Discover from "./pages/skills/Discover";
+import Learn from "./pages/skills/Learn";
+import Practice from "./pages/skills/Practice";
+import Apply from "./pages/skills/Apply";
+import Reflect from "./pages/skills/Reflect";
+import BridgeModule from "./pages/skills/BridgeModule";
 
-// Admin Navigation Component
-const AdminNav = () => (
-  <div className="bg-gray-800 text-white p-4 mb-6">
-    <div className="container mx-auto">
-      <div className="flex flex-wrap items-center justify-between">
-        <h1 className="text-xl font-bold">Admin Dashboard</h1>
-        <nav className="flex space-x-4">
-          <Link to="/" className="px-3 py-2 rounded hover:bg-gray-700">Home</Link>
-          <Link to="/admin/add-skill" className="px-3 py-2 rounded hover:bg-gray-700">Add Skill</Link>
-          <Link to="/admin/scenario-tool" className="px-3 py-2 rounded hover:bg-gray-700">Scenario Tool</Link>
-          <Link to="/admin/test" className="px-3 py-2 rounded hover:bg-gray-700">Test Page</Link>
-        </nav>
+// Import the BasicScenarioTool component
+// Note: You'll need to adjust this path based on where you place the component
+const BasicScenarioTool = React.lazy(() => import('./components/admin/BasicScenarioTool'));
+
+// Simple Admin Navigation component
+const AdminNav = () => {
+  const navStyle = {
+    display: 'flex',
+    backgroundColor: '#4299e1',
+    padding: '12px',
+    marginBottom: '20px'
+  };
+  
+  const linkStyle = {
+    color: 'white',
+    padding: '8px 16px',
+    textDecoration: 'none',
+    fontWeight: '500',
+    marginRight: '12px'
+  };
+  
+  return (
+    <div style={navStyle}>
+      <a href="/" style={linkStyle}>Home</a>
+      <a href="/admin/add-skill" style={linkStyle}>Add Skill</a>
+      <a href="/admin/scenario-tool" style={linkStyle}>Scenario Tool</a>
+    </div>
+  );
+};
+
+// Admin page wrapper component
+const AdminPage = ({ children }) => {
+  const containerStyle = {
+    padding: '20px'
+  };
+  
+  return (
+    <div>
+      <AdminNav />
+      <div style={containerStyle}>
+        {children}
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-// Admin Page Wrapper
-const AdminPage = ({ children }) => (
-  <div className="min-h-screen bg-gray-100">
-    <AdminNav />
-    <div className="container mx-auto px-4 py-6">
-      {children}
-    </div>
+// Loading fallback component
+const Loading = () => (
+  <div style={{ 
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    height: '100vh' 
+  }}>
+    Loading...
   </div>
-);
-
-// Home Page Component
-const HomePage = () => (
-  <AdminPage>
-    <div className="bg-white shadow-md rounded-lg p-6">
-      <h1 className="text-2xl font-bold mb-6">Lifelong Learning Platform Admin</h1>
-      <p className="mb-6">Welcome to the admin dashboard. Select a tool from the navigation bar above.</p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div className="bg-blue-50 p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-3">Add Skill</h2>
-          <p className="mb-4">Add new skills to the platform and organize them into categories.</p>
-          <Link to="/admin/add-skill" className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Go to Add Skill
-          </Link>
-        </div>
-        
-        <div className="bg-green-50 p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-3">Scenario Generation</h2>
-          <p className="mb-4">Create tailored scenarios for specific customer clusters.</p>
-          <Link to="/admin/scenario-tool" className="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-            Go to Scenario Tool
-          </Link>
-        </div>
-        
-        <div className="bg-purple-50 p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-3">Test Page</h2>
-          <p className="mb-4">Simple test page to verify routing functionality.</p>
-          <Link to="/admin/test" className="inline-block px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
-            Go to Test Page
-          </Link>
-        </div>
-      </div>
-    </div>
-  </AdminPage>
 );
 
 function App() {
   return (
     <Router>
-      <Routes>
-        {/* General Flow */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/overview" element={<Overview />} />
-        <Route path="/wellbeing-check" element={<WellbeingCheck />} />
-        
-        {/* Admin Tools */}
-        <Route path="/admin/add-skill" element={
-          <AdminPage>
-            <AddSkill />
-          </AdminPage>
-        } />
-        <Route path="/admin/scenario-tool" element={
-          <AdminPage>
-            <StandaloneScenarioTool />
-          </AdminPage>
-        } />
-        <Route path="/admin/test" element={
-          <AdminPage>
-            <TestComponent />
-          </AdminPage>
-        } />
-        
-        {/* Skill Journey */}
-        <Route path="/skill-landing" element={<SkillLanding />} />
-        <Route path="/skill-journey-map" element={<SkillJourneyMap />} />
-        <Route path="/apply" element={<Apply />} />
-        <Route path="/reflect" element={<Reflect />} />
-        <Route path="/bridge" element={<BridgeModule />} />
-      </Routes>
+      <React.Suspense fallback={<Loading />}>
+        <Routes>
+          {/* Admin Dashboard as Home */}
+          <Route path="/" element={
+            <AdminPage>
+              <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                <h1 style={{ fontSize: '24px', marginBottom: '20px' }}>Admin Dashboard</h1>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '20px' }}>
+                  <a href="/admin/add-skill" style={{ 
+                    textDecoration: 'none', 
+                    color: 'inherit',
+                    display: 'block',
+                    padding: '20px',
+                    backgroundColor: '#fff',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    border: '1px solid #e2e8f0'
+                  }}>
+                    <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Add Skill</h2>
+                    <p>Create and manage skills in the platform</p>
+                  </a>
+                  <a href="/admin/scenario-tool" style={{ 
+                    textDecoration: 'none', 
+                    color: 'inherit',
+                    display: 'block',
+                    padding: '20px',
+                    backgroundColor: '#fff',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    border: '1px solid #e2e8f0'
+                  }}>
+                    <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Scenario Tool</h2>
+                    <p>Generate scenarios for different customer clusters</p>
+                  </a>
+                </div>
+              </div>
+            </AdminPage>
+          } />
+
+          {/* Admin Tools */}
+          <Route path="/admin/add-skill" element={
+            <AdminPage>
+              <AddSkill />
+            </AdminPage>
+          } />
+          <Route path="/admin/scenario-tool" element={
+            <AdminPage>
+              <BasicScenarioTool />
+            </AdminPage>
+          } />
+
+          {/* General Flow */}
+          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/profile" element={<ProfileCreation />} />
+          <Route path="/scenario/everyday" element={<EverydayScenarioPage />} />
+          <Route path="/scenario/opportunities" element={<OpportunitiesScenarioPage />} />
+          <Route path="/wellbeing-check" element={<WellbeingCheck />} />
+          <Route path="/overview" element={<OpportunityOverview />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+
+          {/* Skill Journey (Dynamic slug) */}
+          <Route path="/skills/:skillSlug" element={<SkillLanding />} />
+          <Route path="/skills/:skillSlug/discover" element={<Discover />} />
+          <Route path="/skills/:skillSlug/learn" element={<Learn />} />
+          <Route path="/skills/:skillSlug/practice" element={<Practice />} />
+          <Route path="/skills/:skillSlug/apply" element={<Apply />} />
+          <Route path="/skills/:skillSlug/reflect" element={<Reflect />} />
+          <Route path="/skills/:skillSlug/bridge" element={<BridgeModule />} />
+        </Routes>
+      </React.Suspense>
     </Router>
   );
 }
 
 export default App;
+
 
 
