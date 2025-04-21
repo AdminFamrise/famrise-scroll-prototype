@@ -20,6 +20,10 @@ import Apply from "./pages/skills/Apply";
 import Reflect from "./pages/skills/Reflect";
 import BridgeModule from "./pages/skills/BridgeModule";
 
+// Admin Components
+import AdminLayout from "./features/admin/layout/AdminLayout";
+import ScenarioGenerator from "./features/scenarios/ScenarioGenerator";
+
 // Simple Admin Navigation component
 const AdminNav = () => {
   const navStyle = {
@@ -41,6 +45,7 @@ const AdminNav = () => {
     <div style={navStyle}>
       <a href="/" style={linkStyle}>Home</a>
       <a href="/admin/add-skill" style={linkStyle}>Add Skill</a>
+      <a href="/admin/scenarios" style={linkStyle}>Scenario Tool</a>
     </div>
   );
 };
@@ -97,6 +102,19 @@ function App() {
                     <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Add Skill</h2>
                     <p>Create and manage skills in the platform</p>
                   </a>
+                  <a href="/admin/scenarios" style={{ 
+                    textDecoration: 'none', 
+                    color: 'inherit',
+                    display: 'block',
+                    padding: '20px',
+                    backgroundColor: '#fff',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    border: '1px solid #e2e8f0'
+                  }}>
+                    <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Scenario Tool</h2>
+                    <p>Generate scenarios for different customer clusters</p>
+                  </a>
                 </div>
               </div>
             </AdminPage>
@@ -106,6 +124,12 @@ function App() {
           <Route path="/admin/add-skill" element={
             <AdminPage>
               <AddSkill />
+            </AdminPage>
+          } />
+          
+          <Route path="/admin/scenarios" element={
+            <AdminPage>
+              <ScenarioGenerator />
             </AdminPage>
           } />
 
@@ -133,4 +157,5 @@ function App() {
 }
 
 export default App;
+
 
