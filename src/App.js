@@ -150,7 +150,7 @@ function App() {
           
           <Route path="/admin/compact-scenarios" element={
             <AdminPage>
-              <CompactScenarioTool />
+              <EnhancedScenarioGenerationTool />
             </AdminPage>
           } />
 
