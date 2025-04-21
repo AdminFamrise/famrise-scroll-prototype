@@ -18,7 +18,7 @@ import agentRegistry from './agents/framework/agentRegistry';
 
 // Agent UI Components
 import ContentStructuringTool from './components/admin/ContentStructuringTool';
-import ScenarioGenerationTool from './components/admin/ScenarioGenerationTool';
+import StandaloneScenarioTool from './components/admin/StandaloneScenarioTool';
 
 // Skill Journey Pages (dynamic)
 import SkillLanding from "./pages/skills/SkillLanding";
@@ -91,9 +91,7 @@ function App() {
             <ContentStructuringTool />
           </AdminPageWrapper>
         } />
-        <Route path="/admin/scenario-tool" element={
-          <AdminPageWrapper>
-            <ScenarioGenerationTool />
+<Route path="/admin/scenario-tool" element={<StandaloneScenarioTool />} />
           </AdminPageWrapper>
         } />
         
