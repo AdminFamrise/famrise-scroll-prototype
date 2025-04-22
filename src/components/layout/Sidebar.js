@@ -1,4 +1,3 @@
-// src/components/layout/Sidebar.js
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -26,6 +25,26 @@ const Sidebar = () => {
           <li>
             <Link to="/profile" className="hover:text-blue-600">
               👤 My Profile
+            </Link>
+          </li>
+          <li>
+            <Link to="/mental-health-check" className="hover:text-blue-600">
+              🌈 Mental Health Check
+            </Link>
+          </li>
+          <li>
+            <Link to="/mentor-sessions" className="hover:text-blue-600">
+              💬 Book a Session
+            </Link>
+          </li>
+          <li>
+            <Link to="/specializations" className="hover:text-blue-600">
+              ✨ Specializations
+            </Link>
+          </li>
+          <li>
+            <Link to="/help" className="hover:text-blue-600">
+              🆘 Help Center
             </Link>
           </li>
         </ul>
