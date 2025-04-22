@@ -1,15 +1,13 @@
-// Skill Landing Page
-// src/pages/skills/[skillName]/SkillLanding.js
-
 import React from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 
 const SkillLanding = ({
-  title = "Skill Name",
-  tagline = "Short Tagline or Real-Life Scenario",
-  overview = "Why this skill matters and its real-life impact.",
+  title = "Speak & Think with Clarity",
+  tagline = "Support my child’s success in school",
+  overview = `This skill helps you develop clear communication and reasoning strategies that support your child's learning. 
+Use it to better explain ideas, break down questions, and encourage deeper thinking in daily conversations — especially when navigating Dutch school systems.`,
   isFoundational = true,
 }) => {
   const navigate = useNavigate();
