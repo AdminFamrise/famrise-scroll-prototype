@@ -1,12 +1,11 @@
-// src/pages/skills/Discover.js
-
 import React from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Discover = () => {
   const navigate = useNavigate();
+  const { skillSlug } = useParams(); // 👈 get the dynamic slug from URL
 
   return (
     <Card className="p-6 max-w-3xl mx-auto">
@@ -54,7 +53,9 @@ const Discover = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-8">
-          <Button onClick={() => navigate("../learn")}>Ready to Start Learning</Button>
+          <Button onClick={() => navigate(`/skills/${skillSlug}/learn`)}>
+            Ready to Start Learning
+          </Button>
         </div>
       </CardContent>
     </Card>
@@ -62,5 +63,6 @@ const Discover = () => {
 };
 
 export default Discover;
+
 
 
