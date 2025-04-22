@@ -24,7 +24,7 @@ import Reflect from "./pages/skills/Reflect";
 import BridgeModule from "./pages/skills/BridgeModule";
 
 // Support Directory
-import MockCoachDirectory from "./pages/support/MockCoachDirectory";
+import MockCoachDirectory from "./services/MockCoachDirectory";
 
 const Loading = () => (
   <div style={{ 
