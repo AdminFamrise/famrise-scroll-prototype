@@ -20,6 +20,9 @@ import Apply from "./pages/skills/Apply";
 import Reflect from "./pages/skills/Reflect";
 import BridgeModule from "./pages/skills/BridgeModule";
 
+// Support Directory
+import CoachDirectory from "./pages/support/CoachDirectory";
+
 const Loading = () => (
   <div style={{ 
     display: 'flex', 
@@ -60,6 +63,9 @@ function App() {
           <Route path="/skills/:skillSlug/apply" element={<Apply />} />
           <Route path="/skills/:skillSlug/reflect" element={<Reflect />} />
           <Route path="/skills/:skillSlug/bridge" element={<BridgeModule />} />
+
+          {/* Support */}
+          <Route path="/coach-directory" element={<CoachDirectory />} />
         </Routes>
       </React.Suspense>
     </Router>
@@ -67,6 +73,5 @@ function App() {
 }
 
 export default App;
-
 
 
