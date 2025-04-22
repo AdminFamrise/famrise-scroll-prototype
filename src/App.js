@@ -23,7 +23,8 @@ import BridgeModule from "./pages/skills/BridgeModule";
 // Admin Components
 import AdminLayout from "./features/admin/layout/AdminLayout";
 import ScenarioGenerator from "./features/scenarios/ScenarioGenerator";
-import CompactScenarioTool from "./components/admin/EnhancedScenarioGenerationTool";
+import EnhancedScenarioGenerationTool from "./components/admin/EnhancedScenarioGenerationTool";
+
 
 // Simple Admin Navigation component
 const AdminNav = () => {
