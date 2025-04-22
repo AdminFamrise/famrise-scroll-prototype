@@ -1,5 +1,3 @@
-// src/components/forms/profile.js
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/Card";
@@ -18,6 +16,7 @@ const Profile = () => {
     dutchComfort: "",
     languageAddOn: [],
     realLifeScenario: "",
+    experience: ""
   });
 
   const handleChange = (e) => {
@@ -35,16 +34,12 @@ const Profile = () => {
   };
 
   const handleSubmit = () => {
-    // 1️⃣ Save user data
     mergeUserData(profileData);
-
-    // 2️⃣ Redirect based on realLifeScenario value
     if (profileData.realLifeScenario === "Everyday Life Skills") {
       navigate("/scenario/everyday");
     } else if (profileData.realLifeScenario === "New Paths & Opportunities") {
       navigate("/scenario/opportunities");
     } else {
-      // Fallback
       navigate("/scenario");
     }
   };
@@ -79,6 +74,13 @@ const Profile = () => {
           value={profileData.city}
           onChange={handleChange}
           className="mb-4"
+        />
+
+        <Input
+          name="experience"
+          placeholder="Current Profession / Experience Sector"
+          onChange={handleChange}
+          className="mb-6"
         />
 
         <h3 className="font-semibold mb-2">🌐 Pick a Language Add-On</h3>
@@ -143,4 +145,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
