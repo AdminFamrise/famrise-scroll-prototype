@@ -19,12 +19,12 @@ const readingModules = [
 const videos = [
   {
     title: "🎥 Scenario Simulation",
-    url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    url: "https://www.youtube.com/watch?v=Vs-MyQgfH3A",
     description: "Observe real-world use of the skill in action."
   },
   {
     title: "🎥 Common Mistakes & Fixes",
-    url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    url: "https://www.youtube.com/watch?v=eVDMATVzhTk",
     description: "Learn how to spot and fix typical mistakes."
   }
 ];
