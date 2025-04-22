@@ -1,5 +1,3 @@
-// src/pages/skills/Reflect.js
-
 import React from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
@@ -33,7 +31,9 @@ const Reflect = () => {
             Choose a support option to deepen your understanding or celebrate your progress.
           </p>
           <div className="space-y-3">
-            <Button variant="outline">💬 Book 1-on-1 Mentorship</Button>
+            <Button variant="outline" onClick={() => navigate("/coach-directory")}>
+              💬 Book 1-on-1 Mentorship
+            </Button>
             <Button variant="outline">👥 Join Peer Group Meetup</Button>
             <Button variant="outline">🎓 Guided Coaching Session</Button>
           </div>
@@ -53,4 +53,5 @@ const Reflect = () => {
 };
 
 export default Reflect;
+
 
