@@ -1,12 +1,11 @@
-// src/pages/skills/Apply.js
-
 import React, { useState } from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom"; // ✅ added useParams
 
 const Apply = () => {
   const navigate = useNavigate();
+  const { skillSlug } = useParams(); // ✅ get current skill slug
   const [projectChoice, setProjectChoice] = useState("");
 
   const miniProjects = [
@@ -66,7 +65,10 @@ const Apply = () => {
 
         {/* CTA */}
         <div className="text-center mt-8">
-          <Button onClick={() => navigate("../reflect")} disabled={!projectChoice}>
+          <Button
+            onClick={() => navigate(`/skills/${skillSlug}/reflect`)}
+            disabled={!projectChoice}
+          >
             Next: Reflect & Connect
           </Button>
         </div>
