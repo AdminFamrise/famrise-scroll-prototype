@@ -28,56 +28,65 @@ export default function IndexPage() {
 
   return (
     <div className="bg-white text-gray-800 font-sans">
-      {/* 1️⃣ Header */}
-      <header className="flex justify-between items-center p-6 shadow">
-        <div className="text-2xl font-bold">
-          <span className="bg-gray-200 px-3 py-1 rounded">LOGO</span>
-        </div>
-        <div className="flex gap-3">
-          <Link to="/login">
-            <button className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">
-              Log In
-            </button>
-          </Link>
+      {/* 1️⃣ Hero Section */}
+      <header className="text-center py-16 px-6 bg-gray-100">
+        <h1 className="text-4xl font-extrabold mb-4">Stay Ahead in a Changing World — Without Leaving Your Family Behind</h1>
+        <p className="text-lg max-w-2xl mx-auto mb-6">
+          A personalized lifelong learning journey designed for modern parents who want to thrive — not just survive — in today’s fast-moving world.
+        </p>
+        <p className="text-md max-w-2xl mx-auto text-gray-700">
+          Whether you're navigating a career transition, learning a new skill, or supporting your child’s growth — Famrise helps you build a future where your family and your goals grow together.
+        </p>
+        <div className="mt-8">
           <Link to="/profile">
-            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-              Sign Up
+            <button className="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700">
+              Start My Journey
             </button>
           </Link>
         </div>
       </header>
 
-      {/* 2️⃣ About Famrise */}
-      <section className="py-16 px-6 text-center max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold mb-4">About Famrise</h2>
-        <p className="mb-4">
-          <strong>Our Vision:</strong> Your 1st Lifelong Learning Skills platform. 
-          A Smarter path to families growth and well-being
-        </p>
-        <p>
-          <strong>Our Mission:</strong> Give customers the skills they need to be more productive and competitive
-          in a fast changing world.
-        </p>
+      {/* 2️⃣ Why Famrise */}
+      <section className="py-16 px-6 max-w-4xl mx-auto space-y-8">
+        <h2 className="text-3xl font-bold text-center">💡 Why Famrise?</h2>
+        <div>
+          <h3 className="text-xl font-semibold">👨‍👩‍👧 Built for Real Life</h3>
+          <p>We know life doesn't pause when you're a parent. That’s why we design learning and growth pathways that flex with your schedule, your role, and your reality.</p>
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold">🚀 Stay Competent in a Tech-Driven Future</h3>
+          <p>As technology reshapes work and society, we help you upskill in ways that matter — so you stay relevant and resilient in a world where change is constant.</p>
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold">🌱 Make Growth Sustainable</h3>
+          <p>Well-being isn't a luxury — it's a strategy. We combine career development, mental health, and social connection so you can grow without burnout.</p>
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold">🛡 Future-Proof Your Family</h3>
+          <p>You’re not just learning for yourself — you’re shaping the future your children will inherit. Famrise equips you with the tools to lead by example and keep your family thriving.</p>
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold">✨ Our Vision</h3>
+          <p>A Europe where no parent is left behind in the digital age — and where the path to prosperity includes families, care, and lifelong learning.</p>
+        </div>
       </section>
 
       {/* 3️⃣ How It Works */}
       <section className="py-16 px-6 text-center bg-gray-50">
-        <h2 className="text-3xl font-bold mb-4">How It Works</h2>
-        <ul className="space-y-3 max-w-xl mx-auto text-left text-lg">
-          <li>1️⃣ Discover: Understand how a particular skill relates to your current life challenges</li>
-          <li>2️⃣ Learn: Gain high level skills using our Self-guided tools content at your own pace</li>
-          <li>3️⃣ Practice: Our tools guide you towards mastering concepts </li>
-          <li>4️⃣ Apply: Different formats are designed so you may start applying skills in real life</li>
-          <li>5️⃣ Reflect: Human mentorship and coaching is what makes the difference</li>
+        <h2 className="text-3xl font-bold mb-8">💡 How It Works</h2>
+        <p className="max-w-3xl mx-auto mb-6">
+          In a fast-changing world, basic skills are just the beginning. Famrise helps you move beyond the basics — toward lifelong adaptability, confidence, and purpose.
+        </p>
+        <ul className="space-y-5 max-w-xl mx-auto text-left text-lg">
+          <li>🧭 <strong>Discover:</strong> Understand how specific skills link to your real-life challenges — from parenting to career reinvention. We start where you are.</li>
+          <li>📚 <strong>Learn:</strong> Access structured, self-paced lessons to build practical skills — digital, social, emotional — designed for busy adult learners.</li>
+          <li>🛠 <strong>Practice:</strong> Apply concepts in guided scenarios to build confidence and prepare for real-life conversations, decisions, and challenges.</li>
+          <li>🌍 <strong>Apply:</strong> Turn practice into action. Use our tools to apply your learning at work, at home, and in your community.</li>
+          <li>🔁 <strong>Reflect & Connect:</strong> Our mentors and coaches are your allies in real-world problem-solving. They don’t supervise learning — they help you apply skills in real-life contexts that matter, both personally and professionally. Whether it’s navigating transitions, career growth, or daily life challenges, their support ensures that theory becomes action. We also help you track your real impact and achievements, for if you decide to prove you can make a difference.</li>
         </ul>
-        <Link to="/profile">
-          <button className="mt-6 bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700">
-            Start My Journey
-          </button>
-        </Link>
       </section>
 
-      {/* 🧠 Skills Preview Section */}
+      {/* 4️⃣ Skills Preview */}
       <section className="py-16 px-6 max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold mb-10 text-center">Explore Our Skills</h2>
 
@@ -108,23 +117,6 @@ export default function IndexPage() {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* 4️⃣ FAQ Section */}
-      <section className="py-16 px-6 text-center max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">FAQs</h2>
-        <ul className="space-y-4 text-left">
-          <li>❓ What kind of families is Famrise designed for?</li>
-          <li>❓ Do I need any special background or education?</li>
-          <li>❓ How does the learning process work?</li>
-          <li>❓ Can I connect with real professionals?</li>
-          <li>❓ Is this just for parents or whole families?</li>
-          <li>❓ How is my personal data handled?</li>
-          <li>❓ Do I need to complete everything at once?</li>
-          <li>❓ What if I want to join as a coach or mentor?</li>
-          <li>❓ Will this help me find work or improve skills?</li>
-          <li>❓ How much does it cost?</li>
-        </ul>
       </section>
 
       {/* 5️⃣ Footer */}
