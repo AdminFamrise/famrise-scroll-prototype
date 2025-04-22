@@ -50,9 +50,10 @@ const Practice = () => {
             <p className="text-green-600 font-semibold mb-3">
               ✅ Great! This will help you become more confident in real-world interactions.
             </p>
-            <Button onClick={() => navigate(`/skills/${skillSlug}/apply`)}>
-              Next: Apply This Skill
-            </Button>
+            {submitted && (
+  <Button onClick={() => navigate("../apply")}>
+    Next: Apply This Skill
+  </Button>)}
           </div>
         )}
       </CardContent>
