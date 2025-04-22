@@ -1,10 +1,11 @@
 import React from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom"; // ✅ useParams added
 
 const BridgeModule = () => {
   const navigate = useNavigate();
+  const { skillSlug } = useParams(); // ✅ Extract skillSlug (optional for now)
 
   return (
     <Card className="p-6 max-w-4xl mx-auto">
@@ -54,4 +55,5 @@ const BridgeModule = () => {
 };
 
 export default BridgeModule;
+
 
