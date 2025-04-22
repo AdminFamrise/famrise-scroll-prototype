@@ -6,7 +6,7 @@ import { getUserData } from "../services/UserDataService";
 
 const CustomerDashboard = () => {
   const [user, setUser] = useState(null);
-  const hasCurrentLearnings = false; // Placeholder
+  const hasCurrentLearnings = true; // Simulated for testing
   const hasSpecializations = false; // Placeholder
 
   useEffect(() => {
@@ -63,7 +63,24 @@ const CustomerDashboard = () => {
         <section>
           <h2 className="text-xl font-semibold mb-4">📘 My Current Learnings</h2>
           {hasCurrentLearnings ? (
-            <div className="grid md:grid-cols-2 gap-4">{/* ... */}</div>
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Simulated learning journey */}
+              <Card>
+                <CardContent>
+                  <h3 className="text-lg font-semibold mb-2">🧠 Speak & Think with Clarity</h3>
+                  <p className="text-sm text-gray-600 mb-4">Your journey to improve clarity and reasoning.</p>
+
+                  <div className="space-y-2">
+                    <a href="/skills/speak-clarity/discover" className="text-blue-600 hover:underline block">1️⃣ Discover</a>
+                    <a href="/skills/speak-clarity/learn" className="text-blue-600 hover:underline block">2️⃣ Learn</a>
+                    <a href="/skills/speak-clarity/practice" className="text-blue-600 hover:underline block">3️⃣ Practice</a>
+                    <a href="/skills/speak-clarity/apply" className="text-blue-600 hover:underline block">4️⃣ Apply</a>
+                    <a href="/skills/speak-clarity/reflect" className="text-blue-600 hover:underline block">5️⃣ Reflect</a>
+                    <a href="/skills/speak-clarity/bridge" className="text-blue-600 hover:underline block">🔗 Bridge to Next</a>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           ) : (
             <Card>
               <CardContent>
@@ -132,4 +149,5 @@ const CustomerDashboard = () => {
 };
 
 export default CustomerDashboard;
+
 
