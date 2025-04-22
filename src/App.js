@@ -69,7 +69,7 @@ function App() {
             <Route path="/skills/:skillSlug/bridge" element={<BridgeModule />} />
 
             {/* Support */}
-            <Route path="/coach-directory" element={<CoachDirectory />} />
+         <Route path="/coach-directory" element={<MockCoachDirectory />} />
           </Routes>
         </MainLayout>
       </React.Suspense>
