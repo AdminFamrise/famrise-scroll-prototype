@@ -1,46 +1,55 @@
-// src/services/MockCoachDirectory.js
+import React from "react";
+import { Card, CardContent } from "../components/ui/Card";
+import { Button } from "../components/ui/Button";
+import MockCoachDirectory from "../services/MockCoachDirectory";
 
-const MockCoachDirectory = [
-  {
-    name: "Sanne de Vries",
-    avatar: "https://i.pravatar.cc/150?img=12",
-    bio: "Experienced learning coach specialized in guiding parents through Dutch curriculum thinking strategies.",
-    theorySession: "Thinking Strategies for Parents",
-    scenario: "Support my child’s success in school",
-    format: "1-on-1 Coaching",
-    included: false,
-    price: 40,
-    languages: ["Dutch", "English"],
-    calendarLink: "https://calendly.com/sanne-devries/intro-call",
-    groupInvite: "https://t.me/mockthinkinggroup",
-  },
-  {
-    name: "Mohammed El-Khatib",
-    avatar: "https://i.pravatar.cc/150?img=23",
-    bio: "Community facilitator helping international families connect, learn, and grow together in a fun peer-led format.",
-    theorySession: "Peer-Led Learning & Family Support",
-    scenario: "Support my child’s success in school",
-    format: "Peer Meetup",
-    included: true,
-    price: 0,
-    languages: ["Dutch", "Arabic", "English"],
-    calendarLink: "https://forms.gle/book-call-mohammed",
-    groupInvite: "https://chat.whatsapp.com/peer-group-example",
-  },
-  {
-    name: "Eva Janssen",
-    avatar: "https://i.pravatar.cc/150?img=37",
-    bio: "Educator and coach blending critical thinking with playful learning — perfect for parents and kids.",
-    theorySession: "Creative Reasoning and Play",
-    scenario: "Support my child’s success in school",
-    format: "Webinar + Q&A",
-    included: true,
-    price: 0,
-    languages: ["Dutch", "English"],
-    calendarLink: "https://calendly.com/eva-webinar/intro",
-    groupInvite: "",
-  },
-];
+const CoachDirectory = () => {
+  return (
+    <div className="p-6 max-w-6xl mx-auto">
+      <h1 className="text-3xl font-bold mb-8 text-center">🎓 Coach & Mentor Directory</h1>
+      <div className="grid md:grid-cols-2 gap-6">
+        {MockCoachDirectory.map((coach, idx) => (
+          <Card key={idx}>
+            <CardContent className="flex gap-4 items-start">
+              <img
+                src={coach.avatar}
+                alt={coach.name}
+                className="w-16 h-16 rounded-full object-cover"
+              />
+              <div>
+                <h2 className="text-xl font-semibold">{coach.name}</h2>
+                <p className="text-sm text-gray-600 mb-2">{coach.bio}</p>
+                <p className="text-sm mb-1">
+                  <strong>Format:</strong> {coach.format}
+                </p>
+                <p className="text-sm mb-1">
+                  <strong>Session:</strong> {coach.theorySession}
+                </p>
+                <p className="text-sm mb-1">
+                  <strong>Languages:</strong> {coach.languages.join(", ")}
+                </p>
+                <p className="text-sm mb-3">
+                  <strong>Price:</strong> {coach.included ? "Included" : `€${coach.price}`}
+                </p>
+                <div className="space-x-2">
+                  {coach.calendarLink && (
+                    <a href={coach.calendarLink} target="_blank" rel="noopener noreferrer">
+                      <Button size="sm">📅 Book Session</Button>
+                    </a>
+                  )}
+                  {coach.groupInvite && (
+                    <a href={coach.groupInvite} target="_blank" rel="noopener noreferrer">
+                      <Button size="sm" variant="outline">💬 Join Group</Button>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-export default MockCoachDirectory;
-
+export default CoachDirectory;
