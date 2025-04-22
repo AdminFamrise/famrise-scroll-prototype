@@ -1,10 +1,11 @@
 import React from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Reflect = () => {
   const navigate = useNavigate();
+  const { skillSlug } = useParams(); // ✅ Enables dynamic skill routing
 
   return (
     <Card className="p-6 max-w-4xl mx-auto">
@@ -45,7 +46,9 @@ const Reflect = () => {
           <p className="text-sm text-gray-600 mb-4">
             Whether this is your first or one of many, taking time to reflect is key to real growth. You’re ready to explore the next step.
           </p>
-          <Button onClick={() => navigate("../bridge")}>Continue to Bridge Module</Button>
+          <Button onClick={() => navigate(`/skills/${skillSlug}/bridge`)}>
+            Continue to Bridge Module
+          </Button>
         </section>
       </CardContent>
     </Card>
@@ -53,5 +56,6 @@ const Reflect = () => {
 };
 
 export default Reflect;
+
 
 
