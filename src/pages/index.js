@@ -2,6 +2,30 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function IndexPage() {
+  const everydaySkills = [
+    "Speak & Think with Clarity",
+    "Learn What You Need, When You Need It",
+    "Make Smart Money & Planning Decisions",
+    "Work Better with Others",
+    "Handle Change with More Ease",
+    "Choose What Works for You",
+    "Fix What's Not Working",
+    "Take Initiative in Small Ways",
+    "Understand Emotions — Yours & Others"
+  ];
+
+  const growthSkills = [
+    "AI & Emerging Tech Awareness",
+    "Digital world protection",
+    "Turn Screen Time into Skill Time",
+    "Make Smarter Decisions with Data",
+    "Learn to Code or Automate Without Fear",
+    "Live Sustainably, Think Circular",
+    "Discover Tech Without Being a Techie",
+    "Create, Lead, or Grow a Flexible Career",
+    "Build What Your Community or Market Needs"
+  ];
+
   return (
     <div className="bg-white text-gray-800 font-sans">
       {/* 1️⃣ Header */}
@@ -9,11 +33,18 @@ export default function IndexPage() {
         <div className="text-2xl font-bold">
           <span className="bg-gray-200 px-3 py-1 rounded">LOGO</span>
         </div>
-        <Link to="/profile">
-          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-            Get Started
-          </button>
-        </Link>
+        <div className="flex gap-3">
+          <Link to="/login">
+            <button className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">
+              Log In
+            </button>
+          </Link>
+          <Link to="/profile">
+            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+              Sign Up
+            </button>
+          </Link>
+        </div>
       </header>
 
       {/* 2️⃣ About Famrise */}
@@ -21,7 +52,7 @@ export default function IndexPage() {
         <h2 className="text-3xl font-bold mb-4">About Famrise</h2>
         <p className="mb-4">
           <strong>Our Vision:</strong> Your 1st Lifelong Learning Skills platform. 
-        A Smarter path to families growth and well-being
+          A Smarter path to families growth and well-being
         </p>
         <p>
           <strong>Our Mission:</strong> Give customers the skills they need to be more productive and competitive
@@ -44,6 +75,39 @@ export default function IndexPage() {
             Start My Journey
           </button>
         </Link>
+      </section>
+
+      {/* 🧠 Skills Preview Section */}
+      <section className="py-16 px-6 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold mb-10 text-center">Explore Our Skills</h2>
+
+        <div className="mb-12">
+          <h3 className="text-xl font-semibold mb-4">Everyday Life Skills</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {everydaySkills.map((skill, index) => (
+              <div key={index} className="bg-white border rounded-lg p-4 shadow hover:shadow-md transition">
+                <p className="font-medium">{skill}</p>
+                <span className="text-xs inline-block mt-2 px-2 py-1 rounded bg-blue-100 text-blue-800">
+                  Everyday Skill
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-xl font-semibold mb-4">New Paths & Opportunities</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {growthSkills.map((skill, index) => (
+              <div key={index} className="bg-white border rounded-lg p-4 shadow hover:shadow-md transition">
+                <p className="font-medium">{skill}</p>
+                <span className="text-xs inline-block mt-2 px-2 py-1 rounded bg-green-100 text-green-800">
+                  Growth Skill
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* 4️⃣ FAQ Section */}
@@ -70,4 +134,3 @@ export default function IndexPage() {
     </div>
   );
 }
-
