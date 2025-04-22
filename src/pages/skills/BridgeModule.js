@@ -1,5 +1,3 @@
-// src/pages/skills/BridgeModule.js
-
 import React from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
@@ -46,8 +44,9 @@ const BridgeModule = () => {
         </section>
 
         {/* CTA */}
-        <div className="text-center mt-8">
+        <div className="text-center mt-8 space-y-3">
           <Button onClick={() => navigate("/dashboard")}>Go to My Dashboard</Button>
+          <Button onClick={() => navigate("/explore")} variant="outline">🔍 Explore More Skills</Button>
         </div>
       </CardContent>
     </Card>
@@ -55,3 +54,4 @@ const BridgeModule = () => {
 };
 
 export default BridgeModule;
+
