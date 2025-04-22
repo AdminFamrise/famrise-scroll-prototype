@@ -1,12 +1,11 @@
-// src/pages/skills/Practice.js
-
 import React, { useState } from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom"; // ✅ Added useParams
 
 const Practice = () => {
   const navigate = useNavigate();
+  const { skillSlug } = useParams(); // ✅ Extract dynamic skill slug
   const [response, setResponse] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -51,7 +50,9 @@ const Practice = () => {
             <p className="text-green-600 font-semibold mb-3">
               ✅ Great! This will help you become more confident in real-world interactions.
             </p>
-            <Button onClick={() => navigate("../apply")}>Next: Apply This Skill</Button>
+            <Button onClick={() => navigate(`/skills/${skillSlug}/apply`)}>
+              Next: Apply This Skill
+            </Button>
           </div>
         )}
       </CardContent>
