@@ -1,9 +1,9 @@
-// src/pages/skills/Learn.js
+
 
 import React from "react";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom"; // ✅ import useParams
 
 const readingModules = [
   {
@@ -31,6 +31,7 @@ const videos = [
 
 const Learn = () => {
   const navigate = useNavigate();
+  const { skillSlug } = useParams(); // ✅ grab dynamic skill slug
 
   return (
     <Card className="p-6 max-w-4xl mx-auto">
@@ -90,7 +91,9 @@ const Learn = () => {
 
         {/* CTA to Practice */}
         <div className="text-center">
-          <Button onClick={() => navigate("../practice")}>Next: Practice Your Skills</Button>
+          <Button onClick={() => navigate(`/skills/${skillSlug}/practice`)}>
+            Next: Practice Your Skills
+          </Button>
         </div>
       </CardContent>
     </Card>
@@ -98,6 +101,3 @@ const Learn = () => {
 };
 
 export default Learn;
-
-
-
