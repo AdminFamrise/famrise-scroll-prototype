@@ -1,6 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+// Layout
+import MainLayout from "./components/layout/MainLayout";
+
 // Customer Journey Pages
 import LandingPage from "./pages/index";
 import ProfileCreation from "./pages/profile";
@@ -38,35 +41,37 @@ function App() {
   return (
     <Router>
       <React.Suspense fallback={<Loading />}>
-        <Routes>
-          {/* Landing + Profile */}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/profile" element={<ProfileCreation />} />
+        <MainLayout>
+          <Routes>
+            {/* Landing + Profile */}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/profile" element={<ProfileCreation />} />
 
-          {/* Scenario Selection */}
-          <Route path="/scenario/everyday" element={<EverydayScenarioPage />} />
-          <Route path="/scenario/opportunities" element={<OpportunitiesScenarioPage />} />
+            {/* Scenario Selection */}
+            <Route path="/scenario/everyday" element={<EverydayScenarioPage />} />
+            <Route path="/scenario/opportunities" element={<OpportunitiesScenarioPage />} />
 
-          {/* Wellbeing & Overview */}
-          <Route path="/wellbeing-check" element={<WellbeingCheck />} />
-          <Route path="/overview" element={<OpportunityOverview />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+            {/* Wellbeing & Overview */}
+            <Route path="/wellbeing-check" element={<WellbeingCheck />} />
+            <Route path="/overview" element={<OpportunityOverview />} />
+            <Route path="/dashboard" element={<Dashboard />} />
 
-          {/* Explore */}
-          <Route path="/explore" element={<ExploreSkills />} />
+            {/* Explore */}
+            <Route path="/explore" element={<ExploreSkills />} />
 
-          {/* Skill Journey */}
-          <Route path="/skills/:skillSlug" element={<SkillLanding />} />
-          <Route path="/skills/:skillSlug/discover" element={<Discover />} />
-          <Route path="/skills/:skillSlug/learn" element={<Learn />} />
-          <Route path="/skills/:skillSlug/practice" element={<Practice />} />
-          <Route path="/skills/:skillSlug/apply" element={<Apply />} />
-          <Route path="/skills/:skillSlug/reflect" element={<Reflect />} />
-          <Route path="/skills/:skillSlug/bridge" element={<BridgeModule />} />
+            {/* Skill Journey */}
+            <Route path="/skills/:skillSlug" element={<SkillLanding />} />
+            <Route path="/skills/:skillSlug/discover" element={<Discover />} />
+            <Route path="/skills/:skillSlug/learn" element={<Learn />} />
+            <Route path="/skills/:skillSlug/practice" element={<Practice />} />
+            <Route path="/skills/:skillSlug/apply" element={<Apply />} />
+            <Route path="/skills/:skillSlug/reflect" element={<Reflect />} />
+            <Route path="/skills/:skillSlug/bridge" element={<BridgeModule />} />
 
-          {/* Support */}
-          <Route path="/coach-directory" element={<CoachDirectory />} />
-        </Routes>
+            {/* Support */}
+            <Route path="/coach-directory" element={<CoachDirectory />} />
+          </Routes>
+        </MainLayout>
       </React.Suspense>
     </Router>
   );
