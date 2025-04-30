@@ -24,8 +24,10 @@ import Reflect from "./pages/skills/Reflect";
 import BridgeModule from "./pages/skills/BridgeModule";
 
 // Support
-// Support
 import CoachDirectory from "./pages/support/CoachDirectory";
+
+// Coach Index Page
+import CoachesIndex from "./pages/coaches_index";
 
 const Loading = () => (
   <div style={{ 
@@ -55,6 +57,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="explore" element={<ExploreSkills />} />
             <Route path="coach-directory" element={<CoachDirectory />} />
+            <Route path="coaches_index" element={<CoachesIndex />} />
 
             {/* Skill Journey */}
             <Route path="skills/:skillSlug" element={<SkillLanding />} />
@@ -73,6 +76,5 @@ function App() {
 }
 
 export default App;
-
 
 
