@@ -28,7 +28,7 @@ export default function IndexPage() {
             <p>In a fast-changing world, better decision-making is essential — for yourself, your family, and the future you're building.</p>
           </div>
           <div className="bg-white border rounded-lg p-6 shadow text-center">
-            <h3 className="text-xl font-semibold mb-2">🌟 Lead by Example, Grow with Resilience</h3>
+            <h3 className="text-xl font-semibold mb-2">🌟 Lead by Example, Grow Sustainably</h3>
             <p>Learn the mindset and habits that build resilience, boost your performance, and nurture your family’s well-being.</p>
           </div>
           <div className="bg-white border rounded-lg p-6 shadow text-center">
