@@ -11,7 +11,7 @@ const Header = () => {
       <nav className="space-x-6 text-sm text-gray-700">
         <Link to="/dashboard" className="hover:underline">Dashboard</Link>
         <Link to="/explore" className="hover:underline">Explore</Link>
-        <Link to="/coach-directory" className="hover:underline">Coaches</Link>
+        <Link to="/coaches_index" className="hover:underline">Coaches</Link>
         <Link to="/profile" className="hover:underline">Profile</Link>
         <Link to="/help" className="hover:underline">Help</Link>
       </nav>
