@@ -1,178 +1,82 @@
-// src/pages/overview.js
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
-import { Input } from "../components/ui/Input";
 import { getUserData } from "../services/UserDataService";
-import LanguageLayer from "../components/language/LanguageLayer";
-import mockSpecialServices from "../services/MockSpecialServices";
-import mockSolutions from "../services/MockSolutions";
 
 const Overview = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
-  const [learningMatches, setLearningMatches] = useState([]);
-  const [specialSupport, setSpecialSupport] = useState([]);
-
-  // Filters
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedFormat, setSelectedFormat] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("");
 
   useEffect(() => {
     const data = getUserData();
-    if (data) {
-      setUserData(data);
-
-      const matches = mockSolutions.filter(
-        (sol) =>
-          sol.Scenario === data.realLifeScenario &&
-          sol.SpecificGoal === data.specificGoal
-      );
-      setLearningMatches(matches);
-
-      if (!data.mhcSkipped) {
-        const extras = mockSpecialServices.filter(
-          (svc) =>
-            svc.realLifeScenario === data.realLifeScenario &&
-            svc.specificGoal === data.specificGoal
-        );
-        setSpecialSupport(extras);
-      }
-    }
+    if (data) setUserData(data);
   }, []);
 
-  const handleStartJourney = () => {
-    navigate("/dashboard");
-  };
+  if (!userData) return null;
 
-  const filteredMatches = learningMatches.filter((match) => {
-    const matchesSearch = match.Title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFormat = selectedFormat ? match.InteractionType === selectedFormat : true;
-    const matchesLanguage = selectedLanguage ? match.LanguageAddOn === selectedLanguage : true;
-    return matchesSearch && matchesFormat && matchesLanguage;
-  });
+  const {
+    softSkills = [],
+    hardSkills = [],
+    profession = "",
+    desiredLanguages = [],
+    challenge = "",
+    goal = ""
+  } = userData;
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* HEADER */}
-      <header className="bg-white shadow px-6 py-4 flex justify-between items-center">
-        <div className="text-xl font-bold text-blue-700">Famrise</div>
-        <nav className="space-x-4 text-sm text-gray-700">
-          <a href="/dashboard" className="hover:underline">Dashboard</a>
-          <a href="/profile" className="hover:underline">Profile</a>
-          <a href="/help" className="hover:underline">Help</a>
-        </nav>
-      </header>
+    <div className="min-h-screen flex flex-col items-center p-6 bg-gray-50">
+      <h1 className="text-2xl font-bold mb-4 text-center">🎯 Does this look right?</h1>
+      <p className="mb-8 text-center text-gray-700 max-w-lg">
+        We've crafted a simple, structured & supported path based on your skills, challenge, and goals.
+      </p>
 
-      {/* MAIN CONTENT */}
-      <main className="flex-grow p-6 space-y-10">
-        <h1 className="text-2xl font-bold text-center">🎯 Your Personalized Results</h1>
+      <div className="grid gap-6 w-full max-w-2xl">
+        {/* Starting Point Card */}
+        <Card>
+          <CardContent>
+            <h2 className="font-semibold mb-2">🔍 Your Starting Point</h2>
+            <p className="text-sm mb-1">
+              <strong>Soft skills:</strong> {softSkills.join(", ") || "—"}
+            </p>
+            <p className="text-sm mb-1">
+              <strong>Hard skills:</strong> {profession || hardSkills.join(", ") || "—"}
+            </p>
+            <p className="text-sm">
+              <strong>Languages:</strong> {desiredLanguages.join(", ") || "—"}
+            </p>
+          </CardContent>
+        </Card>
 
-        {/* Filter + Search */}
-        <div className="grid md:grid-cols-4 gap-4">
-          <div className="col-span-1">
-            <h3 className="font-semibold mb-2">🎛 Filters</h3>
-            <div className="mb-4">
-              <label className="block font-medium mb-1 text-sm">Format</label>
-              <select
-                className="w-full p-2 border rounded"
-                value={selectedFormat}
-                onChange={(e) => setSelectedFormat(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="Self-Paced">Self-Paced</option>
-                <option value="Peer Group">Peer Group</option>
-                <option value="Mentor Session">Mentor Session</option>
-              </select>
-            </div>
-            <div className="mb-4">
-              <label className="block font-medium mb-1 text-sm">Language</label>
-              <select
-                className="w-full p-2 border rounded"
-                value={selectedLanguage}
-                onChange={(e) => setSelectedLanguage(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="Dutch">Dutch</option>
-                <option value="English">English</option>
-              </select>
-            </div>
-          </div>
+        {/* Challenge & Goal Card */}
+        <Card>
+          <CardContent>
+            <h2 className="font-semibold mb-2">⚡ Your Challenge & Goal</h2>
+            <p className="text-sm mb-1">
+              <strong>Challenge:</strong> {challenge || "—"}
+            </p>
+            <p className="text-sm">
+              <strong>Goal:</strong> {goal || "—"}
+            </p>
+          </CardContent>
+        </Card>
 
-          <div className="md:col-span-3 space-y-6">
-            <Input
-              placeholder="🔍 Search learning baskets..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full p-2 border rounded"
-            />
+        {/* Path Forward Card */}
+        <Card>
+          <CardContent>
+            <h2 className="font-semibold mb-2">🚀 Your Path Forward</h2>
+            <ul className="list-disc list-inside text-sm space-y-1">
+              <li>Bite‑sized lessons built on what you know</li>
+              <li>Hands‑on tools to practice in real life</li>
+              <li>Expert mentoring to guide your growth</li>
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
 
-            {/* Learning Results */}
-            <div>
-              <h2 className="text-lg font-semibold mb-3">📘 Matched Learning Baskets</h2>
-              {filteredMatches.length > 0 ? (
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {filteredMatches.map((sol, idx) => (
-                    <Card key={idx}>
-                      <CardContent>
-                        <h4 className="font-semibold mb-1">{sol.Title}</h4>
-                        <p className="text-sm mb-2">{sol.Description}</p>
-                        <p className="text-xs text-gray-600">
-                          Format: {sol.InteractionType} | Language: {sol.LanguageAddOn}
-                        </p>
-                        <LanguageLayer
-                          goal={userData?.specificGoal}
-                          level={userData?.dutchComfort}
-                        />
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-600">No learning matches found for your filters.</p>
-              )}
-            </div>
-
-            {/* Special Services */}
-            <div>
-              <h2 className="text-lg font-semibold mb-3">
-                🧠 Extra Services Based on Well-Being Check
-              </h2>
-              {specialSupport.length > 0 ? (
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {specialSupport.map((svc, idx) => (
-                    <Card key={idx}>
-                      <CardContent>
-                        <h4 className="font-semibold mb-1">{svc.title}</h4>
-                        <p className="text-sm mb-2">{svc.description}</p>
-                        <p className="text-xs text-gray-600">
-                          Format: {svc.format} | Interaction: {svc.interactionType} |{" "}
-                          Language: {svc.languages.join(", ")}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-600">No extra support services matched.</p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-10">
-          <Button onClick={handleStartJourney}>🚀 Start My Journey</Button>
-        </div>
-      </main>
-
-      {/* FOOTER */}
-      <footer className="bg-gray-100 text-center text-sm py-4 text-gray-500 mt-10">
-        © {new Date().getFullYear()} Famrise. Empowering Families for a Better Future.
-      </footer>
+      <Button onClick={() => navigate("/dashboard")} className="mt-8">
+        Yes, let’s go!
+      </Button>
     </div>
   );
 };
