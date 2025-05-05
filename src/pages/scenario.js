@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "../../components/ui/Card";
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
-import { mergeUserData } from "../../services/UserDataService";
+import { mergeUserData } from "../services/UserDataService";
 
 const ScenarioPage = () => {
   const navigate = useNavigate();
