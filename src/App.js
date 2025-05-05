@@ -7,7 +7,7 @@ import MainLayout from "./components/layout/MainLayout";
 // Pages
 import LandingPage from "./pages/index";
 import ProfileCreation from "./pages/profile";
-import EverydayScenarioPage from "./pages/scenario/everyday";
+import EverydayScenarioPage from "./pages/scenario";
 import OpportunitiesScenarioPage from "./pages/scenario/opportunities";
 import WellbeingCheck from "./pages/wellbeing-check";
 import OpportunityOverview from "./pages/overview";
@@ -50,7 +50,7 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<LandingPage />} />
             <Route path="profile" element={<ProfileCreation />} />
-            <Route path="scenario/everyday" element={<EverydayScenarioPage />} />
+            <Route path="scenario" element={<ScenarioPage />} />
             <Route path="scenario/opportunities" element={<OpportunitiesScenarioPage />} />
             <Route path="wellbeing-check" element={<WellbeingCheck />} />
             <Route path="overview" element={<OpportunityOverview />} />
