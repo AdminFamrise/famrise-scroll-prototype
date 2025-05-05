@@ -62,7 +62,7 @@ export default function IndexPage() {
           <li>
             <strong>🧠 Step 5: Build Habits for Life</strong><br />
             Get support from mentors who help you apply skills to real-world challenges — 
-            So you can make a bigger impact in your family,community and /or career.
+            So you can have the right skills at the right time and make a bigger impact in your family,community and /or career.
 
           </li>
         </ul>
