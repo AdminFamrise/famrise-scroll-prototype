@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
 import { mergeUserData } from "../services/UserDataService";
 
 const GoalPage = () => {
-  const navigate = useNavigate();
   const [selectedGoal, setSelectedGoal] = useState("");
   const [customGoal, setCustomGoal] = useState("");
 
@@ -34,14 +33,13 @@ const GoalPage = () => {
     const goalValue = selectedGoal === "other" ? customGoal : selectedGoal;
     if (!goalValue) return;
     mergeUserData({ goal: goalValue });
-    navigate("/dashboard");
   };
 
   return (
     <Card className="p-6 max-w-xl mx-auto">
       <CardContent>
         {/* Progress Indicator */}
-        <p className="text-sm text-gray-500 mb-4">Step 3 of 3</p>
+        <p className="text-sm text-gray-500 mb-4">Step 3 of 4</p>
 
         {/* Headline */}
         <h2 className="text-2xl font-bold mb-4">
@@ -94,12 +92,15 @@ const GoalPage = () => {
         </p>
 
         {/* Continue Button */}
-        <Button onClick={handleSubmit} disabled={!selectedGoal || (selectedGoal === 'other' && !customGoal)}>
-          Continue
-        </Button>
+        <Link to="/skill-snapshot">
+          <Button onClick={handleSubmit} disabled={!selectedGoal || (selectedGoal === 'other' && !customGoal)}>
+            Continue
+          </Button>
+        </Link>
       </CardContent>
     </Card>
   );
 };
 
 export default GoalPage;
+
