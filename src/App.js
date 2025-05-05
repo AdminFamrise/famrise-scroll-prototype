@@ -9,7 +9,7 @@ import LandingPage from "./pages/index";
 import ProfileCreation from "./pages/profile";
 import ScenarioPage from "./pages/scenario";
 import GoalPage from "./pages/goal";
-import SkillSnapshotPage from "./pages/skillSnapshot";
+import SkillSnapshotPage from "./pages/SkillSnapshot";
 import OverviewPage from "./pages/overview";
 import Dashboard from "./pages/dashboard";
 import ExploreSkills from "./pages/explore";
