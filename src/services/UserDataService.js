@@ -22,23 +22,18 @@ export function mergeUserData(partialData) {
   return merged;
 }
 
-// Check if user skipped the Well-being Check (previously MHC)
-export function didSkipWellBeingCheck() {
-  const user = getUserData();
-  return user.wellBeingSkipped === true; // ✅ updated key
+// Track current onboarding step (1-6)
+export function setOnboardingStep(step) {
+  mergeUserData({ onboardingStep: step });
 }
 
-// Optional: check if user has submitted well-being data
-export function hasWellBeingData() {
+export function getOnboardingStep() {
   const user = getUserData();
-  return (
-    user.mhcSWB !== undefined &&
-    user.mhcPWB !== undefined &&
-    user.matrixLabel !== undefined
-  );
+  return user.onboardingStep || 1;
 }
 
 // Optional: clear user data (e.g. on logout)
 export function clearUserData() {
   localStorage.removeItem("userData");
 }
+
