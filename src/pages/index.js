@@ -8,7 +8,8 @@ export default function IndexPage() {
       <header className="text-center py-16 px-6 bg-gray-100">
         <h1 className="text-4xl font-extrabold mb-4">Feeling pulled in a million directions? Find focus with FamRise</h1>
         <p className="text-lg max-w-2xl mx-auto mb-6">
-          Your lifelong learning journey designed for busy parents. We deliver personalised roadmaps that help you upskill, guide your children, and build the future you wish for.
+          Your lifelong learning journey designed for busy parents. We deliver personalised roadmaps that help you have the right skills at the right time 
+          wether is to improve your professional life,support your children development or overcome a life challenge.
         </p>
         <div className="mt-8">
           <Link to="/profile">
@@ -62,7 +63,7 @@ export default function IndexPage() {
           <li>
             <strong>🧠 Step 5: Build Habits for Life</strong><br />
             Get support from mentors who help you apply skills to real-world challenges — 
-            So you can have the right skills at the right time and make a bigger impact in your family,community and /or career.
+            So you can make a bigger impact in your family,community and /or career.
 
           </li>
         </ul>
