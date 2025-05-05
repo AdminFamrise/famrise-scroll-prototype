@@ -66,6 +66,7 @@ const Profile = () => {
           className="mb-6"
         />
 
+             <Link to="/scenario">
         <Button onClick={handleSubmit}>Continue</Button>
       </CardContent>
     </Card>
