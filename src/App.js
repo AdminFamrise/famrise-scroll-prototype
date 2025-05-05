@@ -7,10 +7,10 @@ import MainLayout from "./components/layout/MainLayout";
 // Pages
 import LandingPage from "./pages/index";
 import ProfileCreation from "./pages/profile";
-import EverydayScenarioPage from "./pages/scenario";
-import OpportunitiesScenarioPage from "./pages/scenario/opportunities";
-import WellbeingCheck from "./pages/wellbeing-check";
-import OpportunityOverview from "./pages/overview";
+import ScenarioPage from "./pages/scenario";
+import GoalPage from "./pages/goal";
+import SkillSnapshotPage from "./pages/skillSnapshot";
+import OverviewPage from "./pages/overview";
 import Dashboard from "./pages/dashboard";
 import ExploreSkills from "./pages/explore";
 
@@ -51,9 +51,9 @@ function App() {
             <Route index element={<LandingPage />} />
             <Route path="profile" element={<ProfileCreation />} />
             <Route path="scenario" element={<ScenarioPage />} />
-            <Route path="scenario/opportunities" element={<OpportunitiesScenarioPage />} />
-            <Route path="wellbeing-check" element={<WellbeingCheck />} />
-            <Route path="overview" element={<OpportunityOverview />} />
+            <Route path="goal" element={<GoalPage />} />
+            <Route path="skill-snapshot" element={<SkillSnapshotPage />} />
+            <Route path="overview" element={<OverviewPage />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="explore" element={<ExploreSkills />} />
             <Route path="coach-directory" element={<CoachDirectory />} />
@@ -76,5 +76,3 @@ function App() {
 }
 
 export default App;
-
-
