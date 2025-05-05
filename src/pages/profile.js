@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/Card";
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
@@ -21,7 +21,7 @@ const Profile = () => {
 
   const handleSubmit = () => {
     mergeUserData(profileData);
-    navigate("/onboarding/step2");
+    // Data saved; navigation handled by Link
   };
 
   return (
@@ -66,12 +66,14 @@ const Profile = () => {
           className="mb-6"
         />
 
-             <Link to="/scenario">
-        <Button onClick={handleSubmit}>Continue</Button>
+        <Link to="/scenario">
+          <Button onClick={handleSubmit}>Continue</Button>
+        </Link>
       </CardContent>
     </Card>
   );
 };
 
 export default Profile;
+
 
