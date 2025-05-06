@@ -1,0 +1,84 @@
+{
+"nodes": \[
+{
+"parameters": {
+"path": "onboarding/overview",
+"httpMethod": "GET",
+"responseMode": "lastNode",
+"options": {}
+},
+"name": "Webhook Overview",
+"type": "n8n-nodes-base.webhook",
+"typeVersion": 1,
+"position": \[200, 150]
+},
+{
+"parameters": {
+"collection": "user\_profiles",
+"operation": "get",
+"documentId": "={{ \$node\['Webhook Overview'].parameterQuery.userId }}"
+},
+"name": "Get User Profile",
+"type": "n8n-nodes-base.googleFirestore",
+"typeVersion": 1,
+"position": \[400, 150]
+},
+{
+"parameters": {
+"url": "[https://your-site.netlify.app/content/courses.json](https://your-site.netlify.app/content/courses.json)",
+"responseFormat": "json",
+"jsonParse": true
+},
+"name": "Fetch Modules",
+"type": "n8n-nodes-base.httpRequest",
+"typeVersion": 1,
+"position": \[200, 300]
+},
+{
+"parameters": {
+"url": "[https://your-site.netlify.app/content/mentors.json](https://your-site.netlify.app/content/mentors.json)",
+"responseFormat": "json",
+"jsonParse": true
+},
+"name": "Fetch Mentors",
+"type": "n8n-nodes-base.httpRequest",
+"typeVersion": 1,
+"position": \[400, 300]
+},
+{
+"parameters": {
+"resource": "chatCompletion",
+"model": "gpt-4",
+"messages": \[
+{ "role": "system", "content": "You are a learning-path agent. Build a JSON payload with 'startingPoint', 'challengeAndGoal', and 'pathForward' based on the user profile, available modules, and mentors." },
+{ "role": "user", "content": "User Profile:\n{{ \$node\['Get User Profile'].json | json }}\nModules:\n{{ \$node\['Fetch Modules'].json | json }}\nMentors:\n{{ \$node\['Fetch Mentors'].json | json }}\nReturn JSON: { startingPoint:{softSkills,array,hardSkills,array,languages,array}, challengeAndGoal:{challenge\:string,goal\:string}, pathForward:{modules:\[{title,description,url}],mentor:{name,expertise}} }" }
+],
+"options": {}
+},
+"name": "Build with OpenAI",
+"type": "n8n-nodes-base.openAI",
+"typeVersion": 1,
+"position": \[600, 225]
+},
+{
+"parameters": {
+"statusCode": 200,
+"options": {}
+},
+"name": "Respond to Webhook",
+"type": "n8n-nodes-base.respondToWebhook",
+"typeVersion": 1,
+"position": \[850, 225]
+}
+],
+"connections": {
+"Webhook Overview": { "main": \[\[{ "node": "Get User Profile", "type": "main", "index": 0 },{ "node": "Fetch Modules", "type": "main", "index": 0 },{ "node": "Fetch Mentors", "type": "main", "index": 0 }]]},
+"Get User Profile": { "main": \[\[{ "node": "Build with OpenAI", "type": "main", "index": 0 }]] },
+"Fetch Modules": { "main": \[\[{ "node": "Build with OpenAI", "type": "main", "index": 0 }]] },
+"Fetch Mentors": { "main": \[\[{ "node": "Build with OpenAI", "type": "main", "index": 0 }]] },
+"Build with OpenAI": { "main": \[\[{ "node": "Respond to Webhook", "type": "main", "index": 0 }]] }
+},
+"active": false,
+"settings": {},
+"id": 1
+}
