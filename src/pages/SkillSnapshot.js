@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
-import { mergeUserData } from "../services/UserDataService";
+import { mergeUserData, getUserData } from "../services/UserDataService";
 
 const softSkillsList = [
   'Creativity',
@@ -19,10 +19,13 @@ const softSkillsList = [
 const languagesList = ['English', 'Dutch', 'German'];
 
 const SkillSnapshotPage = () => {
+  const navigate = useNavigate();
+
   const [softSkills, setSoftSkills] = useState([]);
   const [profession, setProfession] = useState("");
   const [cvFile, setCvFile] = useState(null);
   const [desiredLanguages, setDesiredLanguages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const toggleSoftSkill = (skill) => {
     setSoftSkills((prev) =>
@@ -47,8 +50,32 @@ const SkillSnapshotPage = () => {
     setDesiredLanguages(selected);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     mergeUserData({ softSkills, profession, cvFile, desiredLanguages });
+
+    const fullUserData = getUserData();
+    setLoading(true);
+
+    try {
+      const response = await fetch("https://famrise.app.n8n.cloud/webhook-test/onboarding/overview", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(fullUserData)
+      });
+
+      if (!response.ok) throw new Error("Failed to get response from AI");
+
+      const result = await response.json();
+      localStorage.setItem("onboardingOverview", JSON.stringify(result));
+      navigate("/overview");
+    } catch (err) {
+      console.error("Submission failed:", err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const isDisabled =
@@ -60,16 +87,12 @@ const SkillSnapshotPage = () => {
   return (
     <Card className="p-6 max-w-xl mx-auto">
       <CardContent>
-        {/* Progress Indicator */}
         <p className="text-sm text-gray-500 mb-4">Step 4 of 4</p>
-
-        {/* Headline & Description */}
         <h2 className="text-2xl font-bold mb-2">Skill Snapshot</h2>
         <p className="mb-6 text-gray-700">
           We gather information about your current soft, academic/professional, and language skills to tailor your learning path from what you already know and help you grow from there.
         </p>
 
-        {/* Soft Skills */}
         <h3 className="font-medium mb-2">What strengths do you bring?</h3>
         <div className="flex flex-wrap gap-2 mb-6">
           {softSkillsList.map((skill) => (
@@ -88,7 +111,6 @@ const SkillSnapshotPage = () => {
           ))}
         </div>
 
-        {/* Hard Skills */}
         <h3 className="font-medium mb-2">Hard Skills</h3>
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <div className="flex-1">
@@ -111,7 +133,6 @@ const SkillSnapshotPage = () => {
           </div>
         </div>
 
-        {/* Desired Languages */}
         <h3 className="font-medium mb-2">Desired Language</h3>
         <select
           multiple
@@ -124,15 +145,15 @@ const SkillSnapshotPage = () => {
           ))}
         </select>
 
-        {/* Continue Button */}
-        <Link to="/overview">
-          <Button onClick={handleSubmit} disabled={isDisabled}>
-            Continue
-          </Button>
-        </Link>
+        <Button onClick={handleSubmit} disabled={isDisabled || loading}>
+          {loading ? "Submitting..." : "Continue"}
+        </Button>
       </CardContent>
     </Card>
   );
 };
+
+export default SkillSnapshotPage;
+
 
 export default SkillSnapshotPage;
