@@ -1,1 +1,138 @@
-
+[
+  {
+    "courseId": "econ-finance-va",
+    "courseTitle": "Economics & Personal Finance (VA)",
+    "domain": "Economics",
+    "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va",
+    "description": "Aligned with Virginia's Standards of Learning for Economics and Personal Finance (EPF), this course prepares students to be effective consumers, savers, investors, and active citizens. It emphasizes the significance of personal human capital and the interconnectedness of the U.S. economy with the global market.",
+    "introVideoUrl": null,
+    "units": [
+      {
+        "templateId": "econ-finance-va-u1-1-foundations-of-economics",
+        "unitTitle": "1: Foundations of economics",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:foundations-of-economics",
+        "intro": "Welcome, {{user.name}}! In this unit on 1: Foundations of economics, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u2-2-producers-and-consumers-in-markets",
+        "unitTitle": "2: Producers and consumers in markets",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:producers-and-consumers-in-markets",
+        "intro": "Welcome, {{user.name}}! In this unit on 2: Producers and consumers in markets, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u3-3-the-microeconomy-and-price-systems",
+        "unitTitle": "3: The microeconomy and price systems",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:the-microeconomy-and-price-systems",
+        "intro": "Welcome, {{user.name}}! In this unit on 3: The microeconomy and price systems, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u4-4-the-role-of-government-in-markets",
+        "unitTitle": "4: The role of government in markets",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:the-role-of-government-in-markets",
+        "intro": "Welcome, {{user.name}}! In this unit on 4: The role of government in markets, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u5-5-macroeconomic-challenges",
+        "unitTitle": "5: Macroeconomic challenges",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:macroeconomic-challenges",
+        "intro": "Welcome, {{user.name}}! In this unit on 5: Macroeconomic challenges, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u6-6-us-financial-system",
+        "unitTitle": "6: U.S. financial system",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:u-s-financial-system",
+        "intro": "Welcome, {{user.name}}! In this unit on 6: U.S. financial system, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u7-7-economic-stabilization",
+        "unitTitle": "7: Economic stabilization",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:economic-stabilization",
+        "intro": "Welcome, {{user.name}}! In this unit on 7: Economic stabilization, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u8-8-global-economy",
+        "unitTitle": "8: Global economy",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:global-economy",
+        "intro": "Welcome, {{user.name}}! In this unit on 8: Global economy, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u9-9-careers-and-education",
+        "unitTitle": "9: Careers and education",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:careers-and-education",
+        "intro": "Welcome, {{user.name}}! In this unit on 9: Careers and education, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u10-10-employment",
+        "unitTitle": "10: Employment",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:employment",
+        "intro": "Welcome, {{user.name}}! In this unit on 10: Employment, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u11-11-banking",
+        "unitTitle": "11: Banking",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:banking",
+        "intro": "Welcome, {{user.name}}! In this unit on 11: Banking, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u12-12-financial-goals",
+        "unitTitle": "12: Financial goals",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:financial-goals",
+        "intro": "Welcome, {{user.name}}! In this unit on 12: Financial goals, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u13-13-budgeting-saving",
+        "unitTitle": "13: Budgeting & saving",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:budgeting-saving",
+        "intro": "Welcome, {{user.name}}! In this unit on 13: Budgeting & saving, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u14-14-saving-investing",
+        "unitTitle": "14: Saving & investing",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:saving-investing",
+        "intro": "Welcome, {{user.name}}! In this unit on 14: Saving & investing, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u15-15-consumer-credit",
+        "unitTitle": "15: Consumer credit",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:consumer-credit",
+        "intro": "Welcome, {{user.name}}! In this unit on 15: Consumer credit, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u16-16-loans-and-debt",
+        "unitTitle": "16: Loans and debt",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:loans-and-debt",
+        "intro": "Welcome, {{user.name}}! In this unit on 16: Loans and debt, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u17-17-taxes",
+        "unitTitle": "17: Taxes",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:taxes",
+        "intro": "Welcome, {{user.name}}! In this unit on 17: Taxes, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u18-18-insurance",
+        "unitTitle": "18: Insurance",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:insurance",
+        "intro": "Welcome, {{user.name}}! In this unit on 18: Insurance, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u19-19-car-buying",
+        "unitTitle": "19: Car buying",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:car-buying",
+        "intro": "Welcome, {{user.name}}! In this unit on 19: Car buying, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u20-20-housing",
+        "unitTitle": "20: Housing",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:housing",
+        "intro": "Welcome, {{user.name}}! In this unit on 20: Housing, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "econ-finance-va-u21-21-scams-fraud",
+        "unitTitle": "21: Scams & fraud",
+        "sourceUrl": "https://www.khanacademy.org/economics-finance-domain/economics-personal-finance-va/x3ed8f3aede624754:scams-fraud",
+        "intro": "Welcome, {{user.name}}! In this unit on 21: Scams & fraud, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      }
+    ]
+  }
+]
