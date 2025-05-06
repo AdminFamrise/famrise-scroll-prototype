@@ -23,8 +23,6 @@ import Apply from "./pages/skills/Apply";
 import Reflect from "./pages/skills/Reflect";
 import BridgeModule from "./pages/skills/BridgeModule";
 
-// Support
-import CoachDirectory from "./pages/support/CoachDirectory";
 
 // Coach Index Page
 import CoachesIndex from "./pages/coaches_index";
@@ -56,7 +54,6 @@ function App() {
             <Route path="overview" element={<OverviewPage />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="explore" element={<ExploreSkills />} />
-            <Route path="coach-directory" element={<CoachDirectory />} />
             <Route path="coaches_index" element={<CoachesIndex />} />
 
             {/* Skill Journey */}
