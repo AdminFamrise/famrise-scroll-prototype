@@ -134,5 +134,247 @@
         "intro": "Welcome, {{user.name}}! In this unit on 21: Scams & fraud, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
       }
     ]
+  },
+  {
+    "courseId": "life-skills",
+    "courseTitle": "Life Skills",
+    "domain": "College, careers, and more",
+    "sourceUrl": "https://www.khanacademy.org/college-careers-more",
+    "description": "A collection of courses and resources to help you navigate college, careers, and other life skills.",
+    "introVideoUrl": null,
+    "units": [
+      {
+        "templateId": "life-skills-u-financial-literacy",
+        "unitTitle": "Financial Literacy",
+        "sourceUrl": "https://www.khanacademy.org/college-careers-more/financial-literacy",
+        "intro": "Welcome, {{user.name}}! In this unit on Financial Literacy, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "life-skills-u-internet-safety",
+        "unitTitle": "Internet safety",
+        "sourceUrl": "https://www.khanacademy.org/college-careers-more/internet-safety",
+        "intro": "Welcome, {{user.name}}! In this unit on Internet safety, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "life-skills-u-social-media-literacy",
+        "unitTitle": "Social media literacy",
+        "sourceUrl": "https://www.khanacademy.org/college-careers-more/social-media-challenges-and-opportunities",
+        "intro": "Welcome, {{user.name}}! In this unit on Social media literacy, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "life-skills-u-growth-mindset",
+        "unitTitle": "Growth mindset",
+        "sourceUrl": "https://www.khanacademy.org/college-careers-more/learnstorm-growth-mindset-activities-us",
+        "intro": "Welcome, {{user.name}}! In this unit on Growth mindset, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "life-skills-u-college-admissions",
+        "unitTitle": "College admissions",
+        "sourceUrl": "https://www.khanacademy.org/college-careers-more/college-admissions",
+        "intro": "Welcome, {{user.name}}! In this unit on College admissions, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "life-skills-u-personal-finance",
+        "unitTitle": "Personal finance",
+        "sourceUrl": "https://www.khanacademy.org/college-careers-more/personal-finance",
+        "intro": "Welcome, {{user.name}}! In this unit on Personal finance, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "life-skills-u-entrepreneurship",
+        "unitTitle": "Entrepreneurship",
+        "sourceUrl": "https://www.khanacademy.org/college-careers-more/entrepreneurship2",
+        "intro": "Welcome, {{user.name}}! In this unit on Entrepreneurship, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "life-skills-u-khanmigo-for-students",
+        "unitTitle": "Khanmigo for students",
+        "sourceUrl": "https://www.khanacademy.org/college-careers-more/khanmigo-for-students",
+        "intro": "Welcome, {{user.name}}! In this unit on Khanmigo for students, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      }
+    ]
+  },
+  {
+    "courseId": "computer-science",
+    "courseTitle": "Computer science theory | Computing",
+    "domain": "",
+    "sourceUrl": "https://www.khanacademy.org/computing/computer-science",
+    "description": "Learn select topics from computer science - algorithms (how we solve common problems in computer science and measure the efficiency of our solutions), cryptography (how we protect secret information), and information theory (how we encode and compress information).",
+    "introVideoUrl": null,
+    "units": [
+      {
+        "templateId": "computer-science-u1-unit-1algorithms",
+        "unitTitle": "Unit 1Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms",
+        "intro": "We've partnered with Dartmouth college professors Tom Cormen and Devin Balkcom to teach introductory computer science algorithms, including searching, sorting, recursion, and graph theory. Learn with a combination of articles, visualizations, quizzes, and coding challenges."
+      },
+      {
+        "templateId": "computer-science-u2-unit-2cryptography",
+        "unitTitle": "Unit 2Cryptography",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/cryptography",
+        "intro": "Welcome, {{user.name}}! How have humans protected their secret messages through history? What has changed today? This knowledge can help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u3-theory",
+        "unitTitle": "theory",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/informationtheory",
+        "intro": "Welcome, {{user.name}}! We've always been communicating. As we moved from signal fires to alphabets to electricity, the problems remained the same. This knowledge can help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u4-help-requests",
+        "unitTitle": "Help requests",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/projectfeedback",
+        "intro": "Welcome, {{user.name}}! You can browse through recent help requests below. Thank you for the help! This knowledge can help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u5-algorithms",
+        "unitTitle": "Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms",
+        "intro": "We've partnered with Dartmouth college professors Tom Cormen and Devin Balkcom to teach introductory computer science algorithms, including searching, sorting, recursion, and graph theory. Learn with a combination of articles, visualizations, quizzes, and coding challenges."
+      },
+      {
+        "templateId": "computer-science-u6-intro-to-algorithms-algorithms",
+        "unitTitle": "Intro to algorithms: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/intro-to-algorithms/v/what-are-algorithms",
+        "intro": "Welcome, {{user.name}}! In this unit on Intro to algorithms: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u7-binary-search-algorithms",
+        "unitTitle": "Binary search: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search",
+        "intro": "Welcome, {{user.name}}! In this unit on Binary search: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u8-asymptotic-notation-algorithms",
+        "unitTitle": "Asymptotic notation: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation",
+        "intro": "Welcome, {{user.name}}! In this unit on Asymptotic notation: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u9-selection-sort-algorithms",
+        "unitTitle": "Selection sort: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/sorting-algorithms/a/sorting",
+        "intro": "Welcome, {{user.name}}! In this unit on Selection sort: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u10-insertion-sort-algorithms",
+        "unitTitle": "Insertion sort: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/insertion-sort/a/insertion-sort",
+        "intro": "Welcome, {{user.name}}! In this unit on Insertion sort: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u11-recursive-algorithms-algorithms",
+        "unitTitle": "Recursive algorithms: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion",
+        "intro": "Welcome, {{user.name}}! In this unit on Recursive algorithms: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u12-towers-of-hanoi-algorithms",
+        "unitTitle": "Towers of Hanoi: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/towers-of-hanoi/a/towers-of-hanoi",
+        "intro": "Welcome, {{user.name}}! In this unit on Towers of Hanoi: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u13-merge-sort-algorithms",
+        "unitTitle": "Merge sort: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/merge-sort/a/divide-and-conquer-algorithms",
+        "intro": "Welcome, {{user.name}}! In this unit on Merge sort: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u14-quick-sort-algorithms",
+        "unitTitle": "Quick sort: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/quick-sort/a/overview-of-quicksort",
+        "intro": "Welcome, {{user.name}}! In this unit on Quick sort: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u15-graph-representation-algorithms",
+        "unitTitle": "Graph representation: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/describing-graphs",
+        "intro": "Welcome, {{user.name}}! In this unit on Graph representation: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u16-breadth-first-search-algorithms",
+        "unitTitle": "Breadth-first search: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/breadth-first-search/a/breadth-first-search-and-its-uses",
+        "intro": "Welcome, {{user.name}}! In this unit on Breadth-first search: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u17-further-learning-algorithms",
+        "unitTitle": "Further learning: Algorithms",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/algorithms/algorithms-more-learning/a/where-to-go-from-here",
+        "intro": "Welcome, {{user.name}}! In this unit on Further learning: Algorithms, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u18-cryptography",
+        "unitTitle": "Cryptography",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/cryptography",
+        "intro": "Welcome, {{user.name}}! How have humans protected their secret messages through history? What has changed today? This knowledge can help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u19-ancient-cryptography-cryptography",
+        "unitTitle": "Ancient cryptography: Cryptography",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/cryptography/crypt/v/intro-to-cryptography",
+        "intro": "Welcome, {{user.name}}! In this unit on Ancient cryptography: Cryptography, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u20-ciphers-cryptography",
+        "unitTitle": "Ciphers: Cryptography",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/cryptography/ciphers/a/ciphers-vs-codes",
+        "intro": "Welcome, {{user.name}}! In this unit on Ciphers: Cryptography, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u21-cryptography-challenge-101-cryptography",
+        "unitTitle": "Cryptography challenge 101: Cryptography",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/cryptography/cryptochallenge/a/cryptochallenge-introduction",
+        "intro": "Welcome, {{user.name}}! In this unit on Cryptography challenge 101: Cryptography, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u22-modern-cryptography-cryptography",
+        "unitTitle": "Modern cryptography: Cryptography",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/cryptography/modern-crypt/v/the-fundamental-theorem-of-arithmetic-1",
+        "intro": "Welcome, {{user.name}}! In this unit on Modern cryptography: Cryptography, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u23-modular-arithmetic-cryptography",
+        "unitTitle": "Modular arithmetic: Cryptography",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/what-is-modular-arithmetic",
+        "intro": "Welcome, {{user.name}}! In this unit on Modular arithmetic: Cryptography, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u24-primality-test-cryptography",
+        "unitTitle": "Primality test: Cryptography",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/cryptography/comp-number-theory/a/comp-number-theory-introduction",
+        "intro": "Welcome, {{user.name}}! In this unit on Primality test: Cryptography, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u25-randomized-algorithms-cryptography",
+        "unitTitle": "Randomized algorithms: Cryptography",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/cryptography/random-algorithms-probability/v/randomized-algorithms-prime-adventure-part-8",
+        "intro": "Welcome, {{user.name}}! In this unit on Randomized algorithms: Cryptography, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u26-information-theory",
+        "unitTitle": "Information theory",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/informationtheory",
+        "intro": "Welcome, {{user.name}}! We've always been communicating. As we moved from signal fires to alphabets to electricity, the problems remained the same. This knowledge can help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u27-ancient-information-theory-information-theory",
+        "unitTitle": "Ancient information theory: Information theory",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/informationtheory/info-theory/v/intro-information-theory",
+        "intro": "Welcome, {{user.name}}! In this unit on Ancient information theory: Information theory, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u28-modern-information-theory-information-theory",
+        "unitTitle": "Modern information theory: Information theory",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/informationtheory/moderninfotheory/v/symbol-rate-information-theory",
+        "intro": "Welcome, {{user.name}}! In this unit on Modern information theory: Information theory, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      },
+      {
+        "templateId": "computer-science-u29-community-questions",
+        "unitTitle": "Community questions",
+        "sourceUrl": "https://www.khanacademy.org/computing/computer-science/d",
+        "intro": "Welcome, {{user.name}}! In this unit on Community questions, you\u2019ll explore key concepts that will help you {{user.challenge}} and move you closer to {{user.goal}}."
+      }
+    ]
   }
 ]
