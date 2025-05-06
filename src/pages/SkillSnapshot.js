@@ -65,7 +65,7 @@ const SkillSnapshotPage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("https://famrise.app.n8n.cloud/webhook-test/onboarding/overview", {
+      const response = await fetch("https://famrise.app.n8n.cloud/webhook/onboarding/overview", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
