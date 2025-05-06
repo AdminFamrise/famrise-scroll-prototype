@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Jordan K.",
+    "profileTagline": "Budgeting coach for young families",
+    "expertise": [
+      "Personal Finance",
+      "Digital Tools",
+      "Family Budgeting"
+    ],
+    "relevantExperience": "Helped 120+ parents take control of their finances using practical, habit-based methods.",
+    "availability": "Weekly message feedback + monthly check-in",
+    "badges": [
+      "Supportive Listener",
+      "Real-world Tools",
+      "Practical Tasks"
+    ],
+    "contact": {
+      "type": "async",
+      "format": "Private messages & monthly async feedback"
+    }
+  },
+  {
+    "name": "Leila M.",
+    "profileTagline": "Career reentry mentor for parents",
+    "expertise": [
+      "Job Skills",
+      "Confidence Building",
+      "CV Writing"
+    ],
+    "relevantExperience": "Former recruiter now supporting career transitions after parental leave.",
+    "availability": "Weekly CV reviews + peer discussion threads",
+    "badges": [
+      "Encouraging Feedback",
+      "Clear Direction",
+      "Flexible Support"
+    ],
+    "contact": {
+      "type": "async",
+      "format": "Document comments & forum Q&A"
+    }
+  },
+  {
+    "name": "Arjun P.",
+    "profileTagline": "Microbusiness mentor for side hustles",
+    "expertise": [
+      "Entrepreneurship",
+      "Digital Tools",
+      "Marketing"
+    ],
+    "relevantExperience": "Launched 3 family-friendly digital products and supports low-income parents starting small online businesses.",
+    "availability": "Q&A forum + monthly async review",
+    "badges": [
+      "Doer",
+      "Template Provider",
+      "Idea Coach"
+    ],
+    "contact": {
+      "type": "async",
+      "format": "Forum threads & 1 annotated feedback cycle"
+    }
+  },
+  {
+    "name": "Sophie L.",
+    "profileTagline": "Well-being and stress resilience coach",
+    "expertise": [
+      "Mental Health",
+      "Resilience",
+      "Positive Psychology"
+    ],
+    "relevantExperience": "Guided 200+ parents through burnout recovery and energy planning using evidence-based self-coaching.",
+    "availability": "Daily journal prompts + biweekly check-in",
+    "badges": [
+      "Compassionate",
+      "Mental Wellness Focused",
+      "Gentle Accountability"
+    ],
+    "contact": {
+      "type": "async",
+      "format": "Journaling support + async reflection feedback"
+    }
+  },
+  {
+    "name": "Mateo R.",
+    "profileTagline": "Digital upskilling coach for job transitions",
+    "expertise": [
+      "Digital Skills",
+      "Adult Learning",
+      "Project Management"
+    ],
+    "relevantExperience": "Helped career switchers build digital portfolios and apply agile methods to personal development.",
+    "availability": "Weekly task reviews + monthly async video tips",
+    "badges": [
+      "Results-Driven",
+      "Project-Based Learning",
+      "Growth Mindset"
+    ],
+    "contact": {
+      "type": "async",
+      "format": "Asynchronous check-ins + video summaries"
+    }
+  }
+]
