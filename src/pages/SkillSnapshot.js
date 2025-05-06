@@ -154,6 +154,3 @@ const SkillSnapshotPage = () => {
 };
 
 export default SkillSnapshotPage;
-
-
-export default SkillSnapshotPage;
