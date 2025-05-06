@@ -7,69 +7,80 @@ import { getUserData } from "../services/UserDataService";
 const Overview = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
+  const [overview, setOverview] = useState(null);
 
   useEffect(() => {
-    const data = getUserData();
-    if (data) setUserData(data);
+    const user = getUserData();
+    const aiOverview = localStorage.getItem("onboardingOverview");
+
+    setUserData(user);
+    setOverview(aiOverview ? JSON.parse(aiOverview) : null);
   }, []);
 
-  if (!userData) return null;
+  if (!overview) return <p className="text-center mt-20 text-gray-500">Loading your personalized plan...</p>;
 
   const {
-    softSkills = [],
-    hardSkills = [],
-    profession = "",
-    desiredLanguages = [],
-    challenge = "",
-    goal = ""
-  } = userData;
+    greeting,
+    acknowledgement,
+    challenge,
+    goal,
+    suggestedPath = [],
+    summary
+  } = overview;
 
   return (
     <div className="min-h-screen flex flex-col items-center p-6 bg-gray-50">
-      <h1 className="text-2xl font-bold mb-4 text-center">🎯 Does this look right?</h1>
-      <p className="mb-8 text-center text-gray-700 max-w-lg">
-        We've crafted a simple, structured & supported path based on your skills, challenge, and goals.
-      </p>
+      <h1 className="text-2xl font-bold mb-2 text-center">{greeting || "👋 Welcome!"}</h1>
+      <p className="mb-4 text-center text-gray-600 max-w-xl">{acknowledgement}</p>
 
       <div className="grid gap-6 w-full max-w-2xl">
-        {/* Starting Point Card */}
-        <Card>
-          <CardContent>
-            <h2 className="font-semibold mb-2">🔍 Your Starting Point</h2>
-            <p className="text-sm mb-1">
-              <strong>Soft skills:</strong> {softSkills.join(", ") || "—"}
-            </p>
-            <p className="text-sm mb-1">
-              <strong>Hard skills:</strong> {profession || hardSkills.join(", ") || "—"}
-            </p>
-            <p className="text-sm">
-              <strong>Languages:</strong> {desiredLanguages.join(", ") || "—"}
-            </p>
-          </CardContent>
-        </Card>
-
         {/* Challenge & Goal Card */}
         <Card>
           <CardContent>
             <h2 className="font-semibold mb-2">⚡ Your Challenge & Goal</h2>
             <p className="text-sm mb-1">
-              <strong>Challenge:</strong> {challenge || "—"}
+              <strong>Challenge:</strong> {challenge || userData?.challenge || "—"}
             </p>
             <p className="text-sm">
-              <strong>Goal:</strong> {goal || "—"}
+              <strong>Goal:</strong> {goal || userData?.goal || "—"}
             </p>
           </CardContent>
         </Card>
 
-        {/* Path Forward Card */}
+        {/* Suggested Path */}
         <Card>
           <CardContent>
-            <h2 className="font-semibold mb-2">🚀 Your Path Forward</h2>
-            <ul className="list-disc list-inside text-sm space-y-1">
-              <li>Bite‑sized lessons built on what you know</li>
-              <li>Hands‑on tools to practice in real life</li>
-              <li>Expert mentoring to guide your growth</li>
-            </ul>
+            <h2 className="font-semibold mb-2">🚀 Your Personalized Learning Path</h2>
+            {suggestedPath.length > 0 ? (
+              <ol className="list-decimal list-inside text-sm space-y-2">
+                {suggestedPath.map((step, index) => (
+                  <li key={index}>
+                    <div className="font-medium">{step.title}</div>
+                    <p className="text-gray-700">{step.reason}</p>
+                    {step.sourceUrl && (
+                      <a
+                        href={step.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline text-sm"
+                      >
+                        View Module
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p>No path generated — try refining your inputs.</p>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Summary */}
+        <Card>
+          <CardContent>
+            <h2 className="font-semibold mb-2">📦 Summary</h2>
+            <p className="text-sm text-gray-800">{summary || "Follow this path to grow with guidance and confidence."}</p>
           </CardContent>
         </Card>
       </div>
@@ -82,4 +93,5 @@ const Overview = () => {
 };
 
 export default Overview;
+
 
