@@ -1,3 +1,5 @@
+// src/pages/SkillSnapshotPage.js
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/Card";
@@ -51,7 +53,13 @@ const SkillSnapshotPage = () => {
   };
 
   const handleSubmit = async () => {
-    mergeUserData({ softSkills, profession, cvFile, desiredLanguages });
+    // Don't include the raw file object — just a boolean flag
+    mergeUserData({
+      softSkills,
+      profession,
+      cvUploaded: !!cvFile,
+      desiredLanguages
+    });
 
     const fullUserData = getUserData();
     setLoading(true);
