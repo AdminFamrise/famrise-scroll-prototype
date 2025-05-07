@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// src/pages/Overview.js
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
@@ -7,85 +8,102 @@ import { getUserData } from "../services/UserDataService";
 const Overview = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
-  const [overview, setOverview] = useState(null);
+  const [path, setPath] = useState(null);
 
+  /* load once on mount */
   useEffect(() => {
-    const user = getUserData();
-    const aiOverview = localStorage.getItem("onboardingOverview");
+    setUserData(getUserData());
 
-    setUserData(user);
-    setOverview(aiOverview ? JSON.parse(aiOverview) : null);
+    const raw = localStorage.getItem("onboardingOverview");
+    if (raw) setPath(JSON.parse(raw));
   }, []);
 
-  if (!overview) return <p className="text-center mt-20 text-gray-500">Loading your personalized plan...</p>;
+  if (!path)
+    return (
+      <p className="text-center mt-20 text-gray-500">
+        Loading your personalized plan…
+      </p>
+    );
 
+  /* destructure with fallbacks */
   const {
-    greeting,
-    acknowledgement,
-    challenge,
-    goal,
-    suggestedPath = [],
-    summary
-  } = overview;
+    greeting = "👋 Welcome!",
+    overview = "",
+    steps = [],
+    mentor = { name: "T‑B D", reason: "" },
+  } = path;
 
   return (
     <div className="min-h-screen flex flex-col items-center p-6 bg-gray-50">
-      <h1 className="text-2xl font-bold mb-2 text-center">{greeting || "👋 Welcome!"}</h1>
-      <p className="mb-4 text-center text-gray-600 max-w-xl">{acknowledgement}</p>
+      <h1 className="text-2xl font-bold mb-2 text-center">{greeting}</h1>
+      <p className="mb-6 text-center text-gray-600 max-w-2xl">{overview}</p>
 
-      <div className="grid gap-6 w-full max-w-2xl">
-        {/* Challenge & Goal Card */}
+      <div className="grid gap-6 w-full max-w-3xl">
+        {/* 1️⃣ Challenge & Goal */}
         <Card>
           <CardContent>
             <h2 className="font-semibold mb-2">⚡ Your Challenge & Goal</h2>
             <p className="text-sm mb-1">
-              <strong>Challenge:</strong> {challenge || userData?.challenge || "—"}
+              <strong>Challenge:</strong>{" "}
+              {userData?.challenge || "— not provided —"}
             </p>
             <p className="text-sm">
-              <strong>Goal:</strong> {goal || userData?.goal || "—"}
+              <strong>Goal:</strong> {userData?.goal || "— not provided —"}
             </p>
           </CardContent>
         </Card>
 
-        {/* Suggested Path */}
+        {/* 2️⃣ Learning Path */}
         <Card>
           <CardContent>
-            <h2 className="font-semibold mb-2">🚀 Your Personalized Learning Path</h2>
-            {suggestedPath.length > 0 ? (
-              <ol className="list-decimal list-inside text-sm space-y-2">
-                {suggestedPath.map((step, index) => (
-                  <li key={index}>
-                    <div className="font-medium">{step.title}</div>
-                    <p className="text-gray-700">{step.reason}</p>
-                    {step.sourceUrl && (
-                      <a
-                        href={step.sourceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 underline text-sm"
-                      >
-                        View Module
-                      </a>
-                    )}
+            <h2 className="font-semibold mb-4">🚀 Your Personalized Path</h2>
+
+            {steps.length ? (
+              <ol className="space-y-4">
+                {steps.map((s) => (
+                  <li key={s.step} className="flex gap-3">
+                    <div className="h-8 w-8 flex-shrink-0 rounded-full bg-blue-600 text-white flex items-center justify-center">
+                      {s.step}
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-medium">{s.title}</p>
+                      <p className="text-gray-700 text-sm">{s.description}</p>
+                      {s.modules?.length && (
+                        <p className="text-xs text-gray-500 mt-1">
+                          Modules: {s.modules.join(", ")}
+                        </p>
+                      )}
+                    </div>
                   </li>
                 ))}
               </ol>
             ) : (
-              <p>No path generated — try refining your inputs.</p>
+              <p className="text-sm text-gray-500">
+                No path generated — try refining your inputs.
+              </p>
             )}
           </CardContent>
         </Card>
 
-        {/* Summary */}
+        {/* 3️⃣ Mentor */}
         <Card>
           <CardContent>
-            <h2 className="font-semibold mb-2">📦 Summary</h2>
-            <p className="text-sm text-gray-800">{summary || "Follow this path to grow with guidance and confidence."}</p>
+            <h2 className="font-semibold mb-4">🤝 Recommended Mentor</h2>
+            <div className="grid sm:grid-cols-3 gap-4 items-start">
+              <div className="sm:col-span-2">
+                <p className="font-medium">{mentor.name}</p>
+                <p className="text-gray-700 text-sm">{mentor.reason}</p>
+              </div>
+              {/* placeholder avatar */}
+              <div className="h-20 w-20 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-gray-500">
+                {mentor.name?.[0] || "?"}
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
 
-      <Button onClick={() => navigate("/dashboard")} className="mt-8">
+      <Button onClick={() => navigate("/dashboard")} className="mt-10">
         Yes, let’s go!
       </Button>
     </div>
@@ -93,5 +111,4 @@ const Overview = () => {
 };
 
 export default Overview;
-
 
