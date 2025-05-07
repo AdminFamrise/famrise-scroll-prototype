@@ -6,39 +6,33 @@ import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
 import { mergeUserData, getUserData } from "../services/UserDataService";
 
+/* ───────────────────────── dropdown data ───────────────────────── */
 const softSkillsList = [
   "Creativity",
   "Teamwork",
   "Communication",
   "Adaptability",
   "Critical Thinking",
-  "Problem‑solving",
+  "Problem-solving",
   "Leadership",
   "Emotional Intelligence",
 ];
 
 const languagesList = ["English", "Dutch", "German"];
 
-/**
- * Reads the n8n webhook URL from env vars (set in Netlify or a local .env file).
- * Works with Vite, CRA, and generic Node build setups.
- */
-const N8N_ENDPOINT =
-  import.meta?.env?.VITE_N8N_ENDPOINT ||          // Vite / Vite‑React
-  process.env.REACT_APP_N8N_ENDPOINT ||           // Create‑React‑App
-  process.env.N8N_ENDPOINT ||                     // Generic fallback
-  "";                                             // empty → will throw in submit
-
+/* ───────────────────────── page component ───────────────────────── */
 const SkillSnapshotPage = () => {
   const navigate = useNavigate();
 
+  /* form state */
   const [softSkills, setSoftSkills] = useState([]);
   const [profession, setProfession] = useState("");
   const [cvFile, setCvFile] = useState(null);
   const [desiredLanguages, setDesiredLanguages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const toggleSoftSkill = (skill) => {
+  /* helpers */
+  const toggleSoftSkill = (skill) =>
     setSoftSkills((prev) =>
       prev.includes(skill)
         ? prev.filter((s) => s !== skill)
@@ -46,15 +40,15 @@ const SkillSnapshotPage = () => {
         ? [...prev, skill]
         : prev
     );
-  };
 
   const handleProfessionChange = (e) => setProfession(e.target.value);
-  const handleCvUpload = (e) => setCvFile(e.target.files[0] || null);
-
+  const handleCvUpload = (e) => setCvFile(e.target.files[0] ?? null);
   const handleLanguageChange = (e) =>
-    setDesiredLanguages(Array.from(e.target.selectedOptions, (opt) => opt.value));
+    setDesiredLanguages(Array.from(e.target.selectedOptions, (o) => o.value));
 
+  /* ───────── submit ───────── */
   const handleSubmit = async () => {
+    // store answers so other pages can access
     mergeUserData({
       softSkills,
       profession,
@@ -65,23 +59,20 @@ const SkillSnapshotPage = () => {
     const fullUserData = getUserData();
     setLoading(true);
 
-    if (!N8N_ENDPOINT) {
-      alert("n8n endpoint not configured");
-      setLoading(false);
-      return;
-    }
+    // **** endpoint from Netlify env ****
+    const endpoint =
+      process.env.REACT_APP_N8N_ENDPOINT || process.env.N8N_ENDPOINT;
 
     try {
-      const response = await fetch(N8N_ENDPOINT, {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(fullUserData),
       });
+      if (!res.ok) throw new Error("n8n returned " + res.status);
 
-      if (!response.ok) throw new Error(`n8n responded ${response.status}`);
-
-      const result = await response.json();
-      localStorage.setItem("onboardingOverview", JSON.stringify(result));
+      const pathJson = await res.json();
+      localStorage.setItem("onboardingOverview", JSON.stringify(pathJson));
       navigate("/overview");
     } catch (err) {
       console.error("Submission failed:", err);
@@ -97,10 +88,11 @@ const SkillSnapshotPage = () => {
     !cvFile &&
     desiredLanguages.length === 0;
 
+  /* ───────── UI ───────── */
   return (
     <Card className="p-6 max-w-xl mx-auto">
       <CardContent>
-        <p className="text-sm text-gray-500 mb-4">Step&nbsp;4 of 4</p>
+        <p className="text-sm text-gray-500 mb-4">Step 4 of 4</p>
         <h2 className="text-2xl font-bold mb-2">Skill Snapshot</h2>
         <p className="mb-6 text-gray-700">
           We gather information about your current soft, academic/professional,
@@ -108,6 +100,7 @@ const SkillSnapshotPage = () => {
           know and help you grow from there.
         </p>
 
+        {/* soft skills */}
         <h3 className="font-medium mb-2">What strengths do you bring?</h3>
         <div className="flex flex-wrap gap-2 mb-6">
           {softSkillsList.map((skill) => (
@@ -126,7 +119,8 @@ const SkillSnapshotPage = () => {
           ))}
         </div>
 
-        <h3 className="font-medium mb-2">Hard Skills</h3>
+        {/* hard skills */}
+        <h3 className="font-medium mb-2">Hard Skills</h3>
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <div className="flex-1">
             <label className="block text-sm font-medium mb-1">
@@ -134,7 +128,7 @@ const SkillSnapshotPage = () => {
             </label>
             <Input
               name="profession"
-              placeholder="e.g., Software Engineer"
+              placeholder="e.g., Software Engineer"
               value={profession}
               onChange={handleProfessionChange}
             />
@@ -152,6 +146,7 @@ const SkillSnapshotPage = () => {
           </div>
         </div>
 
+        {/* languages */}
         <h3 className="font-medium mb-2">Desired Language</h3>
         <select
           multiple
@@ -166,6 +161,7 @@ const SkillSnapshotPage = () => {
           ))}
         </select>
 
+        {/* submit */}
         <Button onClick={handleSubmit} disabled={isDisabled || loading}>
           {loading ? "Submitting..." : "Continue"}
         </Button>
@@ -175,4 +171,5 @@ const SkillSnapshotPage = () => {
 };
 
 export default SkillSnapshotPage;
+
 
