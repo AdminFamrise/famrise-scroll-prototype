@@ -48,20 +48,21 @@ const SkillSnapshotPage = () => {
 
   /* ───────── submit ───────── */
   const handleSubmit = async () => {
-    // store answers so other pages can access
+    /** 1️⃣  Save this page’s answers under the two new buckets */
     mergeUserData({
-      softSkills,
-      profession,
-      cvUploaded: !!cvFile,
-      desiredLanguages,
+      skills: {
+        soft: softSkills,
+        hard: profession ? [profession] : [],
+        cvUploaded: !!cvFile,
+      },
+      preferences: { language: desiredLanguages },
     });
 
-    const fullUserData = getUserData();
+    const fullUserData = getUserData(); // has context, challenge, goal, skills, preferences
     setLoading(true);
 
-    // **** endpoint from Netlify env ****
-    const endpoint =
-      process.env.REACT_APP_N8N_ENDPOINT || process.env.N8N_ENDPOINT;
+    /** 2️⃣  Endpoint from env */
+    const endpoint = import.meta.env.VITE_N8N_URL + "/onboarding/overview";
 
     try {
       const res = await fetch(endpoint, {
@@ -95,9 +96,9 @@ const SkillSnapshotPage = () => {
         <p className="text-sm text-gray-500 mb-4">Step 4 of 4</p>
         <h2 className="text-2xl font-bold mb-2">Skill Snapshot</h2>
         <p className="mb-6 text-gray-700">
-          We gather information about your current soft, academic/professional,
-          and language skills to tailor your learning path from what you already
-          know and help you grow from there.
+          We gather information about your current soft, professional, and
+          language skills so your learning path starts from what you already
+          know.
         </p>
 
         {/* soft skills */}
@@ -171,5 +172,6 @@ const SkillSnapshotPage = () => {
 };
 
 export default SkillSnapshotPage;
+
 
 
