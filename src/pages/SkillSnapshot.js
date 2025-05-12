@@ -62,7 +62,8 @@ const SkillSnapshotPage = () => {
     setLoading(true);
 
     /** 2️⃣  Endpoint from env */
-    const endpoint = import.meta.env.VITE_N8N_URL + "/onboarding/overview";
+const endpoint = `${process.env.REACT_APP_N8N_URL}/onboarding/overview`;
+
 
     try {
       const res = await fetch(endpoint, {
