@@ -62,7 +62,7 @@ const SkillSnapshotPage = () => {
     setLoading(true);
 
     /** 2️⃣  Endpoint from env */
-const endpoint = `${process.env.REACT_APP_N8N_URL}/onboarding/overview`;
+const endpoint = `${process.env.REACT_APP_N8N_ENDPOINT}/onboarding/overview`;
 
 
     try {
